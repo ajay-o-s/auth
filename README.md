@@ -18,23 +18,23 @@ Whether you’re logging in, signing up, or verifying your email, AOS Auth ensur
 
 ## ✨ Highlights
 
-- 🧭 Simple & minimal interface  
-- 📧 Email-based verification system  
-- 🔒 Secure password management  
-- 💬 Real-time feedback during login/signup  
-- 🧩 Integrated with AOS account ecosystem  
-- 📱 Works perfectly on mobile and desktop  
+- 🧭 Simple & minimal interface
+- 📧 Email-based verification system
+- 🔒 Secure password management
+- 💬 Real-time feedback during login/signup
+- 🧩 Integrated with AOS account ecosystem
+- 📱 Works perfectly on mobile and desktop
 
 ---
 
 ## 🪪 Platform Access
 
-| Page | Description | Link |
-|------|--------------|------|
-| **Login** | Access your AOS account securely | [auth.ajayos.in/login](https://auth.ajayos.in/login) |
-| **Signup** | Create a new account on AOS | [auth.ajayos.in/signup](https://auth.ajayos.in/signup) |
-| **Verify** | Confirm your email after registration | [auth.ajayos.in/setPassword](https://auth.ajayos.in/setPassword) |
-| **Forgot Password** | Forgot password? Reset securely | [auth.ajayos.in/forgot](https://auth.ajayos.in/forgot) |
+| Page                | Description                           | Link                                                             |
+| ------------------- | ------------------------------------- | ---------------------------------------------------------------- |
+| **Login**           | Access your AOS account securely      | [auth.ajayos.in/login](https://auth.ajayos.in/login)             |
+| **Signup**          | Create a new account on AOS           | [auth.ajayos.in/signup](https://auth.ajayos.in/signup)           |
+| **Verify**          | Confirm your email after registration | [auth.ajayos.in/setPassword](https://auth.ajayos.in/setPassword) |
+| **Forgot Password** | Forgot password? Reset securely       | [auth.ajayos.in/forgot](https://auth.ajayos.in/forgot)           |
 
 ---
 
@@ -43,7 +43,7 @@ Whether you’re logging in, signing up, or verifying your email, AOS Auth ensur
 🔸 Unified access for all AOS services  
 🔸 Modern, fast, and user-friendly UI  
 🔸 Designed with privacy and encryption in mind  
-🔸 No third-party tracking or data sharing  
+🔸 No third-party tracking or data sharing
 
 ---
 
