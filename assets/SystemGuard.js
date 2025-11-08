@@ -3479,7 +3479,7 @@ const rt = [
     { path: "/about", element: e.jsx("h1", { children: "About Page v1.0.0" }) },
   ];
 function _s() {
-  var t = B.get("appVersion");
+  var t = B.get("appVersion") || "1.0.0";
   t = t.replace(/\./g, "_");
   const s = { "1_0_0": rt, "1_1_0": Os }[t] || rt;
   return Tt(s);
