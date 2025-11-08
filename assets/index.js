@@ -1,5 +1,395 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/SystemGuard.js","assets/aos_vendor.js","assets/aos.js"])))=>i.map(i=>d[i]);
-var w=Object.defineProperty;var v=(n,o,r)=>o in n?w(n,o,{enumerable:!0,configurable:!0,writable:!0,value:r}):n[o]=r;var f=(n,o,r)=>v(n,typeof o!="symbol"?o+"":o,r);import{r as h,j as e,Z as j,c as k,R as N,a as E,b as z}from"./aos_vendor.js";import"./aos.js";(function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))i(t);new MutationObserver(t=>{for(const a of t)if(a.type==="childList")for(const l of a.addedNodes)l.tagName==="LINK"&&l.rel==="modulepreload"&&i(l)}).observe(document,{childList:!0,subtree:!0});function r(t){const a={};return t.integrity&&(a.integrity=t.integrity),t.referrerPolicy&&(a.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?a.credentials="include":t.crossOrigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function i(t){if(t.ep)return;t.ep=!0;const a=r(t);fetch(t.href,a)}})();const S="modulepreload",I=function(n){return"/"+n},u={},C=function(o,r,i){let t=Promise.resolve();if(r&&r.length>0){let l=function(c){return Promise.all(c.map(p=>Promise.resolve(p).then(m=>({status:"fulfilled",value:m}),m=>({status:"rejected",reason:m}))))};document.getElementsByTagName("link");const s=document.querySelector("meta[property=csp-nonce]"),x=(s==null?void 0:s.nonce)||(s==null?void 0:s.getAttribute("nonce"));t=l(r.map(c=>{if(c=I(c),c in u)return;u[c]=!0;const p=c.endsWith(".css"),m=p?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${c}"]${m}`))return;const d=document.createElement("link");if(d.rel=p?"stylesheet":S,p||(d.as="script"),d.crossOrigin="",d.href=c,x&&d.setAttribute("nonce",x),document.head.appendChild(d),p)return new Promise((g,y)=>{d.addEventListener("load",g),d.addEventListener("error",()=>y(new Error(`Unable to preload CSS for ${c}`)))})}))}function a(l){const s=new Event("vite:preloadError",{cancelable:!0});if(s.payload=l,window.dispatchEvent(s),!s.defaultPrevented)throw l}return t.then(l=>{for(const s of l||[])s.status==="rejected"&&a(s.reason);return o().catch(a)})};class R extends h.Component{constructor(r){super(r);f(this,"handleGoHome",()=>{this.props.history&&typeof this.props.history.push=="function"?this.props.history.push("/"):typeof window!="undefined"&&(window.location.href="/")});f(this,"openModal",()=>this.setState({showModal:!0}));f(this,"closeModal",()=>this.setState({showModal:!1}));f(this,"toggleDetails",()=>{this.setState(r=>({showDetails:!r.showDetails}))});f(this,"copyErrorId",async()=>{const{errorId:r}=this.state;if(!(!r||typeof navigator=="undefined"||!navigator.clipboard))try{await navigator.clipboard.writeText(r),this.setState({copied:!0}),setTimeout(()=>this.setState({copied:!1}),2e3)}catch(i){}});this.state={hasError:!1,error:null,errorInfo:null,errorId:null,showDetails:!1,showModal:!1,copied:!1}}static getDerivedStateFromError(r){const i="ERR-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,7).toUpperCase();return{hasError:!0,error:r,errorId:i}}componentDidCatch(r,i){if(this.setState({errorInfo:i}),console.error("ErrorBoundary caught an error:",r,i),typeof this.props.onError=="function")try{this.props.onError({error:r,errorInfo:i,errorId:this.state.errorId})}catch(t){console.warn("onError callback failed",t)}}render(){var i;if(!this.state.hasError)return this.props.children;const r=typeof window!="undefined"&&this.state.errorId?`https://status.ajayos.in/error/status/${this.state.errorId}`:`/error/status/${this.state.errorId||"unknown"}`;return e.jsxs("div",{className:"error-container",role:"alert","aria-live":"assertive",children:[e.jsx("div",{className:"particles","aria-hidden":"true",children:[...Array(40)].map((t,a)=>e.jsx("div",{className:"particle",style:{left:`${Math.random()*100}%`,animationDelay:`${Math.random()*20}s`,animationDuration:`${15+Math.random()*10}s`}},a))}),e.jsx("div",{className:"matrix-lines","aria-hidden":"true",children:[...Array(8)].map((t,a)=>e.jsx("div",{className:"matrix-line",style:{left:`${12.5*a}%`,animationDelay:`${a*.5}s`}},a))}),e.jsxs("div",{className:"error-content",children:[e.jsxs("div",{className:"glitch-container","aria-hidden":"true",children:[e.jsx("div",{className:"glitch-icon",children:"⚠"}),e.jsx("div",{className:"glitch-icon glitch-shadow-1",children:"⚠"}),e.jsx("div",{className:"glitch-icon glitch-shadow-2",children:"⚠"})]}),e.jsx("h1",{className:"error-title glitch-text","data-text":"Oops!",children:"Oops!"}),e.jsx("div",{className:"error-subtitle",children:e.jsx("span",{className:"typing-text","aria-hidden":"true",children:"Something went wrong...!"})}),e.jsx("div",{className:"space-error-subtitle",children:e.jsx("span",{className:"space-typing-text","aria-hidden":"true",children:"Lost in the void of space..."})}),e.jsxs("div",{className:"error-id-display","aria-label":"Error identifier",children:[e.jsx("div",{className:"scan-line"}),e.jsx("div",{className:"error-label",children:"ERROR_ID"}),e.jsx("div",{className:"error-value",children:e.jsx("code",{children:this.state.errorId})}),e.jsxs("div",{style:{marginTop:"8px",display:"flex",gap:"8px",justifyContent:"center"},children:[e.jsx("button",{className:"small-btn",onClick:this.copyErrorId,"aria-label":"Copy error id",children:this.state.copied?"COPIED":"COPY ID"}),e.jsx("a",{href:r,onClick:t=>{typeof window!="undefined"&&(t.preventDefault(),window.open(r,"_blank","noopener,noreferrer"))},className:"small-link",children:"VIEW STATUS"})]})]}),e.jsxs("div",{className:"action-panel",children:[e.jsxs("button",{className:"cyber-btn primary",onClick:this.handleGoHome,children:[e.jsx("span",{className:"btn-text",children:"RETURN HOME"}),e.jsx("div",{className:"btn-glow"})]}),e.jsxs("button",{className:"cyber-btn primary",onClick:this.openModal,children:[e.jsx("span",{className:"btn-text",children:"📊 VIEW LOGS"}),e.jsx("div",{className:"btn-glow"})]})]}),this.state.showModal&&e.jsx("div",{className:"space-modal-backdrop",onClick:this.closeModal,children:e.jsxs("div",{className:"space-modal",onClick:t=>t.stopPropagation(),children:[e.jsxs("div",{className:"space-modal-header",children:[e.jsx("h2",{children:"⚙ Error Diagnostics ⚙"}),e.jsx("button",{className:"space-modal-close",onClick:this.closeModal,children:"✖"})]}),e.jsxs("div",{className:"space-modal-content",children:[e.jsxs("div",{className:"space-log-line",children:[e.jsx("span",{className:"space-log-label",children:"ERROR:"}),e.jsx("span",{className:"space-log-value",children:((i=this.state.error)==null?void 0:i.message)||"Unknown anomaly detected"})]}),this.state.errorInfo&&e.jsxs("div",{className:"space-stack-container",children:[e.jsx("div",{className:"space-stack-label",children:"STACK TRACE:"}),e.jsx("div",{className:"space-stack-content",children:this.state.errorInfo.componentStack})]})]})]})}),e.jsxs("div",{className:"footer-info",children:[e.jsxs("div",{className:"footer-line",children:["REF: ",this.state.errorId]}),e.jsx("div",{className:"footer-line",children:"AWAITING SYSTEM RECOVERY..."})]})]}),e.jsx("style",{children:`
+const __vite__mapDeps = (
+  i,
+  m = __vite__mapDeps,
+  d = m.f ||
+    (m.f = ["assets/SystemGuard.js", "assets/aos_vendor.js", "assets/aos.js"]),
+) => i.map((i) => d[i]);
+var w = Object.defineProperty;
+var v = (n, o, r) =>
+  o in n
+    ? w(n, o, { enumerable: !0, configurable: !0, writable: !0, value: r })
+    : (n[o] = r);
+var f = (n, o, r) => v(n, typeof o != "symbol" ? o + "" : o, r);
+import {
+  r as h,
+  j as e,
+  Z as j,
+  c as k,
+  R as N,
+  a as E,
+  b as z,
+} from "./aos_vendor.js";
+import "./aos.js";
+(function () {
+  const o = document.createElement("link").relList;
+  if (o && o.supports && o.supports("modulepreload")) return;
+  for (const t of document.querySelectorAll('link[rel="modulepreload"]')) i(t);
+  new MutationObserver((t) => {
+    for (const a of t)
+      if (a.type === "childList")
+        for (const l of a.addedNodes)
+          l.tagName === "LINK" && l.rel === "modulepreload" && i(l);
+  }).observe(document, { childList: !0, subtree: !0 });
+  function r(t) {
+    const a = {};
+    return (
+      t.integrity && (a.integrity = t.integrity),
+      t.referrerPolicy && (a.referrerPolicy = t.referrerPolicy),
+      t.crossOrigin === "use-credentials"
+        ? (a.credentials = "include")
+        : t.crossOrigin === "anonymous"
+          ? (a.credentials = "omit")
+          : (a.credentials = "same-origin"),
+      a
+    );
+  }
+  function i(t) {
+    if (t.ep) return;
+    t.ep = !0;
+    const a = r(t);
+    fetch(t.href, a);
+  }
+})();
+const S = "modulepreload",
+  I = function (n) {
+    return "/" + n;
+  },
+  u = {},
+  C = function (o, r, i) {
+    let t = Promise.resolve();
+    if (r && r.length > 0) {
+      let l = function (c) {
+        return Promise.all(
+          c.map((p) =>
+            Promise.resolve(p).then(
+              (m) => ({ status: "fulfilled", value: m }),
+              (m) => ({ status: "rejected", reason: m }),
+            ),
+          ),
+        );
+      };
+      document.getElementsByTagName("link");
+      const s = document.querySelector("meta[property=csp-nonce]"),
+        x =
+          (s == null ? void 0 : s.nonce) ||
+          (s == null ? void 0 : s.getAttribute("nonce"));
+      t = l(
+        r.map((c) => {
+          if (((c = I(c)), c in u)) return;
+          u[c] = !0;
+          const p = c.endsWith(".css"),
+            m = p ? '[rel="stylesheet"]' : "";
+          if (document.querySelector(`link[href="${c}"]${m}`)) return;
+          const d = document.createElement("link");
+          if (
+            ((d.rel = p ? "stylesheet" : S),
+            p || (d.as = "script"),
+            (d.crossOrigin = ""),
+            (d.href = c),
+            x && d.setAttribute("nonce", x),
+            document.head.appendChild(d),
+            p)
+          )
+            return new Promise((g, y) => {
+              d.addEventListener("load", g),
+                d.addEventListener("error", () =>
+                  y(new Error(`Unable to preload CSS for ${c}`)),
+                );
+            });
+        }),
+      );
+    }
+    function a(l) {
+      const s = new Event("vite:preloadError", { cancelable: !0 });
+      if (((s.payload = l), window.dispatchEvent(s), !s.defaultPrevented))
+        throw l;
+    }
+    return t.then((l) => {
+      for (const s of l || []) s.status === "rejected" && a(s.reason);
+      return o().catch(a);
+    });
+  };
+class R extends h.Component {
+  constructor(r) {
+    super(r);
+    f(this, "handleGoHome", () => {
+      this.props.history && typeof this.props.history.push == "function"
+        ? this.props.history.push("/")
+        : typeof window != "undefined" && (window.location.href = "/");
+    });
+    f(this, "openModal", () => this.setState({ showModal: !0 }));
+    f(this, "closeModal", () => this.setState({ showModal: !1 }));
+    f(this, "toggleDetails", () => {
+      this.setState((r) => ({ showDetails: !r.showDetails }));
+    });
+    f(this, "copyErrorId", async () => {
+      const { errorId: r } = this.state;
+      if (!(!r || typeof navigator == "undefined" || !navigator.clipboard))
+        try {
+          await navigator.clipboard.writeText(r),
+            this.setState({ copied: !0 }),
+            setTimeout(() => this.setState({ copied: !1 }), 2e3);
+        } catch (i) {}
+    });
+    this.state = {
+      hasError: !1,
+      error: null,
+      errorInfo: null,
+      errorId: null,
+      showDetails: !1,
+      showModal: !1,
+      copied: !1,
+    };
+  }
+  static getDerivedStateFromError(r) {
+    const i =
+      "ERR-" +
+      Date.now().toString(36).toUpperCase() +
+      "-" +
+      Math.random().toString(36).slice(2, 7).toUpperCase();
+    return { hasError: !0, error: r, errorId: i };
+  }
+  componentDidCatch(r, i) {
+    if (
+      (this.setState({ errorInfo: i }),
+      console.error("ErrorBoundary caught an error:", r, i),
+      typeof this.props.onError == "function")
+    )
+      try {
+        this.props.onError({
+          error: r,
+          errorInfo: i,
+          errorId: this.state.errorId,
+        });
+      } catch (t) {
+        console.warn("onError callback failed", t);
+      }
+  }
+  render() {
+    var i;
+    if (!this.state.hasError) return this.props.children;
+    const r =
+      typeof window != "undefined" && this.state.errorId
+        ? `https://status.ajayos.in/error/status/${this.state.errorId}`
+        : `/error/status/${this.state.errorId || "unknown"}`;
+    return e.jsxs("div", {
+      className: "error-container",
+      role: "alert",
+      "aria-live": "assertive",
+      children: [
+        e.jsx("div", {
+          className: "particles",
+          "aria-hidden": "true",
+          children: [...Array(40)].map((t, a) =>
+            e.jsx(
+              "div",
+              {
+                className: "particle",
+                style: {
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 20}s`,
+                  animationDuration: `${15 + Math.random() * 10}s`,
+                },
+              },
+              a,
+            ),
+          ),
+        }),
+        e.jsx("div", {
+          className: "matrix-lines",
+          "aria-hidden": "true",
+          children: [...Array(8)].map((t, a) =>
+            e.jsx(
+              "div",
+              {
+                className: "matrix-line",
+                style: { left: `${12.5 * a}%`, animationDelay: `${a * 0.5}s` },
+              },
+              a,
+            ),
+          ),
+        }),
+        e.jsxs("div", {
+          className: "error-content",
+          children: [
+            e.jsxs("div", {
+              className: "glitch-container",
+              "aria-hidden": "true",
+              children: [
+                e.jsx("div", { className: "glitch-icon", children: "⚠" }),
+                e.jsx("div", {
+                  className: "glitch-icon glitch-shadow-1",
+                  children: "⚠",
+                }),
+                e.jsx("div", {
+                  className: "glitch-icon glitch-shadow-2",
+                  children: "⚠",
+                }),
+              ],
+            }),
+            e.jsx("h1", {
+              className: "error-title glitch-text",
+              "data-text": "Oops!",
+              children: "Oops!",
+            }),
+            e.jsx("div", {
+              className: "error-subtitle",
+              children: e.jsx("span", {
+                className: "typing-text",
+                "aria-hidden": "true",
+                children: "Something went wrong...!",
+              }),
+            }),
+            e.jsx("div", {
+              className: "space-error-subtitle",
+              children: e.jsx("span", {
+                className: "space-typing-text",
+                "aria-hidden": "true",
+                children: "Lost in the void of space...",
+              }),
+            }),
+            e.jsxs("div", {
+              className: "error-id-display",
+              "aria-label": "Error identifier",
+              children: [
+                e.jsx("div", { className: "scan-line" }),
+                e.jsx("div", {
+                  className: "error-label",
+                  children: "ERROR_ID",
+                }),
+                e.jsx("div", {
+                  className: "error-value",
+                  children: e.jsx("code", { children: this.state.errorId }),
+                }),
+                e.jsxs("div", {
+                  style: {
+                    marginTop: "8px",
+                    display: "flex",
+                    gap: "8px",
+                    justifyContent: "center",
+                  },
+                  children: [
+                    e.jsx("button", {
+                      className: "small-btn",
+                      onClick: this.copyErrorId,
+                      "aria-label": "Copy error id",
+                      children: this.state.copied ? "COPIED" : "COPY ID",
+                    }),
+                    e.jsx("a", {
+                      href: r,
+                      onClick: (t) => {
+                        typeof window != "undefined" &&
+                          (t.preventDefault(),
+                          window.open(r, "_blank", "noopener,noreferrer"));
+                      },
+                      className: "small-link",
+                      children: "VIEW STATUS",
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            e.jsxs("div", {
+              className: "action-panel",
+              children: [
+                e.jsxs("button", {
+                  className: "cyber-btn primary",
+                  onClick: this.handleGoHome,
+                  children: [
+                    e.jsx("span", {
+                      className: "btn-text",
+                      children: "RETURN HOME",
+                    }),
+                    e.jsx("div", { className: "btn-glow" }),
+                  ],
+                }),
+                e.jsxs("button", {
+                  className: "cyber-btn primary",
+                  onClick: this.openModal,
+                  children: [
+                    e.jsx("span", {
+                      className: "btn-text",
+                      children: "📊 VIEW LOGS",
+                    }),
+                    e.jsx("div", { className: "btn-glow" }),
+                  ],
+                }),
+              ],
+            }),
+            this.state.showModal &&
+              e.jsx("div", {
+                className: "space-modal-backdrop",
+                onClick: this.closeModal,
+                children: e.jsxs("div", {
+                  className: "space-modal",
+                  onClick: (t) => t.stopPropagation(),
+                  children: [
+                    e.jsxs("div", {
+                      className: "space-modal-header",
+                      children: [
+                        e.jsx("h2", { children: "⚙ Error Diagnostics ⚙" }),
+                        e.jsx("button", {
+                          className: "space-modal-close",
+                          onClick: this.closeModal,
+                          children: "✖",
+                        }),
+                      ],
+                    }),
+                    e.jsxs("div", {
+                      className: "space-modal-content",
+                      children: [
+                        e.jsxs("div", {
+                          className: "space-log-line",
+                          children: [
+                            e.jsx("span", {
+                              className: "space-log-label",
+                              children: "ERROR:",
+                            }),
+                            e.jsx("span", {
+                              className: "space-log-value",
+                              children:
+                                ((i = this.state.error) == null
+                                  ? void 0
+                                  : i.message) || "Unknown anomaly detected",
+                            }),
+                          ],
+                        }),
+                        this.state.errorInfo &&
+                          e.jsxs("div", {
+                            className: "space-stack-container",
+                            children: [
+                              e.jsx("div", {
+                                className: "space-stack-label",
+                                children: "STACK TRACE:",
+                              }),
+                              e.jsx("div", {
+                                className: "space-stack-content",
+                                children: this.state.errorInfo.componentStack,
+                              }),
+                            ],
+                          }),
+                      ],
+                    }),
+                  ],
+                }),
+              }),
+            e.jsxs("div", {
+              className: "footer-info",
+              children: [
+                e.jsxs("div", {
+                  className: "footer-line",
+                  children: ["REF: ", this.state.errorId],
+                }),
+                e.jsx("div", {
+                  className: "footer-line",
+                  children: "AWAITING SYSTEM RECOVERY...",
+                }),
+              ],
+            }),
+          ],
+        }),
+        e.jsx("style", {
+          children: `
           /* Modal */
           .space-modal-backdrop { position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); display:flex; align-items:center; justify-content:center; z-index:100000;}
           .space-modal { background:#0a0a1a; border:2px solid #00e5ff; border-radius:12px; width:90%; max-width:600px; padding:1.5rem; max-height:80vh; overflow-y:auto; box-shadow:0 0 30px #00e5ff;}
@@ -126,7 +516,106 @@ var w=Object.defineProperty;var v=(n,o,r)=>o in n?w(n,o,{enumerable:!0,configura
             .action-panel { flex-direction:column; gap:0.6rem; }
             .cyber-btn { width:100%; min-width:auto; border-radius:10px; }
           }
-        `})]})}}function b(){return e.jsxs("div",{className:"min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden",children:[e.jsx("div",{className:"absolute inset-0 opacity-10",children:e.jsx("div",{className:"absolute inset-0",style:{backgroundImage:"linear-gradient(rgba(168, 85, 247, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.1) 1px, transparent 1px)",backgroundSize:"50px 50px"}})}),e.jsx("div",{className:"absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"}),e.jsx("div",{className:"absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"}),e.jsx("div",{className:"relative z-10 w-full max-w-md",children:e.jsxs("div",{className:"group",children:[e.jsx("div",{className:"flex justify-center mb-8",children:e.jsxs("div",{className:"relative w-20 h-20",children:[e.jsx("div",{className:"absolute inset-0 rounded-full border-2 border-transparent border-t-purple-400 border-r-pink-400 animate-spin"}),e.jsx("div",{className:"absolute inset-2 rounded-full border-2 border-transparent border-b-pink-400 border-l-purple-400 animate-spin",style:{animationDirection:"reverse",animationDuration:"1.5s"}}),e.jsx("div",{className:"absolute inset-0 flex items-center justify-center",children:e.jsx(j,{className:"w-8 h-8 text-purple-400",fill:"currentColor"})})]})}),e.jsx("div",{className:"text-center",children:e.jsxs("div",{className:"inline-flex items-center justify-center space-x-2",children:[e.jsx("span",{className:"text-purple-300/70 text-sm",children:"Initializing"}),e.jsxs("span",{className:"inline-flex space-x-1",children:[e.jsx("span",{className:"w-2 h-2 bg-purple-400 rounded-full animate-bounce",style:{animationDelay:"0s"}}),e.jsx("span",{className:"w-2 h-2 bg-pink-400 rounded-full animate-bounce",style:{animationDelay:"0.15s"}}),e.jsx("span",{className:"w-2 h-2 bg-purple-400 rounded-full animate-bounce",style:{animationDelay:"0.3s"}})]})]})})]})}),e.jsx("style",{children:`
+        `,
+        }),
+      ],
+    });
+  }
+}
+function b() {
+  return e.jsxs("div", {
+    className:
+      "min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden",
+    children: [
+      e.jsx("div", {
+        className: "absolute inset-0 opacity-10",
+        children: e.jsx("div", {
+          className: "absolute inset-0",
+          style: {
+            backgroundImage:
+              "linear-gradient(rgba(168, 85, 247, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.1) 1px, transparent 1px)",
+            backgroundSize: "50px 50px",
+          },
+        }),
+      }),
+      e.jsx("div", {
+        className:
+          "absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob",
+      }),
+      e.jsx("div", {
+        className:
+          "absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000",
+      }),
+      e.jsx("div", {
+        className: "relative z-10 w-full max-w-md",
+        children: e.jsxs("div", {
+          className: "group",
+          children: [
+            e.jsx("div", {
+              className: "flex justify-center mb-8",
+              children: e.jsxs("div", {
+                className: "relative w-20 h-20",
+                children: [
+                  e.jsx("div", {
+                    className:
+                      "absolute inset-0 rounded-full border-2 border-transparent border-t-purple-400 border-r-pink-400 animate-spin",
+                  }),
+                  e.jsx("div", {
+                    className:
+                      "absolute inset-2 rounded-full border-2 border-transparent border-b-pink-400 border-l-purple-400 animate-spin",
+                    style: {
+                      animationDirection: "reverse",
+                      animationDuration: "1.5s",
+                    },
+                  }),
+                  e.jsx("div", {
+                    className:
+                      "absolute inset-0 flex items-center justify-center",
+                    children: e.jsx(j, {
+                      className: "w-8 h-8 text-purple-400",
+                      fill: "currentColor",
+                    }),
+                  }),
+                ],
+              }),
+            }),
+            e.jsx("div", {
+              className: "text-center",
+              children: e.jsxs("div", {
+                className: "inline-flex items-center justify-center space-x-2",
+                children: [
+                  e.jsx("span", {
+                    className: "text-purple-300/70 text-sm",
+                    children: "Initializing",
+                  }),
+                  e.jsxs("span", {
+                    className: "inline-flex space-x-1",
+                    children: [
+                      e.jsx("span", {
+                        className:
+                          "w-2 h-2 bg-purple-400 rounded-full animate-bounce",
+                        style: { animationDelay: "0s" },
+                      }),
+                      e.jsx("span", {
+                        className:
+                          "w-2 h-2 bg-pink-400 rounded-full animate-bounce",
+                        style: { animationDelay: "0.15s" },
+                      }),
+                      e.jsx("span", {
+                        className:
+                          "w-2 h-2 bg-purple-400 rounded-full animate-bounce",
+                        style: { animationDelay: "0.3s" },
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            }),
+          ],
+        }),
+      }),
+      e.jsx("style", {
+        children: `
         @keyframes blob {
           0%, 100% {
             transform: translate(0, 0) scale(1);
@@ -155,4 +644,30 @@ var w=Object.defineProperty;var v=(n,o,r)=>o in n?w(n,o,{enumerable:!0,configura
             width: 100%;
           }
         }
-      `})]})}const D=h.lazy(()=>C(()=>import("./SystemGuard.js"),__vite__mapDeps([0,1,2]))),O=k([{path:"*",element:e.jsx(R,{children:e.jsx(D,{})}),HydrateFallback:e.jsx(b,{})}],{future:{v7_startTransition:!0}});N.createRoot(document.getElementById("ajayos")).render(e.jsx(E.StrictMode,{children:e.jsx(h.Suspense,{fallback:e.jsx(b,{}),children:e.jsx(z,{router:O})})}));export{b as L};
+      `,
+      }),
+    ],
+  });
+}
+const D = h.lazy(() =>
+    C(() => import("./SystemGuard.js"), __vite__mapDeps([0, 1, 2])),
+  ),
+  O = k(
+    [
+      {
+        path: "*",
+        element: e.jsx(R, { children: e.jsx(D, {}) }),
+        HydrateFallback: e.jsx(b, {}),
+      },
+    ],
+    { future: { v7_startTransition: !0 } },
+  );
+N.createRoot(document.getElementById("ajayos")).render(
+  e.jsx(E.StrictMode, {
+    children: e.jsx(h.Suspense, {
+      fallback: e.jsx(b, {}),
+      children: e.jsx(z, { router: O }),
+    }),
+  }),
+);
+export { b as L };

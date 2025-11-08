@@ -1,16 +1,2944 @@
-var Nt=Object.defineProperty,St=Object.defineProperties;var kt=Object.getOwnPropertyDescriptors;var Qe=Object.getOwnPropertySymbols;var Ct=Object.prototype.hasOwnProperty,Mt=Object.prototype.propertyIsEnumerable;var Ze=(t,a,s)=>a in t?Nt(t,a,{enumerable:!0,configurable:!0,writable:!0,value:s}):t[a]=s,B=(t,a)=>{for(var s in a||(a={}))Ct.call(a,s)&&Ze(t,s,a[s]);if(Qe)for(var s of Qe(a))Mt.call(a,s)&&Ze(t,s,a[s]);return t},Q=(t,a)=>St(t,kt(a));import{r as c,j as e,u as Z,d as Et,Z as De,S as At,C as Pt,D as Rt,e as It,X as Tt,W as et,T as Lt,f as zt,g as Dt,A as _t}from"./aos_vendor.js";import{C as Ce,S as ce,P as de,W as ue,B as Y,e as z,f as q,h as X,G as Le,T as Gt,k as Ot,l as he,n as Ut,o as Ft,M as le,q as ae,t as F,u as Me,v as ne,w as Ee,x as $t,y as Ht,z as Bt,D as Vt,F as Wt,H as Yt}from"./aos.js";import{L as qt}from"./index.js";const Ae=t=>`${btoa(`${t}`).replace(/=/g,"")}`,tt="super-secret-key-ajayos",H={get(t,a=null){try{const s=localStorage.getItem(Ae(t));if(!s)return a;const r=Ce.AES.decrypt(s,tt).toString(Ce.enc.Utf8);if(!r)return a;try{const o=JSON.parse(r);return o&&o.__type==="string"?o.value:o}catch(o){return r}}catch(s){return a}},set(t,a){try{let s;typeof a=="string"?s=JSON.stringify({__type:"string",value:a}):s=JSON.stringify(a);const n=Ce.AES.encrypt(s,tt).toString();localStorage.setItem(Ae(t),n)}catch(s){console.error("Storage set error:",s)}},remove(t){localStorage.removeItem(Ae(t))},firstLoad(){return this.get("seen",!1)?!1:(this.set("seen",!0),!0)}},Xt=()=>{const t=c.useRef(null);return c.useEffect(()=>{const a=t.current;if(!a)return;const s=new ce,n=new de(75,a.clientWidth/a.clientHeight,.1,1e3);n.position.z=50;const r=new ue({alpha:!0,antialias:!0});r.setSize(a.clientWidth,a.clientHeight),r.setPixelRatio(window.devicePixelRatio),a.appendChild(r.domElement);const o=new Y,l=8e3,d=new Float32Array(l*3),i=new Float32Array(l*3);for(let y=0;y<l;y++){const x=y*3,g=Math.random()*50,v=Math.random()*Math.PI*2,j=g*.2;d[x]=Math.cos(v+j)*g,d[x+1]=(Math.random()-.5)*20,d[x+2]=Math.sin(v+j)*g,i[x]=Math.random(),i[x+1]=Math.random()*.5+.5,i[x+2]=1}o.setAttribute("position",new z(d,3)),o.setAttribute("color",new z(i,3));const p=new q({size:.15,vertexColors:!0,transparent:!0,opacity:.7}),u=new X(o,p);s.add(u);let h=0,w=0;const f=y=>{h=(y.clientX/window.innerWidth-.5)*2,w=(y.clientY/window.innerHeight-.5)*2};window.addEventListener("mousemove",f);const m=()=>{u.rotation.y+=8e-4,u.rotation.x+=(w*.05-u.rotation.x)*.05,u.rotation.z+=(h*.05-u.rotation.z)*.05,r.render(s,n),requestAnimationFrame(m)};m();const b=()=>{n.aspect=a.clientWidth/a.clientHeight,n.updateProjectionMatrix(),r.setSize(a.clientWidth,a.clientHeight)};return window.addEventListener("resize",b),()=>{window.removeEventListener("mousemove",f),window.removeEventListener("resize",b),a.removeChild(r.domElement),o.dispose(),p.dispose(),r.dispose()}},[]),e.jsx("div",{ref:t,className:"absolute inset-0 z-0"})},Kt=()=>{const t=c.useRef(null);return c.useEffect(()=>{const a=t.current;if(!a)return;const s=new ce,n=new de(75,a.clientWidth/a.clientHeight,.1,2e3);n.position.z=60;const r=new ue({alpha:!0,antialias:!0});r.setSize(a.clientWidth,a.clientHeight),r.setPixelRatio(window.devicePixelRatio),a.appendChild(r.domElement);const o=new Y,l=4e3,d=new Float32Array(l*3),i=new Float32Array(l*3);for(let A=0;A<l;A++){const C=A*3;d[C]=(Math.random()-.5)*400,d[C+1]=(Math.random()-.5)*400,d[C+2]=(Math.random()-.5)*400;const N=Math.random();i[C]=N,i[C+1]=N*.9+.1,i[C+2]=1}o.setAttribute("position",new z(d,3)),o.setAttribute("color",new z(i,3));const p=new q({size:.1,vertexColors:!0,transparent:!0,opacity:.8}),u=new X(o,p);s.add(u);const h=new Le,f=new Gt().load("https://threejs.org/examples/textures/sprites/smoke.png");for(let A=0;A<15;A++){const C=new Ot({map:f,color:new he().setHSL(Math.random(),.7,.5),transparent:!0,opacity:.15+Math.random()*.1,depthWrite:!1}),N=new Ut(C);N.position.set((Math.random()-.5)*300,(Math.random()-.5)*200,(Math.random()-.5)*300);const P=80+Math.random()*100;N.scale.set(P,P,1),h.add(N)}s.add(h);const m=new Y,b=2e3,y=new Float32Array(b*3),x=new Float32Array(b*3);for(let A=0;A<b;A++){const C=A*3,N=Math.random()*100,P=Math.random()*Math.PI*2,L=Math.acos(Math.random()*2-1);y[C]=N*Math.sin(L)*Math.cos(P),y[C+1]=N*Math.sin(L)*Math.sin(P),y[C+2]=N*Math.cos(L);const T=new he().setHSL(Math.random(),1,.6);x[C]=T.r,x[C+1]=T.g,x[C+2]=T.b}m.setAttribute("position",new z(y,3)),m.setAttribute("color",new z(x,3));const g=new q({size:.5,vertexColors:!0,transparent:!0,opacity:.9,blending:Ft}),v=new X(m,g);s.add(v);let j=0,E=0;const D=A=>{j=(A.clientX/window.innerWidth-.5)*2,E=(A.clientY/window.innerHeight-.5)*2};window.addEventListener("mousemove",D);const k=()=>{requestAnimationFrame(k),u.rotation.y+=2e-4,v.rotation.y+=5e-4,h.rotation.y+=1e-4,h.rotation.x=Math.sin(Date.now()*5e-5)*.1,n.position.x+=(j*30-n.position.x)*.05,n.position.y+=(-E*20-n.position.y)*.05,n.lookAt(s.position),r.render(s,n)};k();const S=()=>{n.aspect=a.clientWidth/a.clientHeight,n.updateProjectionMatrix(),r.setSize(a.clientWidth,a.clientHeight)};return window.addEventListener("resize",S),()=>{window.removeEventListener("mousemove",D),window.removeEventListener("resize",S),a.removeChild(r.domElement),r.dispose()}},[]),e.jsx("div",{ref:t,className:"absolute inset-0 z-0"})},Jt=()=>{const t=c.useRef(null),a=c.useRef(null),s=c.useRef(null),n=c.useRef(null),r=c.useRef(null),o=c.useRef(!1);return c.useEffect(()=>{if(!t.current||o.current)return;o.current=!0;const l=new ce;n.current=l;const d=new de(75,window.innerWidth/window.innerHeight,.1,2e3);d.position.z=60,r.current=d;const i=new ue({alpha:!0,antialias:!0});i.setSize(window.innerWidth,window.innerHeight),i.setPixelRatio(window.devicePixelRatio),i.setClearColor(0,1),s.current=i,t.current.appendChild(i.domElement);const p=new Y,u=12e3,h=new Float32Array(u*3),w=new Float32Array(u*3),f=[{r:.1,g:.6,b:1},{r:.6,g:.2,b:1},{r:1,g:.2,b:.6},{r:.2,g:1,b:1},{r:1,g:.6,b:0},{r:1,g:.3,b:.8},{r:.5,g:1,b:.5},{r:1,g:1,b:.5}];for(let N=0;N<u;N++){const P=N*3,L=Math.random()*Math.PI*2,T=Math.pow(Math.random(),.5)*60,ee=3,te=T/60*Math.PI*4,fe=Math.floor(Math.random()*ee)/ee*Math.PI*2;h[P]=Math.cos(L+te+fe)*T,h[P+1]=(Math.random()-.5)*40,h[P+2]=Math.sin(L+te+fe)*T;const se=f[Math.floor(Math.random()*f.length)];w[P]=se.r+(Math.random()-.5)*.2,w[P+1]=se.g+(Math.random()-.5)*.2,w[P+2]=se.b+(Math.random()-.5)*.2}p.setAttribute("position",new z(h,3)),p.setAttribute("color",new z(w,3));const m=new q({size:.25,vertexColors:!0,transparent:!0,opacity:.8,sizeAttenuation:!0}),b=new X(p,m);l.add(b);const y=new Y,x=5e3,g=new Float32Array(x*3),v=new Float32Array(x*3);for(let N=0;N<x;N++){const P=N*3;g[P]=(Math.random()-.5)*300,g[P+1]=(Math.random()-.5)*300,g[P+2]=(Math.random()-.5)*300;const L=Math.random();v[P]=L*.8+.2,v[P+1]=L*.8+.2,v[P+2]=L}y.setAttribute("position",new z(g,3)),y.setAttribute("color",new z(v,3));const j=new q({size:.08,vertexColors:!0,transparent:!0,opacity:.6,sizeAttenuation:!0}),E=new X(y,j);l.add(E);for(let N=0;N<12;N++){const P=new le({color:new he().setHSL(.5+Math.random()*.4,.8,.4),transparent:!0,opacity:.06+Math.random()*.08,depthWrite:!1}),L=new ae(Math.random()*40+25,32,32),T=new F(L,P);T.position.set((Math.random()-.5)*150,(Math.random()-.5)*120,(Math.random()-.5)*150),T.scale.set(Math.random()*3+1,Math.random()*3+1,Math.random()*3+1),l.add(T)}let D=0,k=0;const S=N=>{D=N.clientX/window.innerWidth*2-1,k=-(N.clientY/window.innerHeight)*2+1};window.addEventListener("mousemove",S);const A=()=>{a.current=requestAnimationFrame(A),b.rotation.z+=15e-5,b.rotation.x+=8e-5,b.rotation.y+=1e-4,E.rotation.z+=5e-5,E.rotation.x+=2e-5,d.position.x=D*25,d.position.y=k*20,d.lookAt(0,0,0),i.render(l,d)};A();const C=()=>{if(!i)return;const N=window.innerWidth,P=window.innerHeight;d.aspect=N/P,d.updateProjectionMatrix(),i.setSize(N,P)};return window.addEventListener("resize",C),()=>{window.removeEventListener("mousemove",S),window.removeEventListener("resize",C),cancelAnimationFrame(a.current),p.dispose(),m.dispose(),y.dispose(),j.dispose(),i.dispose(),t.current&&i.domElement.parentNode===t.current&&t.current.removeChild(i.domElement),l.clear()}},[]),e.jsx("div",{ref:t,className:"fixed inset-0 z-0"})},Qt=()=>{const t=c.useRef(null),a=c.useRef(!1);return c.useEffect(()=>{if(!t.current||a.current)return;a.current=!0;const s=new ce,n=new de(75,window.innerWidth/window.innerHeight,.1,2e3);n.position.z=60;const r=new ue({alpha:!0,antialias:!0});r.setSize(window.innerWidth,window.innerHeight),r.setPixelRatio(window.devicePixelRatio),r.setClearColor(0,1),t.current.appendChild(r.domElement);const o=new Y,l=12e3,d=new Float32Array(l*3),i=new Float32Array(l*3),p=[{r:.1,g:.6,b:1},{r:.6,g:.2,b:1},{r:1,g:.2,b:.6},{r:.2,g:1,b:1},{r:1,g:.6,b:0},{r:1,g:.3,b:.8},{r:.5,g:1,b:.5},{r:1,g:1,b:.5}];for(let k=0;k<l;k++){const S=k*3,A=Math.random()*Math.PI*2,C=Math.pow(Math.random(),.5)*60,N=3,L=C/60*Math.PI*4,T=Math.floor(Math.random()*N)/N*Math.PI*2;d[S]=Math.cos(A+L+T)*C,d[S+1]=(Math.random()-.5)*40,d[S+2]=Math.sin(A+L+T)*C;const ee=p[Math.floor(Math.random()*p.length)];i[S]=ee.r+(Math.random()-.5)*.2,i[S+1]=ee.g+(Math.random()-.5)*.2,i[S+2]=ee.b+(Math.random()-.5)*.2}o.setAttribute("position",new z(d,3)),o.setAttribute("color",new z(i,3));const u=new q({size:.25,vertexColors:!0,transparent:!0,opacity:.8,sizeAttenuation:!0}),h=new X(o,u);s.add(h);const w=new Y,f=5e3,m=new Float32Array(f*3),b=new Float32Array(f*3);for(let k=0;k<f;k++){const S=k*3;m[S]=(Math.random()-.5)*300,m[S+1]=(Math.random()-.5)*300,m[S+2]=(Math.random()-.5)*300;const A=Math.random();b[S]=A*.8+.2,b[S+1]=A*.8+.2,b[S+2]=A}w.setAttribute("position",new z(m,3)),w.setAttribute("color",new z(b,3));const y=new q({size:.08,vertexColors:!0,transparent:!0,opacity:.6,sizeAttenuation:!0}),x=new X(w,y);s.add(x);for(let k=0;k<12;k++){const S=new le({color:new he().setHSL(.5+Math.random()*.4,.8,.4),transparent:!0,opacity:.06+Math.random()*.08,depthWrite:!1}),A=new ae(Math.random()*40+25,32,32),C=new F(A,S);C.position.set((Math.random()-.5)*150,(Math.random()-.5)*120,(Math.random()-.5)*150),C.scale.set(Math.random()*3+1,Math.random()*3+1,Math.random()*3+1),s.add(C)}let g=0,v=0;const j=k=>{g=k.clientX/window.innerWidth*2-1,v=-(k.clientY/window.innerHeight)*2+1};window.addEventListener("mousemove",j);const E=()=>{h.rotation.z+=15e-5,h.rotation.x+=8e-5,h.rotation.y+=1e-4,x.rotation.z+=5e-5,x.rotation.x+=2e-5,n.position.x=g*25,n.position.y=v*20,n.lookAt(0,0,0),r.render(s,n),requestAnimationFrame(E)};E();const D=()=>{const k=window.innerWidth,S=window.innerHeight;n.aspect=k/S,n.updateProjectionMatrix(),r.setSize(k,S)};return window.addEventListener("resize",D),()=>{window.removeEventListener("mousemove",j),window.removeEventListener("resize",D),r.dispose()}},[]),e.jsx("div",{ref:t,className:"fixed inset-0 z-0"})},Zt=()=>{const t=c.useRef(null);return c.useEffect(()=>{const a=t.current;if(!a)return;const s=new ce,n=new de(75,a.clientWidth/a.clientHeight,.1,1e3);n.position.z=50;const r=new ue({alpha:!0,antialias:!0});r.setSize(a.clientWidth,a.clientHeight),r.setPixelRatio(window.devicePixelRatio),a.appendChild(r.domElement);const o=new Y,l=8e3,d=new Float32Array(l*3),i=new Float32Array(l*3);for(let y=0;y<l;y++){const x=y*3,g=Math.random()*50,v=Math.random()*Math.PI*2,j=g*.2;d[x]=Math.cos(v+j)*g,d[x+1]=(Math.random()-.5)*20,d[x+2]=Math.sin(v+j)*g,i[x]=Math.random(),i[x+1]=Math.random()*.5+.5,i[x+2]=1}o.setAttribute("position",new z(d,3)),o.setAttribute("color",new z(i,3));const p=new q({size:.15,vertexColors:!0,transparent:!0,opacity:.7}),u=new X(o,p);s.add(u);let h=0,w=0;const f=y=>{h=(y.clientX/window.innerWidth-.5)*2,w=(y.clientY/window.innerHeight-.5)*2};window.addEventListener("mousemove",f);const m=()=>{u.rotation.y+=8e-4,u.rotation.x+=(w*.05-u.rotation.x)*.05,u.rotation.z+=(h*.05-u.rotation.z)*.05,r.render(s,n),requestAnimationFrame(m)};m();const b=()=>{n.aspect=a.clientWidth/a.clientHeight,n.updateProjectionMatrix(),r.setSize(a.clientWidth,a.clientHeight)};return window.addEventListener("resize",b),()=>{window.removeEventListener("mousemove",f),window.removeEventListener("resize",b),a.removeChild(r.domElement),o.dispose(),p.dispose(),r.dispose()}},[]),e.jsx("div",{ref:t,className:"absolute inset-0 z-0"})},es=()=>{const t=c.useRef(null);return c.useEffect(()=>{const a=t.current;if(!a)return;const s=new ce,n=new de(75,window.innerWidth/window.innerHeight,.1,5e3);n.position.z=100;const r=new ue({alpha:!0,antialias:!0});r.setSize(window.innerWidth,window.innerHeight),r.setPixelRatio(window.devicePixelRatio),r.setClearColor(0,1),t.current.appendChild(r.domElement);const o=new Y,l=1e4,d=new Float32Array(l*3),i=new Float32Array(l*3);for(let R=0;R<l;R++){const I=R*3;d[I]=(Math.random()-.5)*500,d[I+1]=(Math.random()-.5)*500,d[I+2]=(Math.random()-.5)*500;const V=Math.random();i[I]=V*.8+.2,i[I+1]=V*.9+.1,i[I+2]=V}o.setAttribute("position",new z(d,3)),o.setAttribute("color",new z(i,3));const p=new q({size:.2,vertexColors:!0,transparent:!0,opacity:.8,sizeAttenuation:!0}),u=new X(o,p);s.add(u);const h=new Y,w=12e3,f=new Float32Array(w*3),m=new Float32Array(w*3),b=[{r:.1,g:.6,b:1},{r:.6,g:.2,b:1},{r:1,g:.2,b:.6},{r:.2,g:1,b:1},{r:1,g:.6,b:.1}];for(let R=0;R<w;R++){const I=R*3,V=Math.random()*Math.PI*2,$=Math.pow(Math.random(),.6)*45,Je=$/45*Math.PI*5;f[I]=Math.cos(V+Je)*$,f[I+1]=(Math.random()-.5)*30,f[I+2]=Math.sin(V+Je)*$;const ke=b[Math.floor(Math.random()*b.length)];m[I]=ke.r,m[I+1]=ke.g,m[I+2]=ke.b}h.setAttribute("position",new z(f,3)),h.setAttribute("color",new z(m,3));const y=new q({size:.35,vertexColors:!0,transparent:!0,opacity:.8,sizeAttenuation:!0}),x=new X(h,y);x.position.set(-60,-20,-50),s.add(x);const g=new ae(8,32,32),v=document.createElement("canvas");v.width=512,v.height=512;const j=v.getContext("2d"),E=j.createRadialGradient(256,256,0,256,256,256);E.addColorStop(0,"#ffff99"),E.addColorStop(.5,"#ffcc00"),E.addColorStop(1,"#ff8800"),j.fillStyle=E,j.fillRect(0,0,512,512);const D=new Me(v),k=new le({map:D}),S=new F(g,k);S.position.set(80,60,-100),s.add(S);const A=new ae(9,32,32),C=new le({color:16755200,transparent:!0,opacity:.3,depthWrite:!1}),N=new F(A,C);N.position.copy(S.position),s.add(N);const P=new ae(5,32,32),L=document.createElement("canvas");L.width=1024,L.height=512;const T=L.getContext("2d");T.fillStyle="#1a4d7a",T.fillRect(0,0,1024,512),T.fillStyle="#2d8a3d",T.fillRect(100,200,120,80),T.fillRect(400,150,150,100),T.fillRect(750,220,130,70);const ee=new Me(L),Fe=new ne({map:ee,emissive:1731496,emissiveIntensity:.2}),te=new F(P,Fe);te.position.set(30,-10,0),s.add(te);const fe=new ae(1.5,16,16),se=document.createElement("canvas");se.width=256,se.height=256;const K=se.getContext("2d");K.fillStyle="#cccccc",K.fillRect(0,0,256,256),K.fillStyle="#999999",K.beginPath(),K.arc(80,80,20,0,Math.PI*2),K.fill(),K.beginPath(),K.arc(180,150,15,0,Math.PI*2),K.fill();const ct=new Me(se),dt=new ne({map:ct}),me=new F(fe,dt);me.position.set(38,-8,0),s.add(me);const J=new Le,ut=new Ee(1.5,6,8),mt=new ne({color:16711680}),$e=new F(ut,mt);$e.position.z=3,J.add($e);const pt=new ae(1.5,8,8),ht=new ne({color:16776960}),Se=new F(pt,ht);Se.position.z=6.5,Se.scale.z=.6,J.add(Se);for(let R=0;R<3;R++){const I=new Ee(1,3,4),V=new ne({color:26367}),$=new F(I,V);$.position.set(0,0,.5),$.rotation.z=R*Math.PI*2/3,$.rotation.x=Math.PI/4,J.add($)}const xt=new Ee(1,2,8),ft=new le({color:16737792}),He=new F(xt,ft);He.position.z=0,J.add(He),J.position.set(-30,40,20),J.rotation.z=Math.PI/6,s.add(J);const oe=new Le,gt=new $t(2,3,1),wt=new ne({color:13421772}),bt=new F(gt,wt);oe.add(bt);const yt=new Ht(4,2),vt=new ne({color:39423});for(let R=0;R<2;R++){const I=new F(yt,vt);I.position.y=R===0?3:-3,I.rotation.x=Math.PI/6,oe.add(I)}oe.position.set(60,30,-80),s.add(oe);for(let R=0;R<10;R++){const I=new le({color:new he().setHSL(.5+Math.random()*.4,.8,.4),transparent:!0,opacity:.06+Math.random()*.08,depthWrite:!1}),V=new ae(Math.random()*40+30,32,32),$=new F(V,I);$.position.set((Math.random()-.5)*200,(Math.random()-.5)*200,(Math.random()-.5)*200),$.scale.set(Math.random()*2+1,Math.random()*2+1,Math.random()*2+1),s.add($)}const Be=new Bt(16755200,1.5,300);Be.position.copy(S.position),s.add(Be);const jt=new Vt(4491519,.4);s.add(jt);let Ve=0,We=0,pe=0,Ye;const qe=R=>{Ve=R.clientX/window.innerWidth*2-1,We=-(R.clientY/window.innerHeight)*2+1};window.addEventListener("mousemove",qe);const Xe=()=>{Ye=requestAnimationFrame(Xe),pe+=3e-4,u.rotation.z+=5e-5,x.rotation.z+=2e-4,x.rotation.x+=8e-5,te.rotation.y+=.002,me.rotation.y+=.01,S.rotation.y+=.001,N.rotation.y-=.001,me.position.x=te.position.x+Math.cos(pe*2)*8,me.position.y=te.position.y+Math.sin(pe*2)*4,J.position.x=-30+Math.cos(pe*.8)*15,J.position.y=40+Math.sin(pe*.6)*10,oe.rotation.z+=.005,oe.rotation.x+=.002,n.position.x=Ve*40,n.position.y=We*30,n.lookAt(0,0,0),r.render(s,n)};Xe();const Ke=()=>{const R=window.innerWidth,I=window.innerHeight;n.aspect=R/I,n.updateProjectionMatrix(),r.setSize(R,I)};return window.addEventListener("resize",Ke),()=>{window.removeEventListener("mousemove",qe),window.removeEventListener("resize",Ke),cancelAnimationFrame(Ye),a.removeChild(r.domElement),o.dispose(),p.dispose(),h.dispose(),y.dispose(),r.dispose()}},[]),e.jsx("div",{ref:t,className:"absolute inset-0 z-0"})},we=({className:t="w-5 h-5"})=>e.jsx("svg",{xmlns:"http://www.w3.org/2000/svg",className:t,fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:"1.8",children:e.jsx("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0"})}),ze=({className:t="w-5 h-5"})=>e.jsx("svg",{xmlns:"http://www.w3.org/2000/svg",className:t,fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:"1.8",children:e.jsx("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M16.5 10.5V7.5a4.5 4.5 0 00-9 0v3m10.5 0H6A1.5 1.5 0 004.5 12v7.5A1.5 1.5 0 006 21h12a1.5 1.5 0 001.5-1.5V12a1.5 1.5 0 00-1.5-1.5z"})}),_e=({className:t="w-5 h-5"})=>e.jsx("svg",{xmlns:"http://www.w3.org/2000/svg",className:t,fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:"1.8",children:e.jsx("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M15.75 9V5.25A2.25 2.25 0 0013.5 3H6.75A2.25 2.25 0 004.5 5.25v13.5A2.25 2.25 0 006.75 21H13.5a2.25 2.25 0 002.25-2.25V15M9 12h12m0 0l-3-3m3 3l-3 3"})}),nt=({className:t="w-5 h-5"})=>e.jsxs("svg",{xmlns:"http://www.w3.org/2000/svg",className:t,fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:"1.8",children:[e.jsx("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M12 4.5a7.5 7.5 0 017.5 7.5c0 3.727-2.674 6.834-6.25 7.387v.363a1 1 0 01-2 0v-.363C7.174 18.834 4.5 15.727 4.5 12A7.5 7.5 0 0112 4.5z"}),e.jsx("circle",{cx:"12",cy:"12",r:"1.5",fill:"currentColor"})]}),Ge=({className:t="w-5 h-5"})=>e.jsxs("svg",{xmlns:"http://www.w3.org/2000/svg",className:t,viewBox:"0 0 24 24",children:[e.jsx("path",{fill:"#4285F4",d:"M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.3 5.3 0 01-2.21 3.31l3.57 2.77c2.08-1.92 3.28-4.74 3.28-8.09z"}),e.jsx("path",{fill:"#34A853",d:"M12 23a10.9 10.9 0 007.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06A7.94 7.94 0 014.13 14H.45v2.84A11.98 11.98 0 0012 23z"}),e.jsx("path",{fill:"#FBBC05",d:"M4.13 14a7.93 7.93 0 010-4H.45V7.16A12.02 12.02 0 000 12c0 1.79.39 3.49 1.1 5.01L4.13 14z"}),e.jsx("path",{fill:"#EA4335",d:"M12 4.75c1.62 0 3.06.56 4.21 1.64l3.15-3.15A11.97 11.97 0 000 12l4.13-3.34C5 6.06 7.43 4.75 12 4.75z"})]}),Oe=({className:t="w-5 h-5"})=>e.jsx("svg",{xmlns:"http://www.w3.org/2000/svg",className:t,viewBox:"0 0 24 24",fill:"currentColor",children:e.jsx("path",{d:"M12 .297C5.37.297 0 5.67 0 12.297c0 5.3 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.337.726-4.033-1.416-4.033-1.416-.547-1.387-1.334-1.756-1.334-1.756-1.09-.745.083-.729.083-.729 1.205.083 1.839 1.237 1.839 1.237 1.07 1.834 2.806 1.304 3.492.997.108-.775.419-1.305.763-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.524.118-3.176 0 0 1.007-.322 3.3 1.23a11.34 11.34 0 013.003-.404c1.02.005 2.047.138 3.006.404 2.292-1.552 3.298-1.23 3.298-1.23.653 1.653.242 2.874.118 3.176.768.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.478 5.921.43.372.822 1.102.822 2.222v3.293c0 .319.192.694.801.576C20.563 22.097 24 17.6 24 12.297 24 5.67 18.627.297 12 .297z"})}),ot=({className:t="w-5 h-5"})=>e.jsx("svg",{xmlns:"http://www.w3.org/2000/svg",className:t,fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:"1.8",children:e.jsx("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M3 8l9 6 9-6M4.5 6h15A1.5 1.5 0 0121 7.5v9A1.5 1.5 0 0119.5 18h-15A1.5 1.5 0 013 16.5v-9A1.5 1.5 0 014.5 6z"})}),Ue=({className:t="w-5 h-5"})=>e.jsx("svg",{xmlns:"http://www.w3.org/2000/svg",className:t,fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:"1.8",children:e.jsx("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"})}),je=({className:t="w-5 h-5"})=>e.jsx("svg",{xmlns:"http://www.w3.org/2000/svg",className:t,fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:"1.8",children:e.jsx("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M15 19l-7-7 7-7"})});class ts{constructor(){this.map=new Map}on(a,s){const n=this.map.get(a)||[];return n.push(s),this.map.set(a,n),()=>this.off(a,s)}once(a,s){const n=this.on(a,(...r)=>{n(),s(...r)});return n}off(a,s){const n=this.map.get(a)||[];this.map.set(a,n.filter(r=>r!==s))}emit(a,...s){const n=this.map.get(a)||[];for(const r of n)try{r(...s)}catch(o){console.error(o)}}}const O=new ts,U={API_LOADING:"api:loading",API_TRACE:"api:trace",ERROR:"app:error",INSPECT_DETECTED:"security:inspect",INPUT_TRACE:"trace:input",VERSION_MISMATCH:"app:version:mismatch",TAB_VISIBILITY:"tab:visibility",THEME_CHANGED:"theme:changed",SOCKET_MESSAGE:"socket:message",SERVER_NOT_PING:"server_not_ping"},ss="Auth",as="1.0.0",rs={inspectGuard:!0,inputTracer:!0,tabTracker:!0,wss:!1,isServerLive:!0},ns={url:"wss://api.ajayos.in",withCredentials:!0,reconnectionAttempts:3,reconnectionDelay:1e3,reconnection:!1,autoConnect:!0,transports:["websocket"],timeout:8e3,multiplex:!0,path:""},os={baseURL:"https://api.ajayos.in",timeout:2e4,withCredentials:!0,retry:3},is="November 5, 2025",ls=[{id:1,category:"✨ New Features",icon:"🎨",gradient:"from-purple-500/40 to-pink-500/40",borderColor:"border-purple-400/60",badgeGradient:"from-purple-500 to-pink-500",items:[{title:"Dark Mode Support",description:"Complete dark theme across all pages",image:"🌙"},{title:"Real-time Collaboration",description:"Work together with live updates",image:"👥"},{title:"AI-Powered Search",description:"Smart search with natural language",image:"🤖"}]},{id:2,category:"🐛 Bug Fixes",icon:"🔧",gradient:"from-blue-500/40 to-cyan-500/40",borderColor:"border-blue-400/60",badgeGradient:"from-blue-500 to-cyan-500",items:[{title:"Mobile Animation Fix",description:"Fixed loading spinner stuttering",image:"📱"},{title:"Memory Leak Resolution",description:"Resolved websocket memory leak",image:"💾"},{title:"Timezone Conversion",description:"Fixed timezone conversion errors",image:"⏰"}]},{id:3,category:"⚡ Performance",icon:"⚙️",gradient:"from-orange-500/40 to-red-500/40",borderColor:"border-orange-400/60",badgeGradient:"from-orange-500 to-red-500",items:[{title:"Bundle Size Reduction",description:"Reduced app bundle by 35%",image:"📦"},{title:"API Response Speed",description:"Improved response time by 40%",image:"⚡"},{title:"Image Optimization",description:"Smart loading for slow networks",image:"🖼️"}]}],it={projectName:ss,appVersion:as,features:rs,ws:ns,api:os,releaseDate:is,changelog:ls},M=it,Ne=t=>{var a;return!!((a=it.features)!=null&&a[t])};let _=null,W=0,Pe=null,ge=[];function G(t,a={}){O.emit(`SOCKET:${t}`,B({type:t},a))}function cs(){var a;if(!Ne("wss")||_)return;const t=((a=M==null?void 0:M.ws)==null?void 0:a.url)||window.location.origin;_=Wt(t,M.ws),_.on("connect",()=>{W=0,G("STATUS",{connected:!0,id:_.id}),ds()}),_.on("message",s=>{G("MESSAGE",{data:s})}),_.on("notification",s=>G("NOTIFICATION",{data:s})),_.on("update",s=>G("UPDATE",{data:s})),_.on("connect_error",s=>{G("ERROR",{message:s.message||"Connection error",attempt:W}),st()}),_.on("disconnect",s=>{G("DISCONNECT",{reason:s}),s!=="io client disconnect"&&st()}),_.on("reconnect_attempt",()=>{G("RECONNECT_ATTEMPT",{attempt:W})}),_.on("reconnect_failed",()=>{G("RECONNECT_FAILED",{attempt:W})}),_.on("ping",()=>{G("PING",{ts:Date.now()})}),_.on("pong",s=>{G("PONG",{latency:s})}),G("INIT",{connected:!1})}function ds(){if(ge.length){G("flush_start",{count:ge.length});for(const t of ge)_.emit(t.type,t.payload),G("sent",t);ge=[],G("flush_end")}}function st(){var n,r,o,l;if(Pe)return;const t=(r=(n=M==null?void 0:M.realtime)==null?void 0:n.maxRetries)!=null?r:5,a=(l=(o=M==null?void 0:M.realtime)==null?void 0:o.retryDelay)!=null?l:2e3;if(W>=t){G("reconnect_failed",{retries:W});return}const s=Math.min(a*Math.pow(2,W),3e4);W++,G("reconnect_scheduled",{delay:s,attempt:W}),Pe=setTimeout(()=>{Pe=null,G("reconnecting",{attempt:W}),_&&!_.connected&&_.connect()},s)}let be=localStorage.getItem("U1RBVElDX1VVSUQ");be||(be=lt(),localStorage.setItem("U1RBVElDX1VVSUQ",be));function lt(t=!1){if(typeof crypto!="undefined"){if(crypto.getRandomValues){const a=new Uint8Array(20);return crypto.getRandomValues(a),`aos.${t?"request":"device"}_`+Array.from(a).map(s=>s.toString(16).padStart(2,"0")).join("")}else if(crypto.randomBytes)return`aos.${t?"request":"device"}_`+crypto.randomBytes(20).toString("hex")}return`aos.${t?"request":"device"}_`+(Math.random().toString(36).substring(2,10)+Date.now())}const ye=t=>`${(t.method||"GET").toUpperCase()} ${t.baseURL||""}${t.url||""}`;function us(t){return t.metadata={start:Date.now()},t.headers["x-request-time"]=new Date().toISOString(),t.headers["x-request-id"]=lt(!0),t.headers["x-visitor-id"]=be,t.headers["x-request-timezone"]=Intl.DateTimeFormat().resolvedOptions().timeZone,t.headers["x-request-utc-offset"]=-new Date().getTimezoneOffset()/60,t.headers["x-request-epoch"]=Date.now(),t.headers["x-app-name"]=M.projectName,t}async function ms(t,a){var d,i,p,u,h,w;const s=t.config;if(!s||s._retrying)return Promise.reject(t);s._retrying=!0,s.__retryCount=s.__retryCount||0;const n=Math.min((i=(d=s.retry)!=null?d:M.api.retry)!=null?i:3,5),r=(u=(p=s.retryDelay)!=null?p:M.api.retryDelay)!=null?u:1e3,o=(h=t.response)==null?void 0:h.status;if(o&&o>=400&&o<500||t.code==="ECONNABORTED"||(w=t.message)!=null&&w.includes("canceled"))return Promise.reject(t);let l=t;for(;s.__retryCount<n;){s.__retryCount+=1;const f=r*Math.pow(2,s.__retryCount-1);M.api.trace&&O.emit(U.API_TRACE,{method:s.method,url:s.url,retry:s.__retryCount,delay:f}),await new Promise(m=>setTimeout(m,f));try{const m=await a(s);return s.loading===!0&&O.emit(U.API_LOADING,{key:ye(s),loading:!1,inFlight:0}),m}catch(m){if(l=m,s.__retryCount>=n)break}}return s.loading===!0&&O.emit(U.API_LOADING,{key:ye(s),loading:!1,inFlight:0}),O.emit(U.ERROR,l),O.emit(U.API_RETRY_END,{method:s.method,url:s.url,attempts:s.__retryCount}),Promise.reject(l)}const xe=Yt.create(M.api);xe.interceptors.request.use(t=>(us(t),t.loading===!0&&O.emit(U.API_LOADING,{key:ye(t),loading:!0,inFlight:1}),t));xe.interceptors.response.use(t=>{var s;const a=Date.now()-(((s=t.config.metadata)==null?void 0:s.start)||Date.now());return t.config.loading===!0&&O.emit(U.API_LOADING,{key:ye(t.config),loading:!1,inFlight:0}),M.api.trace&&O.emit(U.API_TRACE,{method:t.config.method,url:t.config.url,ms:a,status:t.status}),t},async t=>{var n,r;const a=t.config||{},s=Date.now()-(((n=a.metadata)==null?void 0:n.start)||Date.now());return M.api.trace&&O.emit(U.API_TRACE,{method:a.method,url:a.url,ms:s,status:((r=t.response)==null?void 0:r.status)||0}),ms(t,xe)});const ie=async(t="GET",a,s={},n={})=>{var d;let r;function o(i={}){const p=encodeURIComponent;return Object.keys(i).map(u=>`${p(u)}=${p(i[u])}`).join("&")}const l=B({method:t.toUpperCase(),url:a},n);if(["GET","DELETE","HEAD"].includes(t.toUpperCase())){if(s&&Object.keys(s).length){const i=o(s),p=a.includes("?")?"&":"?";l.url=`${a}${p}${i}`}}else l.data=s;try{const{data:i}=await xe(l);r=i}catch(i){r=((d=i==null?void 0:i.response)==null?void 0:d.data)||{error:!0,code:"INTERNAL_SERVER_ERROR",message:(i==null?void 0:i.message)||"Something went wrong :)"}}return r},re={get:(t,a={},s={})=>ie("GET",t,a,s),post:(t,a={},s={})=>ie("POST",t,a,s),put:(t,a={},s={})=>ie("PUT",t,a,s),patch:(t,a={},s={})=>ie("PATCH",t,a,s),delete:(t,a={},s={})=>ie("DELETE",t,a,s),head:(t,a={},s={})=>ie("HEAD",t,a,s)};function ps(){const t=()=>O.emit(U.TAB_VISIBILITY,{hidden:document.hidden});document.addEventListener("visibilitychange",t),t()}const hs=async()=>{try{await xe({method:"GET",url:"/ping",timeout:2e3,retry:1,loading:!1})}catch(t){O.emit("SYSTEM_GUARD",{model:"SERVER_DOWN",error:t==null?void 0:t.message})}};function xs(){Ne("inputTracer")&&(window.addEventListener("keydown",t=>{O.emit(U.INPUT_TRACE,{type:"key",key:t.key,ts:Date.now()})},!0),window.addEventListener("click",t=>{O.emit(U.INPUT_TRACE,{type:"mouse",button:t.button,x:t.clientX,y:t.clientY,ts:Date.now()})},!0))}const fs=[{key:"F12"},{key:"I",ctrlKey:!0,shiftKey:!0},{key:"C",ctrlKey:!0,shiftKey:!0},{key:"U",ctrlKey:!0},{key:"S",ctrlKey:!0}];function gs(t,a){var s;return(a.key?((s=t.key)==null?void 0:s.toUpperCase())===a.key:!0)&&(a.ctrlKey?t.ctrlKey:!a.ctrlKey)&&(a.shiftKey?t.shiftKey:!a.shiftKey)}function ws(){const t=`
+var Nt = Object.defineProperty,
+  St = Object.defineProperties;
+var kt = Object.getOwnPropertyDescriptors;
+var Qe = Object.getOwnPropertySymbols;
+var Ct = Object.prototype.hasOwnProperty,
+  Mt = Object.prototype.propertyIsEnumerable;
+var Ze = (t, a, s) =>
+    a in t
+      ? Nt(t, a, { enumerable: !0, configurable: !0, writable: !0, value: s })
+      : (t[a] = s),
+  B = (t, a) => {
+    for (var s in a || (a = {})) Ct.call(a, s) && Ze(t, s, a[s]);
+    if (Qe) for (var s of Qe(a)) Mt.call(a, s) && Ze(t, s, a[s]);
+    return t;
+  },
+  Q = (t, a) => St(t, kt(a));
+import {
+  r as c,
+  j as e,
+  u as Z,
+  d as Et,
+  Z as De,
+  S as At,
+  C as Pt,
+  D as Rt,
+  e as It,
+  X as Tt,
+  W as et,
+  T as Lt,
+  f as zt,
+  g as Dt,
+  A as _t,
+} from "./aos_vendor.js";
+import {
+  C as Ce,
+  S as ce,
+  P as de,
+  W as ue,
+  B as Y,
+  e as z,
+  f as q,
+  h as X,
+  G as Le,
+  T as Gt,
+  k as Ot,
+  l as he,
+  n as Ut,
+  o as Ft,
+  M as le,
+  q as ae,
+  t as F,
+  u as Me,
+  v as ne,
+  w as Ee,
+  x as $t,
+  y as Ht,
+  z as Bt,
+  D as Vt,
+  F as Wt,
+  H as Yt,
+} from "./aos.js";
+import { L as qt } from "./index.js";
+const Ae = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
+  tt = "super-secret-key-ajayos",
+  H = {
+    get(t, a = null) {
+      try {
+        const s = localStorage.getItem(Ae(t));
+        if (!s) return a;
+        const r = Ce.AES.decrypt(s, tt).toString(Ce.enc.Utf8);
+        if (!r) return a;
+        try {
+          const o = JSON.parse(r);
+          return o && o.__type === "string" ? o.value : o;
+        } catch (o) {
+          return r;
+        }
+      } catch (s) {
+        return a;
+      }
+    },
+    set(t, a) {
+      try {
+        let s;
+        typeof a == "string"
+          ? (s = JSON.stringify({ __type: "string", value: a }))
+          : (s = JSON.stringify(a));
+        const n = Ce.AES.encrypt(s, tt).toString();
+        localStorage.setItem(Ae(t), n);
+      } catch (s) {
+        console.error("Storage set error:", s);
+      }
+    },
+    remove(t) {
+      localStorage.removeItem(Ae(t));
+    },
+    firstLoad() {
+      return this.get("seen", !1) ? !1 : (this.set("seen", !0), !0);
+    },
+  },
+  Xt = () => {
+    const t = c.useRef(null);
+    return (
+      c.useEffect(() => {
+        const a = t.current;
+        if (!a) return;
+        const s = new ce(),
+          n = new de(75, a.clientWidth / a.clientHeight, 0.1, 1e3);
+        n.position.z = 50;
+        const r = new ue({ alpha: !0, antialias: !0 });
+        r.setSize(a.clientWidth, a.clientHeight),
+          r.setPixelRatio(window.devicePixelRatio),
+          a.appendChild(r.domElement);
+        const o = new Y(),
+          l = 8e3,
+          d = new Float32Array(l * 3),
+          i = new Float32Array(l * 3);
+        for (let y = 0; y < l; y++) {
+          const x = y * 3,
+            g = Math.random() * 50,
+            v = Math.random() * Math.PI * 2,
+            j = g * 0.2;
+          (d[x] = Math.cos(v + j) * g),
+            (d[x + 1] = (Math.random() - 0.5) * 20),
+            (d[x + 2] = Math.sin(v + j) * g),
+            (i[x] = Math.random()),
+            (i[x + 1] = Math.random() * 0.5 + 0.5),
+            (i[x + 2] = 1);
+        }
+        o.setAttribute("position", new z(d, 3)),
+          o.setAttribute("color", new z(i, 3));
+        const p = new q({
+            size: 0.15,
+            vertexColors: !0,
+            transparent: !0,
+            opacity: 0.7,
+          }),
+          u = new X(o, p);
+        s.add(u);
+        let h = 0,
+          w = 0;
+        const f = (y) => {
+          (h = (y.clientX / window.innerWidth - 0.5) * 2),
+            (w = (y.clientY / window.innerHeight - 0.5) * 2);
+        };
+        window.addEventListener("mousemove", f);
+        const m = () => {
+          (u.rotation.y += 8e-4),
+            (u.rotation.x += (w * 0.05 - u.rotation.x) * 0.05),
+            (u.rotation.z += (h * 0.05 - u.rotation.z) * 0.05),
+            r.render(s, n),
+            requestAnimationFrame(m);
+        };
+        m();
+        const b = () => {
+          (n.aspect = a.clientWidth / a.clientHeight),
+            n.updateProjectionMatrix(),
+            r.setSize(a.clientWidth, a.clientHeight);
+        };
+        return (
+          window.addEventListener("resize", b),
+          () => {
+            window.removeEventListener("mousemove", f),
+              window.removeEventListener("resize", b),
+              a.removeChild(r.domElement),
+              o.dispose(),
+              p.dispose(),
+              r.dispose();
+          }
+        );
+      }, []),
+      e.jsx("div", { ref: t, className: "absolute inset-0 z-0" })
+    );
+  },
+  Kt = () => {
+    const t = c.useRef(null);
+    return (
+      c.useEffect(() => {
+        const a = t.current;
+        if (!a) return;
+        const s = new ce(),
+          n = new de(75, a.clientWidth / a.clientHeight, 0.1, 2e3);
+        n.position.z = 60;
+        const r = new ue({ alpha: !0, antialias: !0 });
+        r.setSize(a.clientWidth, a.clientHeight),
+          r.setPixelRatio(window.devicePixelRatio),
+          a.appendChild(r.domElement);
+        const o = new Y(),
+          l = 4e3,
+          d = new Float32Array(l * 3),
+          i = new Float32Array(l * 3);
+        for (let A = 0; A < l; A++) {
+          const C = A * 3;
+          (d[C] = (Math.random() - 0.5) * 400),
+            (d[C + 1] = (Math.random() - 0.5) * 400),
+            (d[C + 2] = (Math.random() - 0.5) * 400);
+          const N = Math.random();
+          (i[C] = N), (i[C + 1] = N * 0.9 + 0.1), (i[C + 2] = 1);
+        }
+        o.setAttribute("position", new z(d, 3)),
+          o.setAttribute("color", new z(i, 3));
+        const p = new q({
+            size: 0.1,
+            vertexColors: !0,
+            transparent: !0,
+            opacity: 0.8,
+          }),
+          u = new X(o, p);
+        s.add(u);
+        const h = new Le(),
+          f = new Gt().load(
+            "https://threejs.org/examples/textures/sprites/smoke.png",
+          );
+        for (let A = 0; A < 15; A++) {
+          const C = new Ot({
+              map: f,
+              color: new he().setHSL(Math.random(), 0.7, 0.5),
+              transparent: !0,
+              opacity: 0.15 + Math.random() * 0.1,
+              depthWrite: !1,
+            }),
+            N = new Ut(C);
+          N.position.set(
+            (Math.random() - 0.5) * 300,
+            (Math.random() - 0.5) * 200,
+            (Math.random() - 0.5) * 300,
+          );
+          const P = 80 + Math.random() * 100;
+          N.scale.set(P, P, 1), h.add(N);
+        }
+        s.add(h);
+        const m = new Y(),
+          b = 2e3,
+          y = new Float32Array(b * 3),
+          x = new Float32Array(b * 3);
+        for (let A = 0; A < b; A++) {
+          const C = A * 3,
+            N = Math.random() * 100,
+            P = Math.random() * Math.PI * 2,
+            L = Math.acos(Math.random() * 2 - 1);
+          (y[C] = N * Math.sin(L) * Math.cos(P)),
+            (y[C + 1] = N * Math.sin(L) * Math.sin(P)),
+            (y[C + 2] = N * Math.cos(L));
+          const T = new he().setHSL(Math.random(), 1, 0.6);
+          (x[C] = T.r), (x[C + 1] = T.g), (x[C + 2] = T.b);
+        }
+        m.setAttribute("position", new z(y, 3)),
+          m.setAttribute("color", new z(x, 3));
+        const g = new q({
+            size: 0.5,
+            vertexColors: !0,
+            transparent: !0,
+            opacity: 0.9,
+            blending: Ft,
+          }),
+          v = new X(m, g);
+        s.add(v);
+        let j = 0,
+          E = 0;
+        const D = (A) => {
+          (j = (A.clientX / window.innerWidth - 0.5) * 2),
+            (E = (A.clientY / window.innerHeight - 0.5) * 2);
+        };
+        window.addEventListener("mousemove", D);
+        const k = () => {
+          requestAnimationFrame(k),
+            (u.rotation.y += 2e-4),
+            (v.rotation.y += 5e-4),
+            (h.rotation.y += 1e-4),
+            (h.rotation.x = Math.sin(Date.now() * 5e-5) * 0.1),
+            (n.position.x += (j * 30 - n.position.x) * 0.05),
+            (n.position.y += (-E * 20 - n.position.y) * 0.05),
+            n.lookAt(s.position),
+            r.render(s, n);
+        };
+        k();
+        const S = () => {
+          (n.aspect = a.clientWidth / a.clientHeight),
+            n.updateProjectionMatrix(),
+            r.setSize(a.clientWidth, a.clientHeight);
+        };
+        return (
+          window.addEventListener("resize", S),
+          () => {
+            window.removeEventListener("mousemove", D),
+              window.removeEventListener("resize", S),
+              a.removeChild(r.domElement),
+              r.dispose();
+          }
+        );
+      }, []),
+      e.jsx("div", { ref: t, className: "absolute inset-0 z-0" })
+    );
+  },
+  Jt = () => {
+    const t = c.useRef(null),
+      a = c.useRef(null),
+      s = c.useRef(null),
+      n = c.useRef(null),
+      r = c.useRef(null),
+      o = c.useRef(!1);
+    return (
+      c.useEffect(() => {
+        if (!t.current || o.current) return;
+        o.current = !0;
+        const l = new ce();
+        n.current = l;
+        const d = new de(75, window.innerWidth / window.innerHeight, 0.1, 2e3);
+        (d.position.z = 60), (r.current = d);
+        const i = new ue({ alpha: !0, antialias: !0 });
+        i.setSize(window.innerWidth, window.innerHeight),
+          i.setPixelRatio(window.devicePixelRatio),
+          i.setClearColor(0, 1),
+          (s.current = i),
+          t.current.appendChild(i.domElement);
+        const p = new Y(),
+          u = 12e3,
+          h = new Float32Array(u * 3),
+          w = new Float32Array(u * 3),
+          f = [
+            { r: 0.1, g: 0.6, b: 1 },
+            { r: 0.6, g: 0.2, b: 1 },
+            { r: 1, g: 0.2, b: 0.6 },
+            { r: 0.2, g: 1, b: 1 },
+            { r: 1, g: 0.6, b: 0 },
+            { r: 1, g: 0.3, b: 0.8 },
+            { r: 0.5, g: 1, b: 0.5 },
+            { r: 1, g: 1, b: 0.5 },
+          ];
+        for (let N = 0; N < u; N++) {
+          const P = N * 3,
+            L = Math.random() * Math.PI * 2,
+            T = Math.pow(Math.random(), 0.5) * 60,
+            ee = 3,
+            te = (T / 60) * Math.PI * 4,
+            fe = (Math.floor(Math.random() * ee) / ee) * Math.PI * 2;
+          (h[P] = Math.cos(L + te + fe) * T),
+            (h[P + 1] = (Math.random() - 0.5) * 40),
+            (h[P + 2] = Math.sin(L + te + fe) * T);
+          const se = f[Math.floor(Math.random() * f.length)];
+          (w[P] = se.r + (Math.random() - 0.5) * 0.2),
+            (w[P + 1] = se.g + (Math.random() - 0.5) * 0.2),
+            (w[P + 2] = se.b + (Math.random() - 0.5) * 0.2);
+        }
+        p.setAttribute("position", new z(h, 3)),
+          p.setAttribute("color", new z(w, 3));
+        const m = new q({
+            size: 0.25,
+            vertexColors: !0,
+            transparent: !0,
+            opacity: 0.8,
+            sizeAttenuation: !0,
+          }),
+          b = new X(p, m);
+        l.add(b);
+        const y = new Y(),
+          x = 5e3,
+          g = new Float32Array(x * 3),
+          v = new Float32Array(x * 3);
+        for (let N = 0; N < x; N++) {
+          const P = N * 3;
+          (g[P] = (Math.random() - 0.5) * 300),
+            (g[P + 1] = (Math.random() - 0.5) * 300),
+            (g[P + 2] = (Math.random() - 0.5) * 300);
+          const L = Math.random();
+          (v[P] = L * 0.8 + 0.2), (v[P + 1] = L * 0.8 + 0.2), (v[P + 2] = L);
+        }
+        y.setAttribute("position", new z(g, 3)),
+          y.setAttribute("color", new z(v, 3));
+        const j = new q({
+            size: 0.08,
+            vertexColors: !0,
+            transparent: !0,
+            opacity: 0.6,
+            sizeAttenuation: !0,
+          }),
+          E = new X(y, j);
+        l.add(E);
+        for (let N = 0; N < 12; N++) {
+          const P = new le({
+              color: new he().setHSL(0.5 + Math.random() * 0.4, 0.8, 0.4),
+              transparent: !0,
+              opacity: 0.06 + Math.random() * 0.08,
+              depthWrite: !1,
+            }),
+            L = new ae(Math.random() * 40 + 25, 32, 32),
+            T = new F(L, P);
+          T.position.set(
+            (Math.random() - 0.5) * 150,
+            (Math.random() - 0.5) * 120,
+            (Math.random() - 0.5) * 150,
+          ),
+            T.scale.set(
+              Math.random() * 3 + 1,
+              Math.random() * 3 + 1,
+              Math.random() * 3 + 1,
+            ),
+            l.add(T);
+        }
+        let D = 0,
+          k = 0;
+        const S = (N) => {
+          (D = (N.clientX / window.innerWidth) * 2 - 1),
+            (k = -(N.clientY / window.innerHeight) * 2 + 1);
+        };
+        window.addEventListener("mousemove", S);
+        const A = () => {
+          (a.current = requestAnimationFrame(A)),
+            (b.rotation.z += 15e-5),
+            (b.rotation.x += 8e-5),
+            (b.rotation.y += 1e-4),
+            (E.rotation.z += 5e-5),
+            (E.rotation.x += 2e-5),
+            (d.position.x = D * 25),
+            (d.position.y = k * 20),
+            d.lookAt(0, 0, 0),
+            i.render(l, d);
+        };
+        A();
+        const C = () => {
+          if (!i) return;
+          const N = window.innerWidth,
+            P = window.innerHeight;
+          (d.aspect = N / P), d.updateProjectionMatrix(), i.setSize(N, P);
+        };
+        return (
+          window.addEventListener("resize", C),
+          () => {
+            window.removeEventListener("mousemove", S),
+              window.removeEventListener("resize", C),
+              cancelAnimationFrame(a.current),
+              p.dispose(),
+              m.dispose(),
+              y.dispose(),
+              j.dispose(),
+              i.dispose(),
+              t.current &&
+                i.domElement.parentNode === t.current &&
+                t.current.removeChild(i.domElement),
+              l.clear();
+          }
+        );
+      }, []),
+      e.jsx("div", { ref: t, className: "fixed inset-0 z-0" })
+    );
+  },
+  Qt = () => {
+    const t = c.useRef(null),
+      a = c.useRef(!1);
+    return (
+      c.useEffect(() => {
+        if (!t.current || a.current) return;
+        a.current = !0;
+        const s = new ce(),
+          n = new de(75, window.innerWidth / window.innerHeight, 0.1, 2e3);
+        n.position.z = 60;
+        const r = new ue({ alpha: !0, antialias: !0 });
+        r.setSize(window.innerWidth, window.innerHeight),
+          r.setPixelRatio(window.devicePixelRatio),
+          r.setClearColor(0, 1),
+          t.current.appendChild(r.domElement);
+        const o = new Y(),
+          l = 12e3,
+          d = new Float32Array(l * 3),
+          i = new Float32Array(l * 3),
+          p = [
+            { r: 0.1, g: 0.6, b: 1 },
+            { r: 0.6, g: 0.2, b: 1 },
+            { r: 1, g: 0.2, b: 0.6 },
+            { r: 0.2, g: 1, b: 1 },
+            { r: 1, g: 0.6, b: 0 },
+            { r: 1, g: 0.3, b: 0.8 },
+            { r: 0.5, g: 1, b: 0.5 },
+            { r: 1, g: 1, b: 0.5 },
+          ];
+        for (let k = 0; k < l; k++) {
+          const S = k * 3,
+            A = Math.random() * Math.PI * 2,
+            C = Math.pow(Math.random(), 0.5) * 60,
+            N = 3,
+            L = (C / 60) * Math.PI * 4,
+            T = (Math.floor(Math.random() * N) / N) * Math.PI * 2;
+          (d[S] = Math.cos(A + L + T) * C),
+            (d[S + 1] = (Math.random() - 0.5) * 40),
+            (d[S + 2] = Math.sin(A + L + T) * C);
+          const ee = p[Math.floor(Math.random() * p.length)];
+          (i[S] = ee.r + (Math.random() - 0.5) * 0.2),
+            (i[S + 1] = ee.g + (Math.random() - 0.5) * 0.2),
+            (i[S + 2] = ee.b + (Math.random() - 0.5) * 0.2);
+        }
+        o.setAttribute("position", new z(d, 3)),
+          o.setAttribute("color", new z(i, 3));
+        const u = new q({
+            size: 0.25,
+            vertexColors: !0,
+            transparent: !0,
+            opacity: 0.8,
+            sizeAttenuation: !0,
+          }),
+          h = new X(o, u);
+        s.add(h);
+        const w = new Y(),
+          f = 5e3,
+          m = new Float32Array(f * 3),
+          b = new Float32Array(f * 3);
+        for (let k = 0; k < f; k++) {
+          const S = k * 3;
+          (m[S] = (Math.random() - 0.5) * 300),
+            (m[S + 1] = (Math.random() - 0.5) * 300),
+            (m[S + 2] = (Math.random() - 0.5) * 300);
+          const A = Math.random();
+          (b[S] = A * 0.8 + 0.2), (b[S + 1] = A * 0.8 + 0.2), (b[S + 2] = A);
+        }
+        w.setAttribute("position", new z(m, 3)),
+          w.setAttribute("color", new z(b, 3));
+        const y = new q({
+            size: 0.08,
+            vertexColors: !0,
+            transparent: !0,
+            opacity: 0.6,
+            sizeAttenuation: !0,
+          }),
+          x = new X(w, y);
+        s.add(x);
+        for (let k = 0; k < 12; k++) {
+          const S = new le({
+              color: new he().setHSL(0.5 + Math.random() * 0.4, 0.8, 0.4),
+              transparent: !0,
+              opacity: 0.06 + Math.random() * 0.08,
+              depthWrite: !1,
+            }),
+            A = new ae(Math.random() * 40 + 25, 32, 32),
+            C = new F(A, S);
+          C.position.set(
+            (Math.random() - 0.5) * 150,
+            (Math.random() - 0.5) * 120,
+            (Math.random() - 0.5) * 150,
+          ),
+            C.scale.set(
+              Math.random() * 3 + 1,
+              Math.random() * 3 + 1,
+              Math.random() * 3 + 1,
+            ),
+            s.add(C);
+        }
+        let g = 0,
+          v = 0;
+        const j = (k) => {
+          (g = (k.clientX / window.innerWidth) * 2 - 1),
+            (v = -(k.clientY / window.innerHeight) * 2 + 1);
+        };
+        window.addEventListener("mousemove", j);
+        const E = () => {
+          (h.rotation.z += 15e-5),
+            (h.rotation.x += 8e-5),
+            (h.rotation.y += 1e-4),
+            (x.rotation.z += 5e-5),
+            (x.rotation.x += 2e-5),
+            (n.position.x = g * 25),
+            (n.position.y = v * 20),
+            n.lookAt(0, 0, 0),
+            r.render(s, n),
+            requestAnimationFrame(E);
+        };
+        E();
+        const D = () => {
+          const k = window.innerWidth,
+            S = window.innerHeight;
+          (n.aspect = k / S), n.updateProjectionMatrix(), r.setSize(k, S);
+        };
+        return (
+          window.addEventListener("resize", D),
+          () => {
+            window.removeEventListener("mousemove", j),
+              window.removeEventListener("resize", D),
+              r.dispose();
+          }
+        );
+      }, []),
+      e.jsx("div", { ref: t, className: "fixed inset-0 z-0" })
+    );
+  },
+  Zt = () => {
+    const t = c.useRef(null);
+    return (
+      c.useEffect(() => {
+        const a = t.current;
+        if (!a) return;
+        const s = new ce(),
+          n = new de(75, a.clientWidth / a.clientHeight, 0.1, 1e3);
+        n.position.z = 50;
+        const r = new ue({ alpha: !0, antialias: !0 });
+        r.setSize(a.clientWidth, a.clientHeight),
+          r.setPixelRatio(window.devicePixelRatio),
+          a.appendChild(r.domElement);
+        const o = new Y(),
+          l = 8e3,
+          d = new Float32Array(l * 3),
+          i = new Float32Array(l * 3);
+        for (let y = 0; y < l; y++) {
+          const x = y * 3,
+            g = Math.random() * 50,
+            v = Math.random() * Math.PI * 2,
+            j = g * 0.2;
+          (d[x] = Math.cos(v + j) * g),
+            (d[x + 1] = (Math.random() - 0.5) * 20),
+            (d[x + 2] = Math.sin(v + j) * g),
+            (i[x] = Math.random()),
+            (i[x + 1] = Math.random() * 0.5 + 0.5),
+            (i[x + 2] = 1);
+        }
+        o.setAttribute("position", new z(d, 3)),
+          o.setAttribute("color", new z(i, 3));
+        const p = new q({
+            size: 0.15,
+            vertexColors: !0,
+            transparent: !0,
+            opacity: 0.7,
+          }),
+          u = new X(o, p);
+        s.add(u);
+        let h = 0,
+          w = 0;
+        const f = (y) => {
+          (h = (y.clientX / window.innerWidth - 0.5) * 2),
+            (w = (y.clientY / window.innerHeight - 0.5) * 2);
+        };
+        window.addEventListener("mousemove", f);
+        const m = () => {
+          (u.rotation.y += 8e-4),
+            (u.rotation.x += (w * 0.05 - u.rotation.x) * 0.05),
+            (u.rotation.z += (h * 0.05 - u.rotation.z) * 0.05),
+            r.render(s, n),
+            requestAnimationFrame(m);
+        };
+        m();
+        const b = () => {
+          (n.aspect = a.clientWidth / a.clientHeight),
+            n.updateProjectionMatrix(),
+            r.setSize(a.clientWidth, a.clientHeight);
+        };
+        return (
+          window.addEventListener("resize", b),
+          () => {
+            window.removeEventListener("mousemove", f),
+              window.removeEventListener("resize", b),
+              a.removeChild(r.domElement),
+              o.dispose(),
+              p.dispose(),
+              r.dispose();
+          }
+        );
+      }, []),
+      e.jsx("div", { ref: t, className: "absolute inset-0 z-0" })
+    );
+  },
+  es = () => {
+    const t = c.useRef(null);
+    return (
+      c.useEffect(() => {
+        const a = t.current;
+        if (!a) return;
+        const s = new ce(),
+          n = new de(75, window.innerWidth / window.innerHeight, 0.1, 5e3);
+        n.position.z = 100;
+        const r = new ue({ alpha: !0, antialias: !0 });
+        r.setSize(window.innerWidth, window.innerHeight),
+          r.setPixelRatio(window.devicePixelRatio),
+          r.setClearColor(0, 1),
+          t.current.appendChild(r.domElement);
+        const o = new Y(),
+          l = 1e4,
+          d = new Float32Array(l * 3),
+          i = new Float32Array(l * 3);
+        for (let R = 0; R < l; R++) {
+          const I = R * 3;
+          (d[I] = (Math.random() - 0.5) * 500),
+            (d[I + 1] = (Math.random() - 0.5) * 500),
+            (d[I + 2] = (Math.random() - 0.5) * 500);
+          const V = Math.random();
+          (i[I] = V * 0.8 + 0.2), (i[I + 1] = V * 0.9 + 0.1), (i[I + 2] = V);
+        }
+        o.setAttribute("position", new z(d, 3)),
+          o.setAttribute("color", new z(i, 3));
+        const p = new q({
+            size: 0.2,
+            vertexColors: !0,
+            transparent: !0,
+            opacity: 0.8,
+            sizeAttenuation: !0,
+          }),
+          u = new X(o, p);
+        s.add(u);
+        const h = new Y(),
+          w = 12e3,
+          f = new Float32Array(w * 3),
+          m = new Float32Array(w * 3),
+          b = [
+            { r: 0.1, g: 0.6, b: 1 },
+            { r: 0.6, g: 0.2, b: 1 },
+            { r: 1, g: 0.2, b: 0.6 },
+            { r: 0.2, g: 1, b: 1 },
+            { r: 1, g: 0.6, b: 0.1 },
+          ];
+        for (let R = 0; R < w; R++) {
+          const I = R * 3,
+            V = Math.random() * Math.PI * 2,
+            $ = Math.pow(Math.random(), 0.6) * 45,
+            Je = ($ / 45) * Math.PI * 5;
+          (f[I] = Math.cos(V + Je) * $),
+            (f[I + 1] = (Math.random() - 0.5) * 30),
+            (f[I + 2] = Math.sin(V + Je) * $);
+          const ke = b[Math.floor(Math.random() * b.length)];
+          (m[I] = ke.r), (m[I + 1] = ke.g), (m[I + 2] = ke.b);
+        }
+        h.setAttribute("position", new z(f, 3)),
+          h.setAttribute("color", new z(m, 3));
+        const y = new q({
+            size: 0.35,
+            vertexColors: !0,
+            transparent: !0,
+            opacity: 0.8,
+            sizeAttenuation: !0,
+          }),
+          x = new X(h, y);
+        x.position.set(-60, -20, -50), s.add(x);
+        const g = new ae(8, 32, 32),
+          v = document.createElement("canvas");
+        (v.width = 512), (v.height = 512);
+        const j = v.getContext("2d"),
+          E = j.createRadialGradient(256, 256, 0, 256, 256, 256);
+        E.addColorStop(0, "#ffff99"),
+          E.addColorStop(0.5, "#ffcc00"),
+          E.addColorStop(1, "#ff8800"),
+          (j.fillStyle = E),
+          j.fillRect(0, 0, 512, 512);
+        const D = new Me(v),
+          k = new le({ map: D }),
+          S = new F(g, k);
+        S.position.set(80, 60, -100), s.add(S);
+        const A = new ae(9, 32, 32),
+          C = new le({
+            color: 16755200,
+            transparent: !0,
+            opacity: 0.3,
+            depthWrite: !1,
+          }),
+          N = new F(A, C);
+        N.position.copy(S.position), s.add(N);
+        const P = new ae(5, 32, 32),
+          L = document.createElement("canvas");
+        (L.width = 1024), (L.height = 512);
+        const T = L.getContext("2d");
+        (T.fillStyle = "#1a4d7a"),
+          T.fillRect(0, 0, 1024, 512),
+          (T.fillStyle = "#2d8a3d"),
+          T.fillRect(100, 200, 120, 80),
+          T.fillRect(400, 150, 150, 100),
+          T.fillRect(750, 220, 130, 70);
+        const ee = new Me(L),
+          Fe = new ne({ map: ee, emissive: 1731496, emissiveIntensity: 0.2 }),
+          te = new F(P, Fe);
+        te.position.set(30, -10, 0), s.add(te);
+        const fe = new ae(1.5, 16, 16),
+          se = document.createElement("canvas");
+        (se.width = 256), (se.height = 256);
+        const K = se.getContext("2d");
+        (K.fillStyle = "#cccccc"),
+          K.fillRect(0, 0, 256, 256),
+          (K.fillStyle = "#999999"),
+          K.beginPath(),
+          K.arc(80, 80, 20, 0, Math.PI * 2),
+          K.fill(),
+          K.beginPath(),
+          K.arc(180, 150, 15, 0, Math.PI * 2),
+          K.fill();
+        const ct = new Me(se),
+          dt = new ne({ map: ct }),
+          me = new F(fe, dt);
+        me.position.set(38, -8, 0), s.add(me);
+        const J = new Le(),
+          ut = new Ee(1.5, 6, 8),
+          mt = new ne({ color: 16711680 }),
+          $e = new F(ut, mt);
+        ($e.position.z = 3), J.add($e);
+        const pt = new ae(1.5, 8, 8),
+          ht = new ne({ color: 16776960 }),
+          Se = new F(pt, ht);
+        (Se.position.z = 6.5), (Se.scale.z = 0.6), J.add(Se);
+        for (let R = 0; R < 3; R++) {
+          const I = new Ee(1, 3, 4),
+            V = new ne({ color: 26367 }),
+            $ = new F(I, V);
+          $.position.set(0, 0, 0.5),
+            ($.rotation.z = (R * Math.PI * 2) / 3),
+            ($.rotation.x = Math.PI / 4),
+            J.add($);
+        }
+        const xt = new Ee(1, 2, 8),
+          ft = new le({ color: 16737792 }),
+          He = new F(xt, ft);
+        (He.position.z = 0),
+          J.add(He),
+          J.position.set(-30, 40, 20),
+          (J.rotation.z = Math.PI / 6),
+          s.add(J);
+        const oe = new Le(),
+          gt = new $t(2, 3, 1),
+          wt = new ne({ color: 13421772 }),
+          bt = new F(gt, wt);
+        oe.add(bt);
+        const yt = new Ht(4, 2),
+          vt = new ne({ color: 39423 });
+        for (let R = 0; R < 2; R++) {
+          const I = new F(yt, vt);
+          (I.position.y = R === 0 ? 3 : -3),
+            (I.rotation.x = Math.PI / 6),
+            oe.add(I);
+        }
+        oe.position.set(60, 30, -80), s.add(oe);
+        for (let R = 0; R < 10; R++) {
+          const I = new le({
+              color: new he().setHSL(0.5 + Math.random() * 0.4, 0.8, 0.4),
+              transparent: !0,
+              opacity: 0.06 + Math.random() * 0.08,
+              depthWrite: !1,
+            }),
+            V = new ae(Math.random() * 40 + 30, 32, 32),
+            $ = new F(V, I);
+          $.position.set(
+            (Math.random() - 0.5) * 200,
+            (Math.random() - 0.5) * 200,
+            (Math.random() - 0.5) * 200,
+          ),
+            $.scale.set(
+              Math.random() * 2 + 1,
+              Math.random() * 2 + 1,
+              Math.random() * 2 + 1,
+            ),
+            s.add($);
+        }
+        const Be = new Bt(16755200, 1.5, 300);
+        Be.position.copy(S.position), s.add(Be);
+        const jt = new Vt(4491519, 0.4);
+        s.add(jt);
+        let Ve = 0,
+          We = 0,
+          pe = 0,
+          Ye;
+        const qe = (R) => {
+          (Ve = (R.clientX / window.innerWidth) * 2 - 1),
+            (We = -(R.clientY / window.innerHeight) * 2 + 1);
+        };
+        window.addEventListener("mousemove", qe);
+        const Xe = () => {
+          (Ye = requestAnimationFrame(Xe)),
+            (pe += 3e-4),
+            (u.rotation.z += 5e-5),
+            (x.rotation.z += 2e-4),
+            (x.rotation.x += 8e-5),
+            (te.rotation.y += 0.002),
+            (me.rotation.y += 0.01),
+            (S.rotation.y += 0.001),
+            (N.rotation.y -= 0.001),
+            (me.position.x = te.position.x + Math.cos(pe * 2) * 8),
+            (me.position.y = te.position.y + Math.sin(pe * 2) * 4),
+            (J.position.x = -30 + Math.cos(pe * 0.8) * 15),
+            (J.position.y = 40 + Math.sin(pe * 0.6) * 10),
+            (oe.rotation.z += 0.005),
+            (oe.rotation.x += 0.002),
+            (n.position.x = Ve * 40),
+            (n.position.y = We * 30),
+            n.lookAt(0, 0, 0),
+            r.render(s, n);
+        };
+        Xe();
+        const Ke = () => {
+          const R = window.innerWidth,
+            I = window.innerHeight;
+          (n.aspect = R / I), n.updateProjectionMatrix(), r.setSize(R, I);
+        };
+        return (
+          window.addEventListener("resize", Ke),
+          () => {
+            window.removeEventListener("mousemove", qe),
+              window.removeEventListener("resize", Ke),
+              cancelAnimationFrame(Ye),
+              a.removeChild(r.domElement),
+              o.dispose(),
+              p.dispose(),
+              h.dispose(),
+              y.dispose(),
+              r.dispose();
+          }
+        );
+      }, []),
+      e.jsx("div", { ref: t, className: "absolute inset-0 z-0" })
+    );
+  },
+  we = ({ className: t = "w-5 h-5" }) =>
+    e.jsx("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      className: t,
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor",
+      strokeWidth: "1.8",
+      children: e.jsx("path", {
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        d: "M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0",
+      }),
+    }),
+  ze = ({ className: t = "w-5 h-5" }) =>
+    e.jsx("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      className: t,
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor",
+      strokeWidth: "1.8",
+      children: e.jsx("path", {
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        d: "M16.5 10.5V7.5a4.5 4.5 0 00-9 0v3m10.5 0H6A1.5 1.5 0 004.5 12v7.5A1.5 1.5 0 006 21h12a1.5 1.5 0 001.5-1.5V12a1.5 1.5 0 00-1.5-1.5z",
+      }),
+    }),
+  _e = ({ className: t = "w-5 h-5" }) =>
+    e.jsx("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      className: t,
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor",
+      strokeWidth: "1.8",
+      children: e.jsx("path", {
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        d: "M15.75 9V5.25A2.25 2.25 0 0013.5 3H6.75A2.25 2.25 0 004.5 5.25v13.5A2.25 2.25 0 006.75 21H13.5a2.25 2.25 0 002.25-2.25V15M9 12h12m0 0l-3-3m3 3l-3 3",
+      }),
+    }),
+  nt = ({ className: t = "w-5 h-5" }) =>
+    e.jsxs("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      className: t,
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor",
+      strokeWidth: "1.8",
+      children: [
+        e.jsx("path", {
+          strokeLinecap: "round",
+          strokeLinejoin: "round",
+          d: "M12 4.5a7.5 7.5 0 017.5 7.5c0 3.727-2.674 6.834-6.25 7.387v.363a1 1 0 01-2 0v-.363C7.174 18.834 4.5 15.727 4.5 12A7.5 7.5 0 0112 4.5z",
+        }),
+        e.jsx("circle", { cx: "12", cy: "12", r: "1.5", fill: "currentColor" }),
+      ],
+    }),
+  Ge = ({ className: t = "w-5 h-5" }) =>
+    e.jsxs("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      className: t,
+      viewBox: "0 0 24 24",
+      children: [
+        e.jsx("path", {
+          fill: "#4285F4",
+          d: "M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.3 5.3 0 01-2.21 3.31l3.57 2.77c2.08-1.92 3.28-4.74 3.28-8.09z",
+        }),
+        e.jsx("path", {
+          fill: "#34A853",
+          d: "M12 23a10.9 10.9 0 007.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06A7.94 7.94 0 014.13 14H.45v2.84A11.98 11.98 0 0012 23z",
+        }),
+        e.jsx("path", {
+          fill: "#FBBC05",
+          d: "M4.13 14a7.93 7.93 0 010-4H.45V7.16A12.02 12.02 0 000 12c0 1.79.39 3.49 1.1 5.01L4.13 14z",
+        }),
+        e.jsx("path", {
+          fill: "#EA4335",
+          d: "M12 4.75c1.62 0 3.06.56 4.21 1.64l3.15-3.15A11.97 11.97 0 000 12l4.13-3.34C5 6.06 7.43 4.75 12 4.75z",
+        }),
+      ],
+    }),
+  Oe = ({ className: t = "w-5 h-5" }) =>
+    e.jsx("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      className: t,
+      viewBox: "0 0 24 24",
+      fill: "currentColor",
+      children: e.jsx("path", {
+        d: "M12 .297C5.37.297 0 5.67 0 12.297c0 5.3 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.337.726-4.033-1.416-4.033-1.416-.547-1.387-1.334-1.756-1.334-1.756-1.09-.745.083-.729.083-.729 1.205.083 1.839 1.237 1.839 1.237 1.07 1.834 2.806 1.304 3.492.997.108-.775.419-1.305.763-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.524.118-3.176 0 0 1.007-.322 3.3 1.23a11.34 11.34 0 013.003-.404c1.02.005 2.047.138 3.006.404 2.292-1.552 3.298-1.23 3.298-1.23.653 1.653.242 2.874.118 3.176.768.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.478 5.921.43.372.822 1.102.822 2.222v3.293c0 .319.192.694.801.576C20.563 22.097 24 17.6 24 12.297 24 5.67 18.627.297 12 .297z",
+      }),
+    }),
+  ot = ({ className: t = "w-5 h-5" }) =>
+    e.jsx("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      className: t,
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor",
+      strokeWidth: "1.8",
+      children: e.jsx("path", {
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        d: "M3 8l9 6 9-6M4.5 6h15A1.5 1.5 0 0121 7.5v9A1.5 1.5 0 0119.5 18h-15A1.5 1.5 0 013 16.5v-9A1.5 1.5 0 014.5 6z",
+      }),
+    }),
+  Ue = ({ className: t = "w-5 h-5" }) =>
+    e.jsx("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      className: t,
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor",
+      strokeWidth: "1.8",
+      children: e.jsx("path", {
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        d: "M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z",
+      }),
+    }),
+  je = ({ className: t = "w-5 h-5" }) =>
+    e.jsx("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      className: t,
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor",
+      strokeWidth: "1.8",
+      children: e.jsx("path", {
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        d: "M15 19l-7-7 7-7",
+      }),
+    });
+class ts {
+  constructor() {
+    this.map = new Map();
+  }
+  on(a, s) {
+    const n = this.map.get(a) || [];
+    return n.push(s), this.map.set(a, n), () => this.off(a, s);
+  }
+  once(a, s) {
+    const n = this.on(a, (...r) => {
+      n(), s(...r);
+    });
+    return n;
+  }
+  off(a, s) {
+    const n = this.map.get(a) || [];
+    this.map.set(
+      a,
+      n.filter((r) => r !== s),
+    );
+  }
+  emit(a, ...s) {
+    const n = this.map.get(a) || [];
+    for (const r of n)
+      try {
+        r(...s);
+      } catch (o) {
+        console.error(o);
+      }
+  }
+}
+const O = new ts(),
+  U = {
+    API_LOADING: "api:loading",
+    API_TRACE: "api:trace",
+    ERROR: "app:error",
+    INSPECT_DETECTED: "security:inspect",
+    INPUT_TRACE: "trace:input",
+    VERSION_MISMATCH: "app:version:mismatch",
+    TAB_VISIBILITY: "tab:visibility",
+    THEME_CHANGED: "theme:changed",
+    SOCKET_MESSAGE: "socket:message",
+    SERVER_NOT_PING: "server_not_ping",
+  },
+  ss = "Auth",
+  as = "1.0.0",
+  rs = {
+    inspectGuard: !0,
+    inputTracer: !0,
+    tabTracker: !0,
+    wss: !1,
+    isServerLive: !0,
+  },
+  ns = {
+    url: "wss://api.ajayos.in",
+    withCredentials: !0,
+    reconnectionAttempts: 3,
+    reconnectionDelay: 1e3,
+    reconnection: !1,
+    autoConnect: !0,
+    transports: ["websocket"],
+    timeout: 8e3,
+    multiplex: !0,
+    path: "",
+  },
+  os = {
+    baseURL: "https://api.ajayos.in",
+    timeout: 2e4,
+    withCredentials: !0,
+    retry: 3,
+  },
+  is = "November 5, 2025",
+  ls = [
+    {
+      id: 1,
+      category: "✨ New Features",
+      icon: "🎨",
+      gradient: "from-purple-500/40 to-pink-500/40",
+      borderColor: "border-purple-400/60",
+      badgeGradient: "from-purple-500 to-pink-500",
+      items: [
+        {
+          title: "Dark Mode Support",
+          description: "Complete dark theme across all pages",
+          image: "🌙",
+        },
+        {
+          title: "Real-time Collaboration",
+          description: "Work together with live updates",
+          image: "👥",
+        },
+        {
+          title: "AI-Powered Search",
+          description: "Smart search with natural language",
+          image: "🤖",
+        },
+      ],
+    },
+    {
+      id: 2,
+      category: "🐛 Bug Fixes",
+      icon: "🔧",
+      gradient: "from-blue-500/40 to-cyan-500/40",
+      borderColor: "border-blue-400/60",
+      badgeGradient: "from-blue-500 to-cyan-500",
+      items: [
+        {
+          title: "Mobile Animation Fix",
+          description: "Fixed loading spinner stuttering",
+          image: "📱",
+        },
+        {
+          title: "Memory Leak Resolution",
+          description: "Resolved websocket memory leak",
+          image: "💾",
+        },
+        {
+          title: "Timezone Conversion",
+          description: "Fixed timezone conversion errors",
+          image: "⏰",
+        },
+      ],
+    },
+    {
+      id: 3,
+      category: "⚡ Performance",
+      icon: "⚙️",
+      gradient: "from-orange-500/40 to-red-500/40",
+      borderColor: "border-orange-400/60",
+      badgeGradient: "from-orange-500 to-red-500",
+      items: [
+        {
+          title: "Bundle Size Reduction",
+          description: "Reduced app bundle by 35%",
+          image: "📦",
+        },
+        {
+          title: "API Response Speed",
+          description: "Improved response time by 40%",
+          image: "⚡",
+        },
+        {
+          title: "Image Optimization",
+          description: "Smart loading for slow networks",
+          image: "🖼️",
+        },
+      ],
+    },
+  ],
+  it = {
+    projectName: ss,
+    appVersion: as,
+    features: rs,
+    ws: ns,
+    api: os,
+    releaseDate: is,
+    changelog: ls,
+  },
+  M = it,
+  Ne = (t) => {
+    var a;
+    return !!((a = it.features) != null && a[t]);
+  };
+let _ = null,
+  W = 0,
+  Pe = null,
+  ge = [];
+function G(t, a = {}) {
+  O.emit(`SOCKET:${t}`, B({ type: t }, a));
+}
+function cs() {
+  var a;
+  if (!Ne("wss") || _) return;
+  const t =
+    ((a = M == null ? void 0 : M.ws) == null ? void 0 : a.url) ||
+    window.location.origin;
+  (_ = Wt(t, M.ws)),
+    _.on("connect", () => {
+      (W = 0), G("STATUS", { connected: !0, id: _.id }), ds();
+    }),
+    _.on("message", (s) => {
+      G("MESSAGE", { data: s });
+    }),
+    _.on("notification", (s) => G("NOTIFICATION", { data: s })),
+    _.on("update", (s) => G("UPDATE", { data: s })),
+    _.on("connect_error", (s) => {
+      G("ERROR", { message: s.message || "Connection error", attempt: W }),
+        st();
+    }),
+    _.on("disconnect", (s) => {
+      G("DISCONNECT", { reason: s }), s !== "io client disconnect" && st();
+    }),
+    _.on("reconnect_attempt", () => {
+      G("RECONNECT_ATTEMPT", { attempt: W });
+    }),
+    _.on("reconnect_failed", () => {
+      G("RECONNECT_FAILED", { attempt: W });
+    }),
+    _.on("ping", () => {
+      G("PING", { ts: Date.now() });
+    }),
+    _.on("pong", (s) => {
+      G("PONG", { latency: s });
+    }),
+    G("INIT", { connected: !1 });
+}
+function ds() {
+  if (ge.length) {
+    G("flush_start", { count: ge.length });
+    for (const t of ge) _.emit(t.type, t.payload), G("sent", t);
+    (ge = []), G("flush_end");
+  }
+}
+function st() {
+  var n, r, o, l;
+  if (Pe) return;
+  const t =
+      (r =
+        (n = M == null ? void 0 : M.realtime) == null
+          ? void 0
+          : n.maxRetries) != null
+        ? r
+        : 5,
+    a =
+      (l =
+        (o = M == null ? void 0 : M.realtime) == null
+          ? void 0
+          : o.retryDelay) != null
+        ? l
+        : 2e3;
+  if (W >= t) {
+    G("reconnect_failed", { retries: W });
+    return;
+  }
+  const s = Math.min(a * Math.pow(2, W), 3e4);
+  W++,
+    G("reconnect_scheduled", { delay: s, attempt: W }),
+    (Pe = setTimeout(() => {
+      (Pe = null),
+        G("reconnecting", { attempt: W }),
+        _ && !_.connected && _.connect();
+    }, s));
+}
+let be = localStorage.getItem("U1RBVElDX1VVSUQ");
+be || ((be = lt()), localStorage.setItem("U1RBVElDX1VVSUQ", be));
+function lt(t = !1) {
+  if (typeof crypto != "undefined") {
+    if (crypto.getRandomValues) {
+      const a = new Uint8Array(20);
+      return (
+        crypto.getRandomValues(a),
+        `aos.${t ? "request" : "device"}_` +
+          Array.from(a)
+            .map((s) => s.toString(16).padStart(2, "0"))
+            .join("")
+      );
+    } else if (crypto.randomBytes)
+      return (
+        `aos.${t ? "request" : "device"}_` +
+        crypto.randomBytes(20).toString("hex")
+      );
+  }
+  return (
+    `aos.${t ? "request" : "device"}_` +
+    (Math.random().toString(36).substring(2, 10) + Date.now())
+  );
+}
+const ye = (t) =>
+  `${(t.method || "GET").toUpperCase()} ${t.baseURL || ""}${t.url || ""}`;
+function us(t) {
+  return (
+    (t.metadata = { start: Date.now() }),
+    (t.headers["x-request-time"] = new Date().toISOString()),
+    (t.headers["x-request-id"] = lt(!0)),
+    (t.headers["x-visitor-id"] = be),
+    (t.headers["x-request-timezone"] =
+      Intl.DateTimeFormat().resolvedOptions().timeZone),
+    (t.headers["x-request-utc-offset"] = -new Date().getTimezoneOffset() / 60),
+    (t.headers["x-request-epoch"] = Date.now()),
+    (t.headers["x-app-name"] = M.projectName),
+    t
+  );
+}
+async function ms(t, a) {
+  var d, i, p, u, h, w;
+  const s = t.config;
+  if (!s || s._retrying) return Promise.reject(t);
+  (s._retrying = !0), (s.__retryCount = s.__retryCount || 0);
+  const n = Math.min(
+      (i = (d = s.retry) != null ? d : M.api.retry) != null ? i : 3,
+      5,
+    ),
+    r =
+      (u = (p = s.retryDelay) != null ? p : M.api.retryDelay) != null ? u : 1e3,
+    o = (h = t.response) == null ? void 0 : h.status;
+  if (
+    (o && o >= 400 && o < 500) ||
+    t.code === "ECONNABORTED" ||
+    ((w = t.message) != null && w.includes("canceled"))
+  )
+    return Promise.reject(t);
+  let l = t;
+  for (; s.__retryCount < n; ) {
+    s.__retryCount += 1;
+    const f = r * Math.pow(2, s.__retryCount - 1);
+    M.api.trace &&
+      O.emit(U.API_TRACE, {
+        method: s.method,
+        url: s.url,
+        retry: s.__retryCount,
+        delay: f,
+      }),
+      await new Promise((m) => setTimeout(m, f));
+    try {
+      const m = await a(s);
+      return (
+        s.loading === !0 &&
+          O.emit(U.API_LOADING, { key: ye(s), loading: !1, inFlight: 0 }),
+        m
+      );
+    } catch (m) {
+      if (((l = m), s.__retryCount >= n)) break;
+    }
+  }
+  return (
+    s.loading === !0 &&
+      O.emit(U.API_LOADING, { key: ye(s), loading: !1, inFlight: 0 }),
+    O.emit(U.ERROR, l),
+    O.emit(U.API_RETRY_END, {
+      method: s.method,
+      url: s.url,
+      attempts: s.__retryCount,
+    }),
+    Promise.reject(l)
+  );
+}
+const xe = Yt.create(M.api);
+xe.interceptors.request.use(
+  (t) => (
+    us(t),
+    t.loading === !0 &&
+      O.emit(U.API_LOADING, { key: ye(t), loading: !0, inFlight: 1 }),
+    t
+  ),
+);
+xe.interceptors.response.use(
+  (t) => {
+    var s;
+    const a =
+      Date.now() -
+      (((s = t.config.metadata) == null ? void 0 : s.start) || Date.now());
+    return (
+      t.config.loading === !0 &&
+        O.emit(U.API_LOADING, { key: ye(t.config), loading: !1, inFlight: 0 }),
+      M.api.trace &&
+        O.emit(U.API_TRACE, {
+          method: t.config.method,
+          url: t.config.url,
+          ms: a,
+          status: t.status,
+        }),
+      t
+    );
+  },
+  async (t) => {
+    var n, r;
+    const a = t.config || {},
+      s =
+        Date.now() -
+        (((n = a.metadata) == null ? void 0 : n.start) || Date.now());
+    return (
+      M.api.trace &&
+        O.emit(U.API_TRACE, {
+          method: a.method,
+          url: a.url,
+          ms: s,
+          status: ((r = t.response) == null ? void 0 : r.status) || 0,
+        }),
+      ms(t, xe)
+    );
+  },
+);
+const ie = async (t = "GET", a, s = {}, n = {}) => {
+    var d;
+    let r;
+    function o(i = {}) {
+      const p = encodeURIComponent;
+      return Object.keys(i)
+        .map((u) => `${p(u)}=${p(i[u])}`)
+        .join("&");
+    }
+    const l = B({ method: t.toUpperCase(), url: a }, n);
+    if (["GET", "DELETE", "HEAD"].includes(t.toUpperCase())) {
+      if (s && Object.keys(s).length) {
+        const i = o(s),
+          p = a.includes("?") ? "&" : "?";
+        l.url = `${a}${p}${i}`;
+      }
+    } else l.data = s;
+    try {
+      const { data: i } = await xe(l);
+      r = i;
+    } catch (i) {
+      r = ((d = i == null ? void 0 : i.response) == null ? void 0 : d.data) || {
+        error: !0,
+        code: "INTERNAL_SERVER_ERROR",
+        message: (i == null ? void 0 : i.message) || "Something went wrong :)",
+      };
+    }
+    return r;
+  },
+  re = {
+    get: (t, a = {}, s = {}) => ie("GET", t, a, s),
+    post: (t, a = {}, s = {}) => ie("POST", t, a, s),
+    put: (t, a = {}, s = {}) => ie("PUT", t, a, s),
+    patch: (t, a = {}, s = {}) => ie("PATCH", t, a, s),
+    delete: (t, a = {}, s = {}) => ie("DELETE", t, a, s),
+    head: (t, a = {}, s = {}) => ie("HEAD", t, a, s),
+  };
+function ps() {
+  const t = () => O.emit(U.TAB_VISIBILITY, { hidden: document.hidden });
+  document.addEventListener("visibilitychange", t), t();
+}
+const hs = async () => {
+  try {
+    await xe({
+      method: "GET",
+      url: "/ping",
+      timeout: 2e3,
+      retry: 1,
+      loading: !1,
+    });
+  } catch (t) {
+    O.emit("SYSTEM_GUARD", {
+      model: "SERVER_DOWN",
+      error: t == null ? void 0 : t.message,
+    });
+  }
+};
+function xs() {
+  Ne("inputTracer") &&
+    (window.addEventListener(
+      "keydown",
+      (t) => {
+        O.emit(U.INPUT_TRACE, { type: "key", key: t.key, ts: Date.now() });
+      },
+      !0,
+    ),
+    window.addEventListener(
+      "click",
+      (t) => {
+        O.emit(U.INPUT_TRACE, {
+          type: "mouse",
+          button: t.button,
+          x: t.clientX,
+          y: t.clientY,
+          ts: Date.now(),
+        });
+      },
+      !0,
+    ));
+}
+const fs = [
+  { key: "F12" },
+  { key: "I", ctrlKey: !0, shiftKey: !0 },
+  { key: "C", ctrlKey: !0, shiftKey: !0 },
+  { key: "U", ctrlKey: !0 },
+  { key: "S", ctrlKey: !0 },
+];
+function gs(t, a) {
+  var s;
+  return (
+    (a.key ? ((s = t.key) == null ? void 0 : s.toUpperCase()) === a.key : !0) &&
+    (a.ctrlKey ? t.ctrlKey : !a.ctrlKey) &&
+    (a.shiftKey ? t.shiftKey : !a.shiftKey)
+  );
+}
+function ws() {
+  const t = `
     font-size: 32px;
     font-weight: 800;
     color: #ff0000;
     text-shadow: 0 0 8px #ff0000;
-  `,a=`
+  `,
+    a = `
     font-size: 14px;
     color: #ffffff;
     background-color: #1e1e1e;
     padding: 10px;
     border: 1px solid #ff0000;
     border-radius: 6px;
-  `;console.clear(),console.log("%c⚠️ SECURITY WARNING ⚠️",t),console.log("%cThis console is for developers only. Any unauthorized access, data inspection, or code modification may violate terms of service or security policies.",a),console.log("%c📜 View Terms & Conditions: https://terms.ajayos.in/","color: #00ffff; font-weight: bold;"),console.log("%c🔒 For security reasons, please close the DevTools window if opened unintentionally.","color: #ff8800;")}function bs(){if(!Ne("inspectGuard"))return;ws(),console.log("%cInspect Guard is active.","color: #00ff00;"),window.addEventListener("contextmenu",s=>s.preventDefault()),window.addEventListener("keydown",s=>{fs.some(n=>gs(s,n))&&(s.preventDefault(),s.stopPropagation())},!0);let t=!1;setInterval(()=>{const n=window.outerWidth-window.innerWidth>160||window.outerHeight-window.innerHeight>160;n!==t&&(t=n,t&&(console.log("%c-----------------------------------","color: #555555;"),console.log("%cDevTools detected!","color: #ff0000; font-size: 16px;"),console.log("%cPlease close the DevTools window.","color: #ff8800;"),console.log("%c🔒 For security reasons, please close the DevTools window if opened unintentionally.","color: #ff8800;"),console.log("%c-----------------------------------","color: #555555;"),O.emit(U.INSPECT_DETECTED,{open:!0})))},1e3)}const Re={inspectGuard:bs,inputTracer:xs,tabTracker:ps,wss:cs,isServerLive:hs},ys=()=>{const[t,a]=c.useState({username:"",password:""}),[s,n]=c.useState(!1),[r,o]=c.useState(!1),[l,d]=c.useState({username:"",password:""}),[i,p]=c.useState({type:"",text:""}),u=Z(),w=new URLSearchParams(window.location.search).get("next"),f=async y=>{y.preventDefault(),d({username:"",password:""}),p({type:"",text:""}),o(!0);try{const x=btoa(JSON.stringify(t)),{code:g,message:v}=await re.get(`/auth/login?data=${x}`);switch(g){case"ACCOUNT_NOT_FOUND":case"ACCOUNT_SUSPENDED":case"ACCOUNT_NOT_VERIFIED":d({username:v,password:""});break;case"NO_PASSWORD_SET":case"INVALID_PASSWORD":d({username:"",password:v});break;case"LOGIN_SUCCESS":p({type:"success",text:"✅ Login successful! Redirecting..."});break;default:p({type:"error",text:v||"⚠️ Something went wrong. Please try again later."});break}}catch(x){console.log(x),p({type:"error",text:"🚨 Network error: Unable to reach the server."})}finally{o(!1)}},m=y=>u(`/oauth/${y.toLowerCase()}${w?`?next=${w}`:""}`),b="peer w-full p-3 bg-black/30 border rounded-xl text-white placeholder-transparent focus:ring-4 focus:outline-none transition";return e.jsx("div",{className:"relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",children:e.jsx("div",{className:"w-full max-w-md backdrop-blur-2xl bg-white/5 border border-cyan-400/30 rounded-3xl shadow-2xl p-8",style:{boxShadow:"0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)"},children:e.jsxs("form",{className:"space-y-6",onSubmit:f,children:[e.jsxs("div",{className:"relative",children:[e.jsx(we,{className:"absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5"}),e.jsx("input",{type:"text",id:"username",required:!0,value:t.username,onChange:y=>a(Q(B({},t),{username:y.target.value.trim()})),className:`${b} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30 ${l.username?"border-red-400 focus:ring-red-400/30":""}`,placeholder:"Username or Email"}),e.jsx("label",{htmlFor:"username",className:`absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.username?"top-0 -translate-y-full text-xs text-cyan-300":"top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,children:"Username or Email"}),l.username&&e.jsx("p",{className:"text-xs text-red-400 mt-1",children:l.username})]}),e.jsxs("div",{className:"relative",children:[e.jsx(ze,{className:"absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5"}),e.jsx("input",{type:s?"text":"password",id:"password",required:!0,value:t.password,onChange:y=>a(Q(B({},t),{password:y.target.value.trim()})),className:`${b} pl-12 pr-10 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30 ${l.password?"border-red-400 focus:ring-red-400/30":""}`,placeholder:"Password"}),e.jsx("label",{htmlFor:"password",className:`absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.password?"top-0 -translate-y-full text-xs text-cyan-300":"top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,children:"Password"}),e.jsx("button",{type:"button",onClick:()=>n(!s),className:"absolute right-4 top-1/2 -translate-y-1/2 transition hover:scale-125",children:s?"🙉":"🙈"}),l.password&&e.jsx("p",{className:"text-xs text-red-400 mt-1",children:l.password})]}),e.jsx("div",{className:"text-right text-sm text-indigo-400 hover:text-indigo-300 cursor-pointer transition",onClick:()=>u(`/forgot${w?`?next=${w}`:""}`),children:"Forgot Password?"}),i.text&&e.jsx("div",{className:`p-3 text-sm border rounded-xl ${i.type==="success"?"text-green-400 bg-green-900/20 border-green-500/30 animate-bounce":"text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,children:i.text}),e.jsxs("button",{type:"submit",disabled:r,className:`w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${r?"bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait":"bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,children:[e.jsxs("span",{className:"relative z-10 flex justify-center items-center gap-2",children:[r?e.jsx("span",{className:"animate-spin border-2 border-t-transparent border-white w-5 h-5 rounded-full"}):e.jsx(_e,{className:"w-5 h-5"}),r?"Signing In...":"SIGN IN"]}),e.jsx("span",{className:"absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-all duration-700 group-hover:left-[100%]"})]}),e.jsxs("div",{className:"flex items-center my-6",children:[e.jsx("div",{className:"flex-grow h-px bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent"}),e.jsx("span",{className:"mx-4 text-xs text-gray-500 uppercase tracking-widest font-semibold",children:"Or log in with"}),e.jsx("div",{className:"flex-grow h-px bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent"})]}),e.jsx("div",{className:"flex gap-3",children:[{name:"Google",icon:e.jsx(Ge,{}),id:"google"},{name:"GitHub",icon:e.jsx(Oe,{}),id:"github"},{name:"Passkey",icon:e.jsx(nt,{className:"w-4 h-4 text-indigo-400"}),id:"passkey"}].map(({name:y,icon:x,id:g})=>e.jsxs("button",{onClick:()=>m(g),type:"button",className:"flex-1 p-3 border border-indigo-400/40 rounded-xl bg-black/30 text-sm text-gray-200 font-semibold flex items-center justify-center gap-2 transition hover:bg-indigo-400/10 hover:border-indigo-400 hover:scale-[1.02] hover:shadow-lg",children:[x,e.jsx("span",{className:"hidden sm:inline",children:y})]},g))}),e.jsx("div",{className:"text-center text-sm text-blue-400 cursor-pointer",onClick:()=>u(`/signup${w?`?next=${w}`:""}`),children:"Don’t have an account? Sign Up"})]})})})},vs=()=>{const[t,a]=c.useState({email:"",firstName:"",lastName:""}),[s,n]=c.useState(!1),[r,o]=c.useState({email:"",firstName:"",lastName:""}),[l,d]=c.useState({type:"",text:""}),i=Z(),p=async f=>{if(f.preventDefault(),o({email:"",firstName:"",lastName:""}),d({type:"",text:""}),!t.firstName||!t.lastName||!t.email){o({email:t.email?"":"Email is required.",firstName:t.firstName?"":"First Name is required.",lastName:t.lastName?"":"Last Name is required."});return}n(!0);try{const{code:m,message:b}=await re.post("/auth/account",t);switch(m){case"USER_ALREADY_EXISTS":case"USER_NOT_VERIFIED":case"ACCOUNT_NOT_VERIFIED":o({email:b,firstName:"",lastName:""});break;case"REGISTER_SUCCESS":d({type:"success",text:"✅ Registration successful! check your mail..."}),i("/checkMail");break;default:d({type:"error",text:"⚠️ Something went wrong. Please try again later."});break}}catch(m){console.log(m),d({type:"error",text:"🚨 Network error: Unable to reach the server."})}finally{n(!1)}},u=f=>i(`/oauth/${f.toLowerCase()}`),h="peer w-full p-3 bg-black/30 border rounded-xl text-white placeholder-transparent focus:ring-4 focus:outline-none transition",w="peer w-full p-3 bg-black/30 border border-cyan-400/40 rounded-xl text-white placeholder-transparent focus:ring-4 focus:ring-cyan-500/30 focus:border-cyan-300 focus:outline-none transition";return e.jsx("div",{className:"relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",children:e.jsx("div",{className:"w-full max-w-md backdrop-blur-2xl bg-white/5 border border-cyan-400/30 rounded-3xl shadow-2xl p-8",style:{boxShadow:"0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)"},children:e.jsxs("form",{className:"space-y-6",onSubmit:p,children:[e.jsxs("div",{className:"grid grid-cols-1 sm:grid-cols-2 gap-4",children:[e.jsxs("div",{className:"relative",children:[e.jsx(we,{className:"absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5"}),e.jsx("input",{type:"text",id:"firstName",value:t.firstName,onChange:f=>a(Q(B({},t),{firstName:f.target.value})),className:w+" pl-12",placeholder:"First Name"}),e.jsx("label",{htmlFor:"firstName",className:`absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.firstName?"top-0 -translate-y-full text-xs text-cyan-300":"top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,children:"First Name"})]}),e.jsxs("div",{className:"relative",children:[e.jsx(we,{className:"absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5"}),e.jsx("input",{type:"text",id:"lastName",value:t.lastName,onChange:f=>a(Q(B({},t),{lastName:f.target.value})),className:w+" pl-12",placeholder:"Last Name"}),e.jsx("label",{htmlFor:"lastName",className:`absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.lastName?"top-0 -translate-y-full text-xs text-cyan-300":"top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,children:"Last Name"})]})]}),e.jsxs("div",{className:"relative",children:[e.jsx(we,{className:"absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5"}),e.jsx("input",{type:"email",id:"email",required:!0,value:t.email,onChange:f=>a(Q(B({},t),{email:f.target.value.trim()})),className:`${h} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30 ${r.email?"border-red-400 focus:ring-red-400/30":""}`,placeholder:"Email"}),e.jsx("label",{htmlFor:"email",className:`absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.email?"top-0 -translate-y-full text-xs text-cyan-300":"top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,children:"Email"}),r.email&&e.jsx("p",{className:"text-xs text-red-400 mt-1",children:r.email})]}),l.text&&e.jsx("div",{className:`p-3 text-sm border rounded-xl ${l.type==="success"?"text-green-400 bg-green-900/20 border-green-500/30 animate-bounce":"text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,children:l.text}),e.jsxs("button",{type:"submit",disabled:s,className:`w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${s?"bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait":"bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,children:[e.jsxs("span",{className:"relative z-10 flex justify-center items-center gap-2",children:[s?e.jsx("span",{className:"animate-spin border-2 border-t-transparent border-white w-5 h-5 rounded-full"}):e.jsx(_e,{className:"w-5 h-5"}),s?"Signing up...":"SIGN UP"]}),e.jsx("span",{className:"absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-all duration-700 group-hover:left-[100%]"})]}),e.jsxs("div",{className:"flex items-center my-6",children:[e.jsx("div",{className:"flex-grow h-px bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent"}),e.jsx("span",{className:"mx-4 text-xs text-gray-500 uppercase tracking-widest font-semibold",children:"Or Sign up with"}),e.jsx("div",{className:"flex-grow h-px bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent"})]}),e.jsx("div",{className:"flex gap-3",children:[{name:"Google",icon:e.jsx(Ge,{}),id:"google"},{name:"GitHub",icon:e.jsx(Oe,{}),id:"github"}].map(({name:f,icon:m,id:b})=>e.jsxs("button",{onClick:()=>u(b),type:"button",className:"flex-1 p-3 border border-indigo-400/40 rounded-xl bg-black/30 text-sm text-gray-200 font-semibold flex items-center justify-center gap-2 transition hover:bg-indigo-400/10 hover:border-indigo-400 hover:scale-[1.02] hover:shadow-lg",children:[m,e.jsx("span",{className:"hidden sm:inline",children:f})]},b))}),e.jsx("div",{className:"text-center text-sm text-blue-400 cursor-pointer",onClick:()=>i("/login"),children:"have an account? Sign In"})]})})})},js=()=>{const t=Z(),s=new URLSearchParams(window.location.search).get("next");return e.jsxs("div",{className:"relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",children:[e.jsx("div",{className:"absolute w-[400px] h-[400px] bg-cyan-500/20 blur-3xl rounded-full -top-20 -left-20 animate-pulse"}),e.jsxs("div",{className:"relative z-10 max-w-md w-full mx-auto p-8 rounded-3xl border border-cyan-400/30 backdrop-blur-2xl bg-white/5 shadow-2xl text-center animate-fadeIn",children:[e.jsx("div",{className:"flex justify-center mb-6",children:e.jsx("div",{className:"p-6 bg-cyan-500/20 rounded-full border border-cyan-400/30 shadow-xl animate-float",children:e.jsx(ot,{className:"w-12 h-12 text-cyan-400"})})}),e.jsx("h1",{className:"text-2xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent mb-2",children:"Check Your Mail"}),e.jsx("p",{className:"text-gray-300 text-sm mb-6",children:"We’ve sent a confirmation link to your registered email address. Please check your inbox and click on the link to verify your account."}),e.jsxs("div",{className:"flex flex-col sm:flex-row gap-3",children:[e.jsxs("button",{onClick:()=>window.open("https://mail.google.com","_blank"),className:"flex items-center justify-center gap-2 w-full p-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 font-semibold",children:[e.jsx(Ue,{className:"w-5 h-5"}),"Open Mail App"]}),e.jsxs("button",{onClick:()=>t(`/login${s?`?next=${s}`:""}`),className:"flex items-center justify-center gap-2 w-full p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-cyan-400/30 transition-all duration-300 font-semibold",children:[e.jsx(je,{className:"w-5 h-5"}),"Back to Login"]})]}),e.jsxs("p",{className:"text-xs text-gray-400 mt-6",children:["Didn’t get it? Check spam folder or ",e.jsx("button",{onClick:()=>t("https://support.ajayos.in"),className:"text-cyan-400 hover:text-cyan-300 underline cursor-pointer",children:"contact Support"})]})]})]})},Ns=()=>{const t=Z(),a=new URLSearchParams(window.location.search),s=a.get("token"),n=a.get("next"),[r,o]=c.useState({password:"",confirm:""}),[l,d]=c.useState(""),[i,p]=c.useState(!1),[u,h]=c.useState(""),[w,f]=c.useState({type:"",text:""}),[m,b]=c.useState(!1);c.useEffect(()=>{try{if(s){const g=JSON.parse(atob(s));g.email?d(g.email):(h("Invalid token data. Please check your link."),t(`/login${n?`?next=${n}`:""}`))}}catch(g){console.error("Invalid base64 data")}},[s,t,n]);const y=async g=>{if(g.preventDefault(),h(""),f({type:"",text:""}),r.password.length<6){h("Password must be at least 6 characters long.");return}if(r.password!==r.confirm){h("Passwords do not match!");return}b(!0);try{const{message:v,error:j}=await re.post("/auth/account/verify-email",{data:btoa(JSON.stringify({email:l,password:r.password}))});j?h({type:"error",text:v||"⚠️ Something went wrong. Try again!"}):(f({type:"success",text:"✅ Password set successfully!"}),setTimeout(()=>{t(`/login${n?`?next=${n}`:""}`)},2e3))}catch(v){f({type:"error",text:"⚠️ Something went wrong. Try again!"})}finally{b(!1)}},x="peer w-full p-3 bg-black/30 border rounded-xl text-white placeholder-transparent focus:ring-4 focus:outline-none transition";return e.jsx("div",{className:"relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",children:e.jsxs("div",{className:"w-full max-w-md backdrop-blur-2xl bg-white/5 border border-cyan-400/30 rounded-3xl shadow-2xl p-8",style:{boxShadow:"0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)"},children:[e.jsxs("button",{onClick:()=>t(-1),className:"flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-6 transition",children:[e.jsx(je,{className:"w-4 h-4"}),e.jsx("span",{children:"Back"})]}),e.jsx("h2",{className:"text-2xl font-bold text-white text-center mb-6",children:"🔐 Set Your Password"}),e.jsxs("form",{className:"space-y-6",onSubmit:y,children:[e.jsxs("div",{className:"relative",children:[e.jsx(ze,{className:"absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5"}),e.jsx("input",{type:i?"text":"password",id:"password",required:!0,value:r.password,onChange:g=>o(Q(B({},r),{password:g.target.value.trim()})),className:`${x} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30`,placeholder:"New Password"}),e.jsx("label",{htmlFor:"password",className:`absolute left-12 text-sm transition-all duration-200 pointer-events-none ${r.password?"top-0 -translate-y-full text-xs text-cyan-300":"top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,children:"New Password"}),e.jsx("button",{type:"button",onClick:()=>p(!i),className:"absolute right-4 top-1/2 -translate-y-1/2 transition hover:scale-125",children:i?"🙉":"🙈"})]}),e.jsxs("div",{className:"relative",children:[e.jsx(ze,{className:"absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5"}),e.jsx("input",{type:i?"text":"password",id:"confirm",required:!0,value:r.confirm,onChange:g=>o(Q(B({},r),{confirm:g.target.value.trim()})),className:`${x} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30`,placeholder:"Confirm Password"}),e.jsx("label",{htmlFor:"confirm",className:`absolute left-12 text-sm transition-all duration-200 pointer-events-none ${r.confirm?"top-0 -translate-y-full text-xs text-cyan-300":"top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,children:"Confirm Password"})]}),u&&e.jsx("p",{className:"text-xs text-red-400 bg-red-900/20 p-2 rounded-lg border border-red-500/30",children:u}),w.text&&e.jsx("div",{className:`p-3 text-sm border rounded-xl ${w.type==="success"?"text-green-400 bg-green-900/20 border-green-500/30 animate-bounce":"text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,children:w.text}),e.jsxs("button",{type:"submit",disabled:m,className:`w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${m?"bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait":"bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,children:[e.jsxs("span",{className:"relative z-10 flex justify-center items-center gap-2",children:[m?e.jsx("span",{className:"animate-spin border-2 border-t-transparent border-white w-5 h-5 rounded-full"}):e.jsx(Ue,{className:"w-5 h-5"}),m?"Setting Password...":"SET PASSWORD"]}),e.jsx("span",{className:"absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-all duration-700 group-hover:left-[100%]"})]})]})]})})},Ss=()=>{const[t,a]=c.useState(""),[s,n]=c.useState(!1),[r,o]=c.useState({type:"",text:""}),l=Z(),i=new URLSearchParams(window.location.search).get("next"),p=async u=>{u.preventDefault(),o({type:"",text:""}),n(!0);try{const h=btoa(JSON.stringify({email:t})),{code:w,message:f}=await re.get(`/auth/forgot?data=${h}${i?`&next=${i}`:""}`);switch(w){case"EMAIL_NOT_FOUND":o({type:"error",text:"❌ Email not found."});break;case"RESET_LINK_SENT":o({type:"success",text:"✅ Reset link sent to your email!"});break;default:o({type:"error",text:f||"⚠️ Something went wrong. Try again later."})}}catch(h){console.error(h),o({type:"error",text:"🚨 Network error: Unable to reach the server."})}finally{n(!1)}};return e.jsx("div",{className:"relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",children:e.jsx("div",{className:"w-full max-w-md backdrop-blur-2xl bg-white/5 border border-cyan-400/30 rounded-3xl shadow-2xl p-8",style:{boxShadow:"0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)"},children:e.jsxs("form",{className:"space-y-6",onSubmit:p,children:[e.jsx("h2",{className:"text-center text-2xl font-bold text-cyan-300 mb-2",children:"Forgot Password"}),e.jsx("p",{className:"text-center text-sm text-gray-400 mb-4",children:"Enter your registered email address and we’ll send you a reset link."}),e.jsxs("div",{className:"relative",children:[e.jsx(ot,{className:"absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5"}),e.jsx("input",{type:"email",id:"email",required:!0,value:t,onChange:u=>a(u.target.value.trim()),className:"peer w-full p-3 bg-black/30 border rounded-xl text-white placeholder-transparent pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-4 focus:ring-cyan-500/30 focus:outline-none transition",placeholder:"Email address"}),e.jsx("label",{htmlFor:"email",className:`absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t?"top-0 -translate-y-full text-xs text-cyan-300":"top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:-translate-y-full peer-focus:text-xs peer-focus:text-cyan-300"}`,children:"Email address"})]}),r.text&&e.jsx("div",{className:`p-3 text-sm border rounded-xl ${r.type==="success"?"text-green-400 bg-green-900/20 border-green-500/30 animate-bounce":"text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,children:r.text}),e.jsxs("button",{type:"submit",disabled:s,className:`w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${s?"bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait":"bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,children:[e.jsxs("span",{className:"relative z-10 flex justify-center items-center gap-2",children:[s?e.jsx("span",{className:"animate-spin border-2 border-t-transparent border-white w-5 h-5 rounded-full"}):e.jsx(Ue,{className:"w-5 h-5"}),s?"Sending...":"SEND RESET LINK"]}),e.jsx("span",{className:"absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-all duration-700 group-hover:left-[100%]"})]}),e.jsxs("button",{type:"button",onClick:()=>l(`/login${i?`?next=${i}`:""}`),className:"w-full flex items-center justify-center gap-2 p-3 border border-indigo-400/40 rounded-xl bg-black/30 text-sm text-gray-300 font-semibold transition hover:bg-indigo-400/10 hover:border-indigo-400 hover:scale-[1.02] hover:shadow-lg",children:[e.jsx(je,{className:"w-4 h-4 text-indigo-300"}),"Back to Login"]})]})})})},ks=()=>{const t=Z();return e.jsxs("div",{className:"relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",children:[e.jsx("div",{className:"absolute w-[450px] h-[450px] bg-cyan-500/20 blur-3xl rounded-full -top-20 -left-20 animate-pulse"}),e.jsx("div",{className:"absolute w-[400px] h-[400px] bg-indigo-500/20 blur-3xl rounded-full -bottom-20 -right-20 animate-pulse"}),e.jsxs("div",{className:"relative z-10 text-center px-8 py-10 max-w-md w-full bg-white/5 border border-cyan-400/30 backdrop-blur-2xl rounded-3xl shadow-2xl animate-fadeIn",children:[e.jsx("h1",{className:"text-[6rem] sm:text-[8rem] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-cyan-400 leading-none mb-4 animate-glow",children:"404"}),e.jsx("h2",{className:"text-2xl font-bold text-cyan-300 mb-2",children:"Page Not Found"}),e.jsx("p",{className:"text-gray-400 text-sm mb-8",children:"Oops! The page you’re looking for doesn’t exist or has been moved."}),e.jsxs("div",{className:"flex flex-col sm:flex-row gap-3 justify-center",children:[e.jsxs("button",{onClick:()=>t("/"),className:"flex items-center justify-center gap-2 w-full sm:w-auto p-3 px-6 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.03] hover:shadow-xl transition-all duration-300 font-semibold",children:[e.jsx(_e,{className:"w-5 h-5"}),"Go Home"]}),e.jsxs("button",{onClick:()=>t(-1),className:"flex items-center justify-center gap-2 w-full sm:w-auto p-3 px-6 rounded-xl border border-cyan-400/40 bg-white/10 hover:bg-white/20 transition-all duration-300 font-semibold",children:[e.jsx(je,{className:"w-5 h-5"}),"Go Back"]})]})]})]})},Cs=()=>e.jsxs("div",{className:"relative w-72 h-72 sm:w-96 sm:h-96 bg-white/10 rounded-3xl backdrop-blur-md border border-white/10 overflow-hidden",children:[e.jsx("div",{className:"absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"}),e.jsxs("div",{className:"flex flex-col items-center justify-center h-full text-gray-400",children:[e.jsx("div",{className:"w-16 h-16 rounded-full bg-white/10 mb-6 animate-pulse"}),e.jsx("div",{className:"w-48 h-5 rounded bg-white/10 mb-3 animate-pulse"}),e.jsx("div",{className:"w-32 h-4 rounded bg-white/10 animate-pulse"})]})]}),Ms=()=>{const[t,a]=c.useState("Initializing Google login..."),[s,n]=c.useState(!0),[r,o]=c.useState(null),[l,d]=c.useState("text-gray-300"),i=Z(),p=new URLSearchParams(window.location.search),u=p.get("next");return c.useEffect(()=>{const h=p.get("code"),w="818711819823-segq27qkuatd2d033nethk4ldd8hjp3t.apps.googleusercontent.com",f=`${window.location.origin}/oauth/google`;if(h)o(h),a("🔄 Verifying Google login..."),n(!0),(async()=>{try{const m=btoa(JSON.stringify({code:h})),{code:b,message:y}=await re.get(`/auth/oauth/google?data=${m}`);b==="OAUTH_SUCCESS"?(a("✅ Login successful! Redirecting..."),d("text-green-400"),setTimeout(()=>window.location.href=u||"https://dashboard.ajayos.in/",1200)):(a(y||"❌ Verification failed. Please try again."),d("text-red-400"))}catch(m){console.error(m),a("🚨 Server error while verifying your account."),d("text-red-400")}finally{n(!1)}})();else{const m=new URL("https://accounts.google.com/o/oauth2/v2/auth");m.searchParams.append("client_id",w),m.searchParams.append("redirect_uri",f),m.searchParams.append("response_type","code"),m.searchParams.append("scope","profile email"),m.searchParams.append("access_type","offline"),m.searchParams.append("prompt","consent"),u&&m.searchParams.append("state",u),a("Opening Google login..."),n(!0),window.location.href=m.toString()}},[u,p]),e.jsx("div",{className:"relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",children:e.jsx("div",{className:"w-full max-w-md backdrop-blur-2xl bg-white/5 border border-cyan-400/30 rounded-3xl shadow-2xl p-8",style:{boxShadow:"0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)"},children:e.jsxs("div",{className:"flex flex-col items-center justify-center space-y-6",children:[e.jsx(Ge,{className:"w-12 h-12 text-red-400"}),e.jsx("h2",{className:"text-xl font-semibold tracking-wide",children:"Google Login"}),e.jsx("p",{className:`text-sm text-center ${l}`,children:t}),r&&e.jsxs("div",{className:"text-xs text-gray-400 break-all border border-cyan-400/20 rounded-md p-2 w-full mt-2 bg-black/20",children:[e.jsx("strong",{children:"Code:"})," ",r]}),s&&e.jsx("div",{className:"w-10 h-10 border-4 border-t-transparent border-cyan-400 rounded-full animate-spin mt-4"}),!s&&e.jsx("button",{onClick:()=>i("/login"),className:"mt-4 px-5 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 transition text-white text-sm",children:"Back to Login"})]})})})},Es=()=>{const[t,a]=c.useState("Initializing GitHub login..."),[s,n]=c.useState(!0),[r,o]=c.useState(null),[l,d]=c.useState("text-gray-300"),i=Z(),p=new URLSearchParams(window.location.search),u=p.get("next");return c.useEffect(()=>{const h=p.get("code"),w="Ov23lizrjD3wtrFFibTm",f=`${window.location.origin}/oauth/github`;if(h)o(h),a("🔄 Verifying GitHub login..."),n(!0),(async()=>{try{const m=btoa(JSON.stringify({code:h})),{code:b,message:y}=await re.get(`/auth/oauth/github?data=${m}`);b==="OAUTH_SUCCESS"?(a("✅ Login successful! Redirecting..."),d("text-green-400"),setTimeout(()=>window.location.href=u||"https://dashboard.ajayos.in/",1200)):(a(y||"❌ Verification failed. Please try again."),d("text-red-400"))}catch(m){console.error(m),a("🚨 Server error while verifying your account."),d("text-red-400")}finally{n(!1)}})();else{const m=new URL("https://github.com/login/oauth/authorize");m.searchParams.append("client_id",w),m.searchParams.append("redirect_uri",f),m.searchParams.append("scope","read:user user:email"),u&&m.searchParams.append("state",u),a("Opening GitHub login..."),n(!0),window.location.href=m.toString()}},[u,p]),e.jsx("div",{className:"relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",children:e.jsx("div",{className:"w-full max-w-md backdrop-blur-2xl bg-white/5 border border-gray-500/30 rounded-3xl shadow-2xl p-8",style:{boxShadow:"0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)"},children:e.jsxs("div",{className:"flex flex-col items-center justify-center space-y-6",children:[e.jsx(Oe,{className:"w-12 h-12 text-white"}),e.jsx("h2",{className:"text-xl font-semibold tracking-wide",children:"GitHub Login"}),e.jsx("p",{className:`text-sm text-center ${l}`,children:t}),r&&e.jsxs("div",{className:"text-xs text-gray-400 break-all border border-gray-500/20 rounded-md p-2 w-full mt-2 bg-black/20",children:[e.jsx("strong",{children:"Code:"})," ",r]}),s&&e.jsx("div",{className:"w-10 h-10 border-4 border-t-transparent border-gray-400 rounded-full animate-spin mt-4"}),!s&&e.jsx("button",{onClick:()=>i("/login"),className:"mt-4 px-5 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition text-white text-sm",children:"Back to Login"})]})})})},As=()=>{const[t,a]=c.useState("🔐 Ready for system authentication..."),[s,n]=c.useState(!0),[r,o]=c.useState("text-gray-300"),l=Z(),i=new URLSearchParams(window.location.search).get("next");return c.useEffect(()=>{(async()=>{var p;try{a("🔑 Initializing system passkey authentication..."),n(!0);const{code:u,message:h}=await re.get("/auth/passkey/challenge");if(u!=="SUCCESS"){a(h||"❌ Could not start passkey authentication."),o("text-red-400"),n(!1);return}const w=h;if(!w||!w.challenge){a("❌ Could not start passkey authentication."),o("text-red-400"),n(!1);return}const f=j=>Uint8Array.from(atob(j),E=>E.charCodeAt(0)),m={challenge:f(w.challenge),allowCredentials:((p=w.allowCredentials)==null?void 0:p.map(j=>Q(B({},j),{id:f(j.id)})))||[],timeout:6e4,userVerification:"required",rpId:window.location.hostname},b=await navigator.credentials.get({publicKey:m});a("🔄 Verifying with secure enclave..."),n(!0);const y={id:b.id,type:b.type,rawId:btoa(String.fromCharCode(...new Uint8Array(b.rawId))),response:{clientDataJSON:btoa(String.fromCharCode(...new Uint8Array(b.response.clientDataJSON))),authenticatorData:btoa(String.fromCharCode(...new Uint8Array(b.response.authenticatorData))),signature:btoa(String.fromCharCode(...new Uint8Array(b.response.signature))),userHandle:b.response.userHandle?btoa(String.fromCharCode(...new Uint8Array(b.response.userHandle))):null}},x=btoa(JSON.stringify(y)),{code:g,message:v}=await re.post(`/auth/passkey/verify?data=${x}`);g==="PASSKEY_SUCCESS"?(a("✅ Verified! Welcome back."),o("text-green-400"),setTimeout(()=>l(i||"/dashboard"),1200)):(a(v||"❌ Authentication failed."),o("text-red-400"))}catch(u){console.error(u),a("🚨 Passkey authentication cancelled or failed."),o("text-red-400")}finally{n(!1)}})()},[]),e.jsx("div",{className:"relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",children:e.jsx("div",{className:"w-full max-w-md backdrop-blur-2xl bg-white/5 border border-yellow-400/30 rounded-3xl shadow-2xl p-8",style:{boxShadow:"0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)"},children:e.jsxs("div",{className:"flex flex-col items-center justify-center space-y-6",children:[e.jsx(nt,{className:"w-12 h-12 text-yellow-400"}),e.jsx("h2",{className:"text-xl font-semibold tracking-wide",children:"System Passkey"}),e.jsx("p",{className:`text-sm text-center ${r}`,children:t}),s&&e.jsx("div",{className:"w-10 h-10 border-4 border-t-transparent border-yellow-400 rounded-full animate-spin mt-4"}),!s&&e.jsx("button",{onClick:()=>l("/login"),className:"mt-4 px-5 py-2 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition text-white text-sm",children:"Back to Login"})]})})})},Ie=[Xt,Kt,Jt,Qt,Zt,es],Te={LOGIN:ys,SIGNUP:vs,CHECKMAIL:js,SETPASSWORD:Ns,FORGOT:Ss,DEFAULT:ks,LOADING:Cs,GOOGLE:Ms,GITHUB:Es,PASSKEY:As};function ve(){const[t,a]=c.useState(()=>Math.floor(Math.random()*Ie.length)),[s,n]=c.useState("LOADING"),r=Ie[t],o=Te[s],l=i=>{const p=i.split("/").filter(Boolean),u=(p[0]||"").toUpperCase(),h=(p[1]||"").toUpperCase();return u?Te[u]?u:u==="OAUTH"&&Te[h]?h:"DEFAULT":"LOGIN"};c.useEffect(()=>{n(l(window.location.pathname))},[]),c.useEffect(()=>{const i=()=>{n(l(window.location.pathname))};window.addEventListener("popstate",i);const p=window.history.pushState,u=window.history.replaceState;return window.history.pushState=function(...h){p.apply(window.history,h),i()},window.history.replaceState=function(...h){u.apply(window.history,h),i()},()=>{window.removeEventListener("popstate",i),window.history.pushState=p,window.history.replaceState=u}},[]);const d=()=>{a(i=>(i+1)%Ie.length)};return e.jsx("div",{className:"relative w-screen h-screen overflow-hidden bg-black text-white",children:e.jsxs("div",{className:"relative w-screen h-screen overflow-hidden text-white animate-fade-in-slow",children:[e.jsx("div",{className:"absolute inset-0 z-0 transition-opacity duration-700 ease-in-out opacity-100",children:e.jsx(r,{})},t),e.jsxs("button",{onClick:d,className:"absolute top-5 right-6 z-20 px-4 py-2 bg-white/10 backdrop-blur-md hover:bg-white/20 text-sm rounded-md border border-white/20 transition-all duration-200",children:[t+1," ✨"]}),e.jsx("div",{className:"absolute inset-0 flex items-center justify-center z-10",children:e.jsx("div",{className:"translate-y-7",children:e.jsx(o,{})})}),e.jsxs("footer",{className:"absolute bottom-3 w-full flex items-center justify-between px-6 text-xs text-gray-300 z-20",children:[e.jsxs("span",{children:["© ",new Date().getFullYear()," AOS All rights reserved."]}),e.jsxs("span",{children:["Code by ",e.jsx("span",{className:"font-semibold text-white",children:"Ajay O S"}),e.jsx("span",{className:"text-pink-400",children:"♥"})]})]}),e.jsx("style",{children:`
+  `;
+  console.clear(),
+    console.log("%c⚠️ SECURITY WARNING ⚠️", t),
+    console.log(
+      "%cThis console is for developers only. Any unauthorized access, data inspection, or code modification may violate terms of service or security policies.",
+      a,
+    ),
+    console.log(
+      "%c📜 View Terms & Conditions: https://terms.ajayos.in/",
+      "color: #00ffff; font-weight: bold;",
+    ),
+    console.log(
+      "%c🔒 For security reasons, please close the DevTools window if opened unintentionally.",
+      "color: #ff8800;",
+    );
+}
+function bs() {
+  if (!Ne("inspectGuard")) return;
+  ws(),
+    console.log("%cInspect Guard is active.", "color: #00ff00;"),
+    window.addEventListener("contextmenu", (s) => s.preventDefault()),
+    window.addEventListener(
+      "keydown",
+      (s) => {
+        fs.some((n) => gs(s, n)) && (s.preventDefault(), s.stopPropagation());
+      },
+      !0,
+    );
+  let t = !1;
+  setInterval(() => {
+    const n =
+      window.outerWidth - window.innerWidth > 160 ||
+      window.outerHeight - window.innerHeight > 160;
+    n !== t &&
+      ((t = n),
+      t &&
+        (console.log(
+          "%c-----------------------------------",
+          "color: #555555;",
+        ),
+        console.log("%cDevTools detected!", "color: #ff0000; font-size: 16px;"),
+        console.log("%cPlease close the DevTools window.", "color: #ff8800;"),
+        console.log(
+          "%c🔒 For security reasons, please close the DevTools window if opened unintentionally.",
+          "color: #ff8800;",
+        ),
+        console.log("%c-----------------------------------", "color: #555555;"),
+        O.emit(U.INSPECT_DETECTED, { open: !0 })));
+  }, 1e3);
+}
+const Re = {
+    inspectGuard: bs,
+    inputTracer: xs,
+    tabTracker: ps,
+    wss: cs,
+    isServerLive: hs,
+  },
+  ys = () => {
+    const [t, a] = c.useState({ username: "", password: "" }),
+      [s, n] = c.useState(!1),
+      [r, o] = c.useState(!1),
+      [l, d] = c.useState({ username: "", password: "" }),
+      [i, p] = c.useState({ type: "", text: "" }),
+      u = Z(),
+      w = new URLSearchParams(window.location.search).get("next"),
+      f = async (y) => {
+        y.preventDefault(),
+          d({ username: "", password: "" }),
+          p({ type: "", text: "" }),
+          o(!0);
+        try {
+          const x = btoa(JSON.stringify(t)),
+            { code: g, message: v } = await re.get(`/auth/login?data=${x}`);
+          switch (g) {
+            case "ACCOUNT_NOT_FOUND":
+            case "ACCOUNT_SUSPENDED":
+            case "ACCOUNT_NOT_VERIFIED":
+              d({ username: v, password: "" });
+              break;
+            case "NO_PASSWORD_SET":
+            case "INVALID_PASSWORD":
+              d({ username: "", password: v });
+              break;
+            case "LOGIN_SUCCESS":
+              p({
+                type: "success",
+                text: "✅ Login successful! Redirecting...",
+              });
+              break;
+            default:
+              p({
+                type: "error",
+                text: v || "⚠️ Something went wrong. Please try again later.",
+              });
+              break;
+          }
+        } catch (x) {
+          console.log(x),
+            p({
+              type: "error",
+              text: "🚨 Network error: Unable to reach the server.",
+            });
+        } finally {
+          o(!1);
+        }
+      },
+      m = (y) => u(`/oauth/${y.toLowerCase()}${w ? `?next=${w}` : ""}`),
+      b =
+        "peer w-full p-3 bg-black/30 border rounded-xl text-white placeholder-transparent focus:ring-4 focus:outline-none transition";
+    return e.jsx("div", {
+      className:
+        "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
+      children: e.jsx("div", {
+        className:
+          "w-full max-w-md backdrop-blur-2xl bg-white/5 border border-cyan-400/30 rounded-3xl shadow-2xl p-8",
+        style: {
+          boxShadow:
+            "0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)",
+        },
+        children: e.jsxs("form", {
+          className: "space-y-6",
+          onSubmit: f,
+          children: [
+            e.jsxs("div", {
+              className: "relative",
+              children: [
+                e.jsx(we, {
+                  className:
+                    "absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5",
+                }),
+                e.jsx("input", {
+                  type: "text",
+                  id: "username",
+                  required: !0,
+                  value: t.username,
+                  onChange: (y) =>
+                    a(Q(B({}, t), { username: y.target.value.trim() })),
+                  className: `${b} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30 ${l.username ? "border-red-400 focus:ring-red-400/30" : ""}`,
+                  placeholder: "Username or Email",
+                }),
+                e.jsx("label", {
+                  htmlFor: "username",
+                  className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.username ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
+                  children: "Username or Email",
+                }),
+                l.username &&
+                  e.jsx("p", {
+                    className: "text-xs text-red-400 mt-1",
+                    children: l.username,
+                  }),
+              ],
+            }),
+            e.jsxs("div", {
+              className: "relative",
+              children: [
+                e.jsx(ze, {
+                  className:
+                    "absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5",
+                }),
+                e.jsx("input", {
+                  type: s ? "text" : "password",
+                  id: "password",
+                  required: !0,
+                  value: t.password,
+                  onChange: (y) =>
+                    a(Q(B({}, t), { password: y.target.value.trim() })),
+                  className: `${b} pl-12 pr-10 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30 ${l.password ? "border-red-400 focus:ring-red-400/30" : ""}`,
+                  placeholder: "Password",
+                }),
+                e.jsx("label", {
+                  htmlFor: "password",
+                  className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.password ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
+                  children: "Password",
+                }),
+                e.jsx("button", {
+                  type: "button",
+                  onClick: () => n(!s),
+                  className:
+                    "absolute right-4 top-1/2 -translate-y-1/2 transition hover:scale-125",
+                  children: s ? "🙉" : "🙈",
+                }),
+                l.password &&
+                  e.jsx("p", {
+                    className: "text-xs text-red-400 mt-1",
+                    children: l.password,
+                  }),
+              ],
+            }),
+            e.jsx("div", {
+              className:
+                "text-right text-sm text-indigo-400 hover:text-indigo-300 cursor-pointer transition",
+              onClick: () => u(`/forgot${w ? `?next=${w}` : ""}`),
+              children: "Forgot Password?",
+            }),
+            i.text &&
+              e.jsx("div", {
+                className: `p-3 text-sm border rounded-xl ${i.type === "success" ? "text-green-400 bg-green-900/20 border-green-500/30 animate-bounce" : "text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,
+                children: i.text,
+              }),
+            e.jsxs("button", {
+              type: "submit",
+              disabled: r,
+              className: `w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${r ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,
+              children: [
+                e.jsxs("span", {
+                  className:
+                    "relative z-10 flex justify-center items-center gap-2",
+                  children: [
+                    r
+                      ? e.jsx("span", {
+                          className:
+                            "animate-spin border-2 border-t-transparent border-white w-5 h-5 rounded-full",
+                        })
+                      : e.jsx(_e, { className: "w-5 h-5" }),
+                    r ? "Signing In..." : "SIGN IN",
+                  ],
+                }),
+                e.jsx("span", {
+                  className:
+                    "absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-all duration-700 group-hover:left-[100%]",
+                }),
+              ],
+            }),
+            e.jsxs("div", {
+              className: "flex items-center my-6",
+              children: [
+                e.jsx("div", {
+                  className:
+                    "flex-grow h-px bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent",
+                }),
+                e.jsx("span", {
+                  className:
+                    "mx-4 text-xs text-gray-500 uppercase tracking-widest font-semibold",
+                  children: "Or log in with",
+                }),
+                e.jsx("div", {
+                  className:
+                    "flex-grow h-px bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent",
+                }),
+              ],
+            }),
+            e.jsx("div", {
+              className: "flex gap-3",
+              children: [
+                { name: "Google", icon: e.jsx(Ge, {}), id: "google" },
+                { name: "GitHub", icon: e.jsx(Oe, {}), id: "github" },
+                {
+                  name: "Passkey",
+                  icon: e.jsx(nt, { className: "w-4 h-4 text-indigo-400" }),
+                  id: "passkey",
+                },
+              ].map(({ name: y, icon: x, id: g }) =>
+                e.jsxs(
+                  "button",
+                  {
+                    onClick: () => m(g),
+                    type: "button",
+                    className:
+                      "flex-1 p-3 border border-indigo-400/40 rounded-xl bg-black/30 text-sm text-gray-200 font-semibold flex items-center justify-center gap-2 transition hover:bg-indigo-400/10 hover:border-indigo-400 hover:scale-[1.02] hover:shadow-lg",
+                    children: [
+                      x,
+                      e.jsx("span", {
+                        className: "hidden sm:inline",
+                        children: y,
+                      }),
+                    ],
+                  },
+                  g,
+                ),
+              ),
+            }),
+            e.jsx("div", {
+              className: "text-center text-sm text-blue-400 cursor-pointer",
+              onClick: () => u(`/signup${w ? `?next=${w}` : ""}`),
+              children: "Don’t have an account? Sign Up",
+            }),
+          ],
+        }),
+      }),
+    });
+  },
+  vs = () => {
+    const [t, a] = c.useState({ email: "", firstName: "", lastName: "" }),
+      [s, n] = c.useState(!1),
+      [r, o] = c.useState({ email: "", firstName: "", lastName: "" }),
+      [l, d] = c.useState({ type: "", text: "" }),
+      i = Z(),
+      p = async (f) => {
+        if (
+          (f.preventDefault(),
+          o({ email: "", firstName: "", lastName: "" }),
+          d({ type: "", text: "" }),
+          !t.firstName || !t.lastName || !t.email)
+        ) {
+          o({
+            email: t.email ? "" : "Email is required.",
+            firstName: t.firstName ? "" : "First Name is required.",
+            lastName: t.lastName ? "" : "Last Name is required.",
+          });
+          return;
+        }
+        n(!0);
+        try {
+          const { code: m, message: b } = await re.post("/auth/account", t);
+          switch (m) {
+            case "USER_ALREADY_EXISTS":
+            case "USER_NOT_VERIFIED":
+            case "ACCOUNT_NOT_VERIFIED":
+              o({ email: b, firstName: "", lastName: "" });
+              break;
+            case "REGISTER_SUCCESS":
+              d({
+                type: "success",
+                text: "✅ Registration successful! check your mail...",
+              }),
+                i("/checkMail");
+              break;
+            default:
+              d({
+                type: "error",
+                text: "⚠️ Something went wrong. Please try again later.",
+              });
+              break;
+          }
+        } catch (m) {
+          console.log(m),
+            d({
+              type: "error",
+              text: "🚨 Network error: Unable to reach the server.",
+            });
+        } finally {
+          n(!1);
+        }
+      },
+      u = (f) => i(`/oauth/${f.toLowerCase()}`),
+      h =
+        "peer w-full p-3 bg-black/30 border rounded-xl text-white placeholder-transparent focus:ring-4 focus:outline-none transition",
+      w =
+        "peer w-full p-3 bg-black/30 border border-cyan-400/40 rounded-xl text-white placeholder-transparent focus:ring-4 focus:ring-cyan-500/30 focus:border-cyan-300 focus:outline-none transition";
+    return e.jsx("div", {
+      className:
+        "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
+      children: e.jsx("div", {
+        className:
+          "w-full max-w-md backdrop-blur-2xl bg-white/5 border border-cyan-400/30 rounded-3xl shadow-2xl p-8",
+        style: {
+          boxShadow:
+            "0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)",
+        },
+        children: e.jsxs("form", {
+          className: "space-y-6",
+          onSubmit: p,
+          children: [
+            e.jsxs("div", {
+              className: "grid grid-cols-1 sm:grid-cols-2 gap-4",
+              children: [
+                e.jsxs("div", {
+                  className: "relative",
+                  children: [
+                    e.jsx(we, {
+                      className:
+                        "absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5",
+                    }),
+                    e.jsx("input", {
+                      type: "text",
+                      id: "firstName",
+                      value: t.firstName,
+                      onChange: (f) =>
+                        a(Q(B({}, t), { firstName: f.target.value })),
+                      className: w + " pl-12",
+                      placeholder: "First Name",
+                    }),
+                    e.jsx("label", {
+                      htmlFor: "firstName",
+                      className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.firstName ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
+                      children: "First Name",
+                    }),
+                  ],
+                }),
+                e.jsxs("div", {
+                  className: "relative",
+                  children: [
+                    e.jsx(we, {
+                      className:
+                        "absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5",
+                    }),
+                    e.jsx("input", {
+                      type: "text",
+                      id: "lastName",
+                      value: t.lastName,
+                      onChange: (f) =>
+                        a(Q(B({}, t), { lastName: f.target.value })),
+                      className: w + " pl-12",
+                      placeholder: "Last Name",
+                    }),
+                    e.jsx("label", {
+                      htmlFor: "lastName",
+                      className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.lastName ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
+                      children: "Last Name",
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            e.jsxs("div", {
+              className: "relative",
+              children: [
+                e.jsx(we, {
+                  className:
+                    "absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5",
+                }),
+                e.jsx("input", {
+                  type: "email",
+                  id: "email",
+                  required: !0,
+                  value: t.email,
+                  onChange: (f) =>
+                    a(Q(B({}, t), { email: f.target.value.trim() })),
+                  className: `${h} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30 ${r.email ? "border-red-400 focus:ring-red-400/30" : ""}`,
+                  placeholder: "Email",
+                }),
+                e.jsx("label", {
+                  htmlFor: "email",
+                  className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.email ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
+                  children: "Email",
+                }),
+                r.email &&
+                  e.jsx("p", {
+                    className: "text-xs text-red-400 mt-1",
+                    children: r.email,
+                  }),
+              ],
+            }),
+            l.text &&
+              e.jsx("div", {
+                className: `p-3 text-sm border rounded-xl ${l.type === "success" ? "text-green-400 bg-green-900/20 border-green-500/30 animate-bounce" : "text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,
+                children: l.text,
+              }),
+            e.jsxs("button", {
+              type: "submit",
+              disabled: s,
+              className: `w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${s ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,
+              children: [
+                e.jsxs("span", {
+                  className:
+                    "relative z-10 flex justify-center items-center gap-2",
+                  children: [
+                    s
+                      ? e.jsx("span", {
+                          className:
+                            "animate-spin border-2 border-t-transparent border-white w-5 h-5 rounded-full",
+                        })
+                      : e.jsx(_e, { className: "w-5 h-5" }),
+                    s ? "Signing up..." : "SIGN UP",
+                  ],
+                }),
+                e.jsx("span", {
+                  className:
+                    "absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-all duration-700 group-hover:left-[100%]",
+                }),
+              ],
+            }),
+            e.jsxs("div", {
+              className: "flex items-center my-6",
+              children: [
+                e.jsx("div", {
+                  className:
+                    "flex-grow h-px bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent",
+                }),
+                e.jsx("span", {
+                  className:
+                    "mx-4 text-xs text-gray-500 uppercase tracking-widest font-semibold",
+                  children: "Or Sign up with",
+                }),
+                e.jsx("div", {
+                  className:
+                    "flex-grow h-px bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent",
+                }),
+              ],
+            }),
+            e.jsx("div", {
+              className: "flex gap-3",
+              children: [
+                { name: "Google", icon: e.jsx(Ge, {}), id: "google" },
+                { name: "GitHub", icon: e.jsx(Oe, {}), id: "github" },
+              ].map(({ name: f, icon: m, id: b }) =>
+                e.jsxs(
+                  "button",
+                  {
+                    onClick: () => u(b),
+                    type: "button",
+                    className:
+                      "flex-1 p-3 border border-indigo-400/40 rounded-xl bg-black/30 text-sm text-gray-200 font-semibold flex items-center justify-center gap-2 transition hover:bg-indigo-400/10 hover:border-indigo-400 hover:scale-[1.02] hover:shadow-lg",
+                    children: [
+                      m,
+                      e.jsx("span", {
+                        className: "hidden sm:inline",
+                        children: f,
+                      }),
+                    ],
+                  },
+                  b,
+                ),
+              ),
+            }),
+            e.jsx("div", {
+              className: "text-center text-sm text-blue-400 cursor-pointer",
+              onClick: () => i("/login"),
+              children: "have an account? Sign In",
+            }),
+          ],
+        }),
+      }),
+    });
+  },
+  js = () => {
+    const t = Z(),
+      s = new URLSearchParams(window.location.search).get("next");
+    return e.jsxs("div", {
+      className:
+        "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
+      children: [
+        e.jsx("div", {
+          className:
+            "absolute w-[400px] h-[400px] bg-cyan-500/20 blur-3xl rounded-full -top-20 -left-20 animate-pulse",
+        }),
+        e.jsxs("div", {
+          className:
+            "relative z-10 max-w-md w-full mx-auto p-8 rounded-3xl border border-cyan-400/30 backdrop-blur-2xl bg-white/5 shadow-2xl text-center animate-fadeIn",
+          children: [
+            e.jsx("div", {
+              className: "flex justify-center mb-6",
+              children: e.jsx("div", {
+                className:
+                  "p-6 bg-cyan-500/20 rounded-full border border-cyan-400/30 shadow-xl animate-float",
+                children: e.jsx(ot, { className: "w-12 h-12 text-cyan-400" }),
+              }),
+            }),
+            e.jsx("h1", {
+              className:
+                "text-2xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent mb-2",
+              children: "Check Your Mail",
+            }),
+            e.jsx("p", {
+              className: "text-gray-300 text-sm mb-6",
+              children:
+                "We’ve sent a confirmation link to your registered email address. Please check your inbox and click on the link to verify your account.",
+            }),
+            e.jsxs("div", {
+              className: "flex flex-col sm:flex-row gap-3",
+              children: [
+                e.jsxs("button", {
+                  onClick: () =>
+                    window.open("https://mail.google.com", "_blank"),
+                  className:
+                    "flex items-center justify-center gap-2 w-full p-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 font-semibold",
+                  children: [
+                    e.jsx(Ue, { className: "w-5 h-5" }),
+                    "Open Mail App",
+                  ],
+                }),
+                e.jsxs("button", {
+                  onClick: () => t(`/login${s ? `?next=${s}` : ""}`),
+                  className:
+                    "flex items-center justify-center gap-2 w-full p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-cyan-400/30 transition-all duration-300 font-semibold",
+                  children: [
+                    e.jsx(je, { className: "w-5 h-5" }),
+                    "Back to Login",
+                  ],
+                }),
+              ],
+            }),
+            e.jsxs("p", {
+              className: "text-xs text-gray-400 mt-6",
+              children: [
+                "Didn’t get it? Check spam folder or ",
+                e.jsx("button", {
+                  onClick: () => t("https://support.ajayos.in"),
+                  className:
+                    "text-cyan-400 hover:text-cyan-300 underline cursor-pointer",
+                  children: "contact Support",
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    });
+  },
+  Ns = () => {
+    const t = Z(),
+      a = new URLSearchParams(window.location.search),
+      s = a.get("token"),
+      n = a.get("next"),
+      [r, o] = c.useState({ password: "", confirm: "" }),
+      [l, d] = c.useState(""),
+      [i, p] = c.useState(!1),
+      [u, h] = c.useState(""),
+      [w, f] = c.useState({ type: "", text: "" }),
+      [m, b] = c.useState(!1);
+    c.useEffect(() => {
+      try {
+        if (s) {
+          const g = JSON.parse(atob(s));
+          g.email
+            ? d(g.email)
+            : (h("Invalid token data. Please check your link."),
+              t(`/login${n ? `?next=${n}` : ""}`));
+        }
+      } catch (g) {
+        console.error("Invalid base64 data");
+      }
+    }, [s, t, n]);
+    const y = async (g) => {
+        if (
+          (g.preventDefault(),
+          h(""),
+          f({ type: "", text: "" }),
+          r.password.length < 6)
+        ) {
+          h("Password must be at least 6 characters long.");
+          return;
+        }
+        if (r.password !== r.confirm) {
+          h("Passwords do not match!");
+          return;
+        }
+        b(!0);
+        try {
+          const { message: v, error: j } = await re.post(
+            "/auth/account/verify-email",
+            { data: btoa(JSON.stringify({ email: l, password: r.password })) },
+          );
+          j
+            ? h({
+                type: "error",
+                text: v || "⚠️ Something went wrong. Try again!",
+              })
+            : (f({ type: "success", text: "✅ Password set successfully!" }),
+              setTimeout(() => {
+                t(`/login${n ? `?next=${n}` : ""}`);
+              }, 2e3));
+        } catch (v) {
+          f({ type: "error", text: "⚠️ Something went wrong. Try again!" });
+        } finally {
+          b(!1);
+        }
+      },
+      x =
+        "peer w-full p-3 bg-black/30 border rounded-xl text-white placeholder-transparent focus:ring-4 focus:outline-none transition";
+    return e.jsx("div", {
+      className:
+        "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
+      children: e.jsxs("div", {
+        className:
+          "w-full max-w-md backdrop-blur-2xl bg-white/5 border border-cyan-400/30 rounded-3xl shadow-2xl p-8",
+        style: {
+          boxShadow:
+            "0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)",
+        },
+        children: [
+          e.jsxs("button", {
+            onClick: () => t(-1),
+            className:
+              "flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-6 transition",
+            children: [
+              e.jsx(je, { className: "w-4 h-4" }),
+              e.jsx("span", { children: "Back" }),
+            ],
+          }),
+          e.jsx("h2", {
+            className: "text-2xl font-bold text-white text-center mb-6",
+            children: "🔐 Set Your Password",
+          }),
+          e.jsxs("form", {
+            className: "space-y-6",
+            onSubmit: y,
+            children: [
+              e.jsxs("div", {
+                className: "relative",
+                children: [
+                  e.jsx(ze, {
+                    className:
+                      "absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5",
+                  }),
+                  e.jsx("input", {
+                    type: i ? "text" : "password",
+                    id: "password",
+                    required: !0,
+                    value: r.password,
+                    onChange: (g) =>
+                      o(Q(B({}, r), { password: g.target.value.trim() })),
+                    className: `${x} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30`,
+                    placeholder: "New Password",
+                  }),
+                  e.jsx("label", {
+                    htmlFor: "password",
+                    className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${r.password ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
+                    children: "New Password",
+                  }),
+                  e.jsx("button", {
+                    type: "button",
+                    onClick: () => p(!i),
+                    className:
+                      "absolute right-4 top-1/2 -translate-y-1/2 transition hover:scale-125",
+                    children: i ? "🙉" : "🙈",
+                  }),
+                ],
+              }),
+              e.jsxs("div", {
+                className: "relative",
+                children: [
+                  e.jsx(ze, {
+                    className:
+                      "absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5",
+                  }),
+                  e.jsx("input", {
+                    type: i ? "text" : "password",
+                    id: "confirm",
+                    required: !0,
+                    value: r.confirm,
+                    onChange: (g) =>
+                      o(Q(B({}, r), { confirm: g.target.value.trim() })),
+                    className: `${x} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30`,
+                    placeholder: "Confirm Password",
+                  }),
+                  e.jsx("label", {
+                    htmlFor: "confirm",
+                    className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${r.confirm ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
+                    children: "Confirm Password",
+                  }),
+                ],
+              }),
+              u &&
+                e.jsx("p", {
+                  className:
+                    "text-xs text-red-400 bg-red-900/20 p-2 rounded-lg border border-red-500/30",
+                  children: u,
+                }),
+              w.text &&
+                e.jsx("div", {
+                  className: `p-3 text-sm border rounded-xl ${w.type === "success" ? "text-green-400 bg-green-900/20 border-green-500/30 animate-bounce" : "text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,
+                  children: w.text,
+                }),
+              e.jsxs("button", {
+                type: "submit",
+                disabled: m,
+                className: `w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${m ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,
+                children: [
+                  e.jsxs("span", {
+                    className:
+                      "relative z-10 flex justify-center items-center gap-2",
+                    children: [
+                      m
+                        ? e.jsx("span", {
+                            className:
+                              "animate-spin border-2 border-t-transparent border-white w-5 h-5 rounded-full",
+                          })
+                        : e.jsx(Ue, { className: "w-5 h-5" }),
+                      m ? "Setting Password..." : "SET PASSWORD",
+                    ],
+                  }),
+                  e.jsx("span", {
+                    className:
+                      "absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-all duration-700 group-hover:left-[100%]",
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      }),
+    });
+  },
+  Ss = () => {
+    const [t, a] = c.useState(""),
+      [s, n] = c.useState(!1),
+      [r, o] = c.useState({ type: "", text: "" }),
+      l = Z(),
+      i = new URLSearchParams(window.location.search).get("next"),
+      p = async (u) => {
+        u.preventDefault(), o({ type: "", text: "" }), n(!0);
+        try {
+          const h = btoa(JSON.stringify({ email: t })),
+            { code: w, message: f } = await re.get(
+              `/auth/forgot?data=${h}${i ? `&next=${i}` : ""}`,
+            );
+          switch (w) {
+            case "EMAIL_NOT_FOUND":
+              o({ type: "error", text: "❌ Email not found." });
+              break;
+            case "RESET_LINK_SENT":
+              o({ type: "success", text: "✅ Reset link sent to your email!" });
+              break;
+            default:
+              o({
+                type: "error",
+                text: f || "⚠️ Something went wrong. Try again later.",
+              });
+          }
+        } catch (h) {
+          console.error(h),
+            o({
+              type: "error",
+              text: "🚨 Network error: Unable to reach the server.",
+            });
+        } finally {
+          n(!1);
+        }
+      };
+    return e.jsx("div", {
+      className:
+        "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
+      children: e.jsx("div", {
+        className:
+          "w-full max-w-md backdrop-blur-2xl bg-white/5 border border-cyan-400/30 rounded-3xl shadow-2xl p-8",
+        style: {
+          boxShadow:
+            "0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)",
+        },
+        children: e.jsxs("form", {
+          className: "space-y-6",
+          onSubmit: p,
+          children: [
+            e.jsx("h2", {
+              className: "text-center text-2xl font-bold text-cyan-300 mb-2",
+              children: "Forgot Password",
+            }),
+            e.jsx("p", {
+              className: "text-center text-sm text-gray-400 mb-4",
+              children:
+                "Enter your registered email address and we’ll send you a reset link.",
+            }),
+            e.jsxs("div", {
+              className: "relative",
+              children: [
+                e.jsx(ot, {
+                  className:
+                    "absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5",
+                }),
+                e.jsx("input", {
+                  type: "email",
+                  id: "email",
+                  required: !0,
+                  value: t,
+                  onChange: (u) => a(u.target.value.trim()),
+                  className:
+                    "peer w-full p-3 bg-black/30 border rounded-xl text-white placeholder-transparent pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-4 focus:ring-cyan-500/30 focus:outline-none transition",
+                  placeholder: "Email address",
+                }),
+                e.jsx("label", {
+                  htmlFor: "email",
+                  className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:-translate-y-full peer-focus:text-xs peer-focus:text-cyan-300"}`,
+                  children: "Email address",
+                }),
+              ],
+            }),
+            r.text &&
+              e.jsx("div", {
+                className: `p-3 text-sm border rounded-xl ${r.type === "success" ? "text-green-400 bg-green-900/20 border-green-500/30 animate-bounce" : "text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,
+                children: r.text,
+              }),
+            e.jsxs("button", {
+              type: "submit",
+              disabled: s,
+              className: `w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${s ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,
+              children: [
+                e.jsxs("span", {
+                  className:
+                    "relative z-10 flex justify-center items-center gap-2",
+                  children: [
+                    s
+                      ? e.jsx("span", {
+                          className:
+                            "animate-spin border-2 border-t-transparent border-white w-5 h-5 rounded-full",
+                        })
+                      : e.jsx(Ue, { className: "w-5 h-5" }),
+                    s ? "Sending..." : "SEND RESET LINK",
+                  ],
+                }),
+                e.jsx("span", {
+                  className:
+                    "absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-all duration-700 group-hover:left-[100%]",
+                }),
+              ],
+            }),
+            e.jsxs("button", {
+              type: "button",
+              onClick: () => l(`/login${i ? `?next=${i}` : ""}`),
+              className:
+                "w-full flex items-center justify-center gap-2 p-3 border border-indigo-400/40 rounded-xl bg-black/30 text-sm text-gray-300 font-semibold transition hover:bg-indigo-400/10 hover:border-indigo-400 hover:scale-[1.02] hover:shadow-lg",
+              children: [
+                e.jsx(je, { className: "w-4 h-4 text-indigo-300" }),
+                "Back to Login",
+              ],
+            }),
+          ],
+        }),
+      }),
+    });
+  },
+  ks = () => {
+    const t = Z();
+    return e.jsxs("div", {
+      className:
+        "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
+      children: [
+        e.jsx("div", {
+          className:
+            "absolute w-[450px] h-[450px] bg-cyan-500/20 blur-3xl rounded-full -top-20 -left-20 animate-pulse",
+        }),
+        e.jsx("div", {
+          className:
+            "absolute w-[400px] h-[400px] bg-indigo-500/20 blur-3xl rounded-full -bottom-20 -right-20 animate-pulse",
+        }),
+        e.jsxs("div", {
+          className:
+            "relative z-10 text-center px-8 py-10 max-w-md w-full bg-white/5 border border-cyan-400/30 backdrop-blur-2xl rounded-3xl shadow-2xl animate-fadeIn",
+          children: [
+            e.jsx("h1", {
+              className:
+                "text-[6rem] sm:text-[8rem] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-cyan-400 leading-none mb-4 animate-glow",
+              children: "404",
+            }),
+            e.jsx("h2", {
+              className: "text-2xl font-bold text-cyan-300 mb-2",
+              children: "Page Not Found",
+            }),
+            e.jsx("p", {
+              className: "text-gray-400 text-sm mb-8",
+              children:
+                "Oops! The page you’re looking for doesn’t exist or has been moved.",
+            }),
+            e.jsxs("div", {
+              className: "flex flex-col sm:flex-row gap-3 justify-center",
+              children: [
+                e.jsxs("button", {
+                  onClick: () => t("/"),
+                  className:
+                    "flex items-center justify-center gap-2 w-full sm:w-auto p-3 px-6 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.03] hover:shadow-xl transition-all duration-300 font-semibold",
+                  children: [e.jsx(_e, { className: "w-5 h-5" }), "Go Home"],
+                }),
+                e.jsxs("button", {
+                  onClick: () => t(-1),
+                  className:
+                    "flex items-center justify-center gap-2 w-full sm:w-auto p-3 px-6 rounded-xl border border-cyan-400/40 bg-white/10 hover:bg-white/20 transition-all duration-300 font-semibold",
+                  children: [e.jsx(je, { className: "w-5 h-5" }), "Go Back"],
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    });
+  },
+  Cs = () =>
+    e.jsxs("div", {
+      className:
+        "relative w-72 h-72 sm:w-96 sm:h-96 bg-white/10 rounded-3xl backdrop-blur-md border border-white/10 overflow-hidden",
+      children: [
+        e.jsx("div", {
+          className:
+            "absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer",
+        }),
+        e.jsxs("div", {
+          className:
+            "flex flex-col items-center justify-center h-full text-gray-400",
+          children: [
+            e.jsx("div", {
+              className:
+                "w-16 h-16 rounded-full bg-white/10 mb-6 animate-pulse",
+            }),
+            e.jsx("div", {
+              className: "w-48 h-5 rounded bg-white/10 mb-3 animate-pulse",
+            }),
+            e.jsx("div", {
+              className: "w-32 h-4 rounded bg-white/10 animate-pulse",
+            }),
+          ],
+        }),
+      ],
+    }),
+  Ms = () => {
+    const [t, a] = c.useState("Initializing Google login..."),
+      [s, n] = c.useState(!0),
+      [r, o] = c.useState(null),
+      [l, d] = c.useState("text-gray-300"),
+      i = Z(),
+      p = new URLSearchParams(window.location.search),
+      u = p.get("next");
+    return (
+      c.useEffect(() => {
+        const h = p.get("code"),
+          w =
+            "818711819823-segq27qkuatd2d033nethk4ldd8hjp3t.apps.googleusercontent.com",
+          f = `${window.location.origin}/oauth/google`;
+        if (h)
+          o(h),
+            a("🔄 Verifying Google login..."),
+            n(!0),
+            (async () => {
+              try {
+                const m = btoa(JSON.stringify({ code: h })),
+                  { code: b, message: y } = await re.get(
+                    `/auth/oauth/google?data=${m}`,
+                  );
+                b === "OAUTH_SUCCESS"
+                  ? (a("✅ Login successful! Redirecting..."),
+                    d("text-green-400"),
+                    setTimeout(
+                      () =>
+                        (window.location.href =
+                          u || "https://dashboard.ajayos.in/"),
+                      1200,
+                    ))
+                  : (a(y || "❌ Verification failed. Please try again."),
+                    d("text-red-400"));
+              } catch (m) {
+                console.error(m),
+                  a("🚨 Server error while verifying your account."),
+                  d("text-red-400");
+              } finally {
+                n(!1);
+              }
+            })();
+        else {
+          const m = new URL("https://accounts.google.com/o/oauth2/v2/auth");
+          m.searchParams.append("client_id", w),
+            m.searchParams.append("redirect_uri", f),
+            m.searchParams.append("response_type", "code"),
+            m.searchParams.append("scope", "profile email"),
+            m.searchParams.append("access_type", "offline"),
+            m.searchParams.append("prompt", "consent"),
+            u && m.searchParams.append("state", u),
+            a("Opening Google login..."),
+            n(!0),
+            (window.location.href = m.toString());
+        }
+      }, [u, p]),
+      e.jsx("div", {
+        className:
+          "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
+        children: e.jsx("div", {
+          className:
+            "w-full max-w-md backdrop-blur-2xl bg-white/5 border border-cyan-400/30 rounded-3xl shadow-2xl p-8",
+          style: {
+            boxShadow:
+              "0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)",
+          },
+          children: e.jsxs("div", {
+            className: "flex flex-col items-center justify-center space-y-6",
+            children: [
+              e.jsx(Ge, { className: "w-12 h-12 text-red-400" }),
+              e.jsx("h2", {
+                className: "text-xl font-semibold tracking-wide",
+                children: "Google Login",
+              }),
+              e.jsx("p", {
+                className: `text-sm text-center ${l}`,
+                children: t,
+              }),
+              r &&
+                e.jsxs("div", {
+                  className:
+                    "text-xs text-gray-400 break-all border border-cyan-400/20 rounded-md p-2 w-full mt-2 bg-black/20",
+                  children: [e.jsx("strong", { children: "Code:" }), " ", r],
+                }),
+              s &&
+                e.jsx("div", {
+                  className:
+                    "w-10 h-10 border-4 border-t-transparent border-cyan-400 rounded-full animate-spin mt-4",
+                }),
+              !s &&
+                e.jsx("button", {
+                  onClick: () => i("/login"),
+                  className:
+                    "mt-4 px-5 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 transition text-white text-sm",
+                  children: "Back to Login",
+                }),
+            ],
+          }),
+        }),
+      })
+    );
+  },
+  Es = () => {
+    const [t, a] = c.useState("Initializing GitHub login..."),
+      [s, n] = c.useState(!0),
+      [r, o] = c.useState(null),
+      [l, d] = c.useState("text-gray-300"),
+      i = Z(),
+      p = new URLSearchParams(window.location.search),
+      u = p.get("next");
+    return (
+      c.useEffect(() => {
+        const h = p.get("code"),
+          w = "Ov23lizrjD3wtrFFibTm",
+          f = `${window.location.origin}/oauth/github`;
+        if (h)
+          o(h),
+            a("🔄 Verifying GitHub login..."),
+            n(!0),
+            (async () => {
+              try {
+                const m = btoa(JSON.stringify({ code: h })),
+                  { code: b, message: y } = await re.get(
+                    `/auth/oauth/github?data=${m}`,
+                  );
+                b === "OAUTH_SUCCESS"
+                  ? (a("✅ Login successful! Redirecting..."),
+                    d("text-green-400"),
+                    setTimeout(
+                      () =>
+                        (window.location.href =
+                          u || "https://dashboard.ajayos.in/"),
+                      1200,
+                    ))
+                  : (a(y || "❌ Verification failed. Please try again."),
+                    d("text-red-400"));
+              } catch (m) {
+                console.error(m),
+                  a("🚨 Server error while verifying your account."),
+                  d("text-red-400");
+              } finally {
+                n(!1);
+              }
+            })();
+        else {
+          const m = new URL("https://github.com/login/oauth/authorize");
+          m.searchParams.append("client_id", w),
+            m.searchParams.append("redirect_uri", f),
+            m.searchParams.append("scope", "read:user user:email"),
+            u && m.searchParams.append("state", u),
+            a("Opening GitHub login..."),
+            n(!0),
+            (window.location.href = m.toString());
+        }
+      }, [u, p]),
+      e.jsx("div", {
+        className:
+          "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
+        children: e.jsx("div", {
+          className:
+            "w-full max-w-md backdrop-blur-2xl bg-white/5 border border-gray-500/30 rounded-3xl shadow-2xl p-8",
+          style: {
+            boxShadow:
+              "0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)",
+          },
+          children: e.jsxs("div", {
+            className: "flex flex-col items-center justify-center space-y-6",
+            children: [
+              e.jsx(Oe, { className: "w-12 h-12 text-white" }),
+              e.jsx("h2", {
+                className: "text-xl font-semibold tracking-wide",
+                children: "GitHub Login",
+              }),
+              e.jsx("p", {
+                className: `text-sm text-center ${l}`,
+                children: t,
+              }),
+              r &&
+                e.jsxs("div", {
+                  className:
+                    "text-xs text-gray-400 break-all border border-gray-500/20 rounded-md p-2 w-full mt-2 bg-black/20",
+                  children: [e.jsx("strong", { children: "Code:" }), " ", r],
+                }),
+              s &&
+                e.jsx("div", {
+                  className:
+                    "w-10 h-10 border-4 border-t-transparent border-gray-400 rounded-full animate-spin mt-4",
+                }),
+              !s &&
+                e.jsx("button", {
+                  onClick: () => i("/login"),
+                  className:
+                    "mt-4 px-5 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition text-white text-sm",
+                  children: "Back to Login",
+                }),
+            ],
+          }),
+        }),
+      })
+    );
+  },
+  As = () => {
+    const [t, a] = c.useState("🔐 Ready for system authentication..."),
+      [s, n] = c.useState(!0),
+      [r, o] = c.useState("text-gray-300"),
+      l = Z(),
+      i = new URLSearchParams(window.location.search).get("next");
+    return (
+      c.useEffect(() => {
+        (async () => {
+          var p;
+          try {
+            a("🔑 Initializing system passkey authentication..."), n(!0);
+            const { code: u, message: h } = await re.get(
+              "/auth/passkey/challenge",
+            );
+            if (u !== "SUCCESS") {
+              a(h || "❌ Could not start passkey authentication."),
+                o("text-red-400"),
+                n(!1);
+              return;
+            }
+            const w = h;
+            if (!w || !w.challenge) {
+              a("❌ Could not start passkey authentication."),
+                o("text-red-400"),
+                n(!1);
+              return;
+            }
+            const f = (j) => Uint8Array.from(atob(j), (E) => E.charCodeAt(0)),
+              m = {
+                challenge: f(w.challenge),
+                allowCredentials:
+                  ((p = w.allowCredentials) == null
+                    ? void 0
+                    : p.map((j) => Q(B({}, j), { id: f(j.id) }))) || [],
+                timeout: 6e4,
+                userVerification: "required",
+                rpId: window.location.hostname,
+              },
+              b = await navigator.credentials.get({ publicKey: m });
+            a("🔄 Verifying with secure enclave..."), n(!0);
+            const y = {
+                id: b.id,
+                type: b.type,
+                rawId: btoa(String.fromCharCode(...new Uint8Array(b.rawId))),
+                response: {
+                  clientDataJSON: btoa(
+                    String.fromCharCode(
+                      ...new Uint8Array(b.response.clientDataJSON),
+                    ),
+                  ),
+                  authenticatorData: btoa(
+                    String.fromCharCode(
+                      ...new Uint8Array(b.response.authenticatorData),
+                    ),
+                  ),
+                  signature: btoa(
+                    String.fromCharCode(
+                      ...new Uint8Array(b.response.signature),
+                    ),
+                  ),
+                  userHandle: b.response.userHandle
+                    ? btoa(
+                        String.fromCharCode(
+                          ...new Uint8Array(b.response.userHandle),
+                        ),
+                      )
+                    : null,
+                },
+              },
+              x = btoa(JSON.stringify(y)),
+              { code: g, message: v } = await re.post(
+                `/auth/passkey/verify?data=${x}`,
+              );
+            g === "PASSKEY_SUCCESS"
+              ? (a("✅ Verified! Welcome back."),
+                o("text-green-400"),
+                setTimeout(() => l(i || "/dashboard"), 1200))
+              : (a(v || "❌ Authentication failed."), o("text-red-400"));
+          } catch (u) {
+            console.error(u),
+              a("🚨 Passkey authentication cancelled or failed."),
+              o("text-red-400");
+          } finally {
+            n(!1);
+          }
+        })();
+      }, []),
+      e.jsx("div", {
+        className:
+          "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
+        children: e.jsx("div", {
+          className:
+            "w-full max-w-md backdrop-blur-2xl bg-white/5 border border-yellow-400/30 rounded-3xl shadow-2xl p-8",
+          style: {
+            boxShadow:
+              "0 50px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1)",
+          },
+          children: e.jsxs("div", {
+            className: "flex flex-col items-center justify-center space-y-6",
+            children: [
+              e.jsx(nt, { className: "w-12 h-12 text-yellow-400" }),
+              e.jsx("h2", {
+                className: "text-xl font-semibold tracking-wide",
+                children: "System Passkey",
+              }),
+              e.jsx("p", {
+                className: `text-sm text-center ${r}`,
+                children: t,
+              }),
+              s &&
+                e.jsx("div", {
+                  className:
+                    "w-10 h-10 border-4 border-t-transparent border-yellow-400 rounded-full animate-spin mt-4",
+                }),
+              !s &&
+                e.jsx("button", {
+                  onClick: () => l("/login"),
+                  className:
+                    "mt-4 px-5 py-2 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition text-white text-sm",
+                  children: "Back to Login",
+                }),
+            ],
+          }),
+        }),
+      })
+    );
+  },
+  Ie = [Xt, Kt, Jt, Qt, Zt, es],
+  Te = {
+    LOGIN: ys,
+    SIGNUP: vs,
+    CHECKMAIL: js,
+    SETPASSWORD: Ns,
+    FORGOT: Ss,
+    DEFAULT: ks,
+    LOADING: Cs,
+    GOOGLE: Ms,
+    GITHUB: Es,
+    PASSKEY: As,
+  };
+function ve() {
+  const [t, a] = c.useState(() => Math.floor(Math.random() * Ie.length)),
+    [s, n] = c.useState("LOADING"),
+    r = Ie[t],
+    o = Te[s],
+    l = (i) => {
+      const p = i.split("/").filter(Boolean),
+        u = (p[0] || "").toUpperCase(),
+        h = (p[1] || "").toUpperCase();
+      return u ? (Te[u] ? u : u === "OAUTH" && Te[h] ? h : "DEFAULT") : "LOGIN";
+    };
+  c.useEffect(() => {
+    n(l(window.location.pathname));
+  }, []),
+    c.useEffect(() => {
+      const i = () => {
+        n(l(window.location.pathname));
+      };
+      window.addEventListener("popstate", i);
+      const p = window.history.pushState,
+        u = window.history.replaceState;
+      return (
+        (window.history.pushState = function (...h) {
+          p.apply(window.history, h), i();
+        }),
+        (window.history.replaceState = function (...h) {
+          u.apply(window.history, h), i();
+        }),
+        () => {
+          window.removeEventListener("popstate", i),
+            (window.history.pushState = p),
+            (window.history.replaceState = u);
+        }
+      );
+    }, []);
+  const d = () => {
+    a((i) => (i + 1) % Ie.length);
+  };
+  return e.jsx("div", {
+    className: "relative w-screen h-screen overflow-hidden bg-black text-white",
+    children: e.jsxs("div", {
+      className:
+        "relative w-screen h-screen overflow-hidden text-white animate-fade-in-slow",
+      children: [
+        e.jsx(
+          "div",
+          {
+            className:
+              "absolute inset-0 z-0 transition-opacity duration-700 ease-in-out opacity-100",
+            children: e.jsx(r, {}),
+          },
+          t,
+        ),
+        e.jsxs("button", {
+          onClick: d,
+          className:
+            "absolute top-5 right-6 z-20 px-4 py-2 bg-white/10 backdrop-blur-md hover:bg-white/20 text-sm rounded-md border border-white/20 transition-all duration-200",
+          children: [t + 1, " ✨"],
+        }),
+        e.jsx("div", {
+          className: "absolute inset-0 flex items-center justify-center z-10",
+          children: e.jsx("div", {
+            className: "translate-y-7",
+            children: e.jsx(o, {}),
+          }),
+        }),
+        e.jsxs("footer", {
+          className:
+            "absolute bottom-3 w-full flex items-center justify-between px-6 text-xs text-gray-300 z-20",
+          children: [
+            e.jsxs("span", {
+              children: [
+                "© ",
+                new Date().getFullYear(),
+                " AOS All rights reserved.",
+              ],
+            }),
+            e.jsxs("span", {
+              children: [
+                "Code by ",
+                e.jsx("span", {
+                  className: "font-semibold text-white",
+                  children: "Ajay O S",
+                }),
+                e.jsx("span", { className: "text-pink-400", children: "♥" }),
+              ],
+            }),
+          ],
+        }),
+        e.jsx("style", {
+          children: `
           @keyframes shimmer {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
@@ -29,7 +2957,251 @@ var Nt=Object.defineProperty,St=Object.defineProperties;var kt=Object.getOwnProp
           .animate-fade-in-slow {
             animation: fade-in 1.2s ease-out;
           }
-        `})]})})}const at=[{path:"/oauth/*",element:e.jsx(ve,{})},{path:"*",element:e.jsx(ve,{})}],Ps=[{path:"/oauth/*",element:e.jsx(ve,{})},{path:"*",element:e.jsx(ve,{})},{path:"/about",element:e.jsx("h1",{children:"About Page v1.0.0"})}];function Rs(){var t=H.get("appVersion");t=t.replace(/\./g,"_");const s={"1_0_0":at,"1_1_0":Ps}[t]||at;return Et(s)}const Is=()=>{const[t,a]=c.useState(60),[s,n]=c.useState(1);return c.useEffect(()=>{const r=setInterval(()=>{a(o=>o>0?o-1:60),n(Math.random()*.5+.7)},1e3);return()=>clearInterval(r)},[]),e.jsxs("div",{className:"fixed inset-0 w-screen h-screen overflow-hidden flex flex-col justify-center items-center bg-slate-950 text-white",children:[e.jsxs("div",{className:"absolute inset-0",children:[e.jsx("div",{className:"absolute inset-0 bg-gradient-to-br from-slate-950 via-red-950/20 to-slate-950"}),e.jsx("div",{className:"absolute inset-0 bg-gradient-to-r from-red-600/30 via-transparent to-orange-600/30",style:{opacity:s}})]}),e.jsxs("div",{className:"absolute inset-0 overflow-hidden pointer-events-none",children:[e.jsx("div",{className:"absolute -top-40 -left-40 w-96 h-96 bg-red-500 rounded-full mix-blend-screen blur-3xl opacity-20 animate-float"}),e.jsx("div",{className:"absolute top-1/4 -right-32 w-80 h-80 bg-orange-500 rounded-full mix-blend-screen blur-3xl opacity-15 animate-float-delayed"}),e.jsx("div",{className:"absolute -bottom-32 left-1/3 w-96 h-96 bg-red-600 rounded-full mix-blend-screen blur-3xl opacity-20 animate-float-delayed-2"})]}),e.jsxs("div",{className:"relative z-50 w-full max-w-xl px-6 py-12 flex flex-col items-center justify-center",children:[e.jsxs("div",{className:"mb-8 text-center animate-in fade-in duration-700",children:[e.jsx("div",{className:"text-7xl mb-4 animate-pulse-custom",children:"🚫"}),e.jsx("h1",{className:"text-5xl font-black mb-2 bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent",children:"ACCESS DENIED"}),e.jsx("p",{className:"text-red-300 text-sm font-mono tracking-widest uppercase",children:"Developer Tools Detected"})]}),e.jsxs("div",{className:"flex gap-3 justify-center mb-8 flex-wrap animate-in slide-in-from-bottom duration-700 delay-100",children:[e.jsx("div",{className:"px-4 py-2 bg-red-500/20 border border-red-500/50 rounded-full backdrop-blur",children:e.jsx("span",{className:"text-red-300 font-bold text-sm",children:"⚠️ SECURITY ALERT"})}),e.jsx("div",{className:"px-4 py-2 bg-orange-500/20 border border-orange-500/50 rounded-full backdrop-blur",children:e.jsx("span",{className:"text-orange-300 font-bold text-sm",children:"🔒 BLOCKED"})})]}),e.jsxs("div",{className:"w-full mb-8 p-6 bg-gradient-to-br from-red-950/40 to-orange-950/30 border border-red-500/30 rounded-xl backdrop-blur-lg shadow-2xl animate-in zoom-in duration-700 delay-200",children:[e.jsx("p",{className:"text-center text-gray-200 leading-relaxed mb-3",children:"Inspector tools have been detected on this protected page. This action is not permitted."}),e.jsxs("div",{className:"flex items-center justify-center gap-2 text-sm text-red-400 font-mono",children:[e.jsx("span",{className:"inline-block w-2 h-2 bg-red-500 rounded-full animate-pulse"}),"Closing in:"," ",e.jsxs("span",{className:"font-bold text-lg text-red-300",children:[t,"s"]})]})]}),e.jsxs("div",{className:"w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 animate-in slide-in-from-bottom duration-700 delay-300",children:[e.jsxs("button",{onClick:()=>window.location.reload(),className:"group relative px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl overflow-hidden",children:[e.jsx("div",{className:"absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"}),e.jsxs("span",{className:"relative flex items-center justify-center gap-2",children:[e.jsx("span",{className:"text-xl group-hover:animate-spin",style:{animationDuration:"0.8s"},children:"🔄"}),"Reload"]})]}),e.jsxs("a",{href:"https://terms.ajayos.in",target:"_blank",rel:"noopener noreferrer",className:"group relative px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl overflow-hidden",children:[e.jsx("div",{className:"absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"}),e.jsxs("span",{className:"relative flex items-center justify-center gap-2",children:[e.jsx("span",{className:"text-xl",children:"📋"}),"Terms & Conditions"]})]})]}),e.jsxs("div",{className:"w-full space-y-2 text-center text-xs text-gray-400 animate-in fade-in duration-700 delay-500",children:[e.jsxs("p",{className:"flex items-center justify-center gap-2",children:[e.jsx("span",{children:"💡"}),e.jsxs("span",{children:["Press"," ",e.jsx("span",{className:"font-mono font-bold text-gray-300",children:"F12"})," or"," ",e.jsx("span",{className:"font-mono font-bold text-gray-300",children:"Ctrl+Shift+I"})," ","to close Developer Tools"]})]}),e.jsxs("div",{className:"pt-2 border-t border-gray-700/50",children:[e.jsxs("p",{className:"text-gray-500",children:["Contact:"," ",e.jsx("span",{className:"text-gray-400 font-mono",children:"support@ajayos.in"})]}),e.jsx("p",{className:"text-gray-600",children:"© 2025 ajayos.in | Encrypted Connection"})]})]})]}),e.jsx("style",{children:`
+        `,
+        }),
+      ],
+    }),
+  });
+}
+const at = [
+    { path: "/oauth/*", element: e.jsx(ve, {}) },
+    { path: "*", element: e.jsx(ve, {}) },
+  ],
+  Ps = [
+    { path: "/oauth/*", element: e.jsx(ve, {}) },
+    { path: "*", element: e.jsx(ve, {}) },
+    { path: "/about", element: e.jsx("h1", { children: "About Page v1.0.0" }) },
+  ];
+function Rs() {
+  var t = H.get("appVersion");
+  t = t.replace(/\./g, "_");
+  const s = { "1_0_0": at, "1_1_0": Ps }[t] || at;
+  return Et(s);
+}
+const Is = () => {
+    const [t, a] = c.useState(60),
+      [s, n] = c.useState(1);
+    return (
+      c.useEffect(() => {
+        const r = setInterval(() => {
+          a((o) => (o > 0 ? o - 1 : 60)), n(Math.random() * 0.5 + 0.7);
+        }, 1e3);
+        return () => clearInterval(r);
+      }, []),
+      e.jsxs("div", {
+        className:
+          "fixed inset-0 w-screen h-screen overflow-hidden flex flex-col justify-center items-center bg-slate-950 text-white",
+        children: [
+          e.jsxs("div", {
+            className: "absolute inset-0",
+            children: [
+              e.jsx("div", {
+                className:
+                  "absolute inset-0 bg-gradient-to-br from-slate-950 via-red-950/20 to-slate-950",
+              }),
+              e.jsx("div", {
+                className:
+                  "absolute inset-0 bg-gradient-to-r from-red-600/30 via-transparent to-orange-600/30",
+                style: { opacity: s },
+              }),
+            ],
+          }),
+          e.jsxs("div", {
+            className: "absolute inset-0 overflow-hidden pointer-events-none",
+            children: [
+              e.jsx("div", {
+                className:
+                  "absolute -top-40 -left-40 w-96 h-96 bg-red-500 rounded-full mix-blend-screen blur-3xl opacity-20 animate-float",
+              }),
+              e.jsx("div", {
+                className:
+                  "absolute top-1/4 -right-32 w-80 h-80 bg-orange-500 rounded-full mix-blend-screen blur-3xl opacity-15 animate-float-delayed",
+              }),
+              e.jsx("div", {
+                className:
+                  "absolute -bottom-32 left-1/3 w-96 h-96 bg-red-600 rounded-full mix-blend-screen blur-3xl opacity-20 animate-float-delayed-2",
+              }),
+            ],
+          }),
+          e.jsxs("div", {
+            className:
+              "relative z-50 w-full max-w-xl px-6 py-12 flex flex-col items-center justify-center",
+            children: [
+              e.jsxs("div", {
+                className: "mb-8 text-center animate-in fade-in duration-700",
+                children: [
+                  e.jsx("div", {
+                    className: "text-7xl mb-4 animate-pulse-custom",
+                    children: "🚫",
+                  }),
+                  e.jsx("h1", {
+                    className:
+                      "text-5xl font-black mb-2 bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent",
+                    children: "ACCESS DENIED",
+                  }),
+                  e.jsx("p", {
+                    className:
+                      "text-red-300 text-sm font-mono tracking-widest uppercase",
+                    children: "Developer Tools Detected",
+                  }),
+                ],
+              }),
+              e.jsxs("div", {
+                className:
+                  "flex gap-3 justify-center mb-8 flex-wrap animate-in slide-in-from-bottom duration-700 delay-100",
+                children: [
+                  e.jsx("div", {
+                    className:
+                      "px-4 py-2 bg-red-500/20 border border-red-500/50 rounded-full backdrop-blur",
+                    children: e.jsx("span", {
+                      className: "text-red-300 font-bold text-sm",
+                      children: "⚠️ SECURITY ALERT",
+                    }),
+                  }),
+                  e.jsx("div", {
+                    className:
+                      "px-4 py-2 bg-orange-500/20 border border-orange-500/50 rounded-full backdrop-blur",
+                    children: e.jsx("span", {
+                      className: "text-orange-300 font-bold text-sm",
+                      children: "🔒 BLOCKED",
+                    }),
+                  }),
+                ],
+              }),
+              e.jsxs("div", {
+                className:
+                  "w-full mb-8 p-6 bg-gradient-to-br from-red-950/40 to-orange-950/30 border border-red-500/30 rounded-xl backdrop-blur-lg shadow-2xl animate-in zoom-in duration-700 delay-200",
+                children: [
+                  e.jsx("p", {
+                    className: "text-center text-gray-200 leading-relaxed mb-3",
+                    children:
+                      "Inspector tools have been detected on this protected page. This action is not permitted.",
+                  }),
+                  e.jsxs("div", {
+                    className:
+                      "flex items-center justify-center gap-2 text-sm text-red-400 font-mono",
+                    children: [
+                      e.jsx("span", {
+                        className:
+                          "inline-block w-2 h-2 bg-red-500 rounded-full animate-pulse",
+                      }),
+                      "Closing in:",
+                      " ",
+                      e.jsxs("span", {
+                        className: "font-bold text-lg text-red-300",
+                        children: [t, "s"],
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+              e.jsxs("div", {
+                className:
+                  "w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 animate-in slide-in-from-bottom duration-700 delay-300",
+                children: [
+                  e.jsxs("button", {
+                    onClick: () => window.location.reload(),
+                    className:
+                      "group relative px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl overflow-hidden",
+                    children: [
+                      e.jsx("div", {
+                        className:
+                          "absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+                      }),
+                      e.jsxs("span", {
+                        className:
+                          "relative flex items-center justify-center gap-2",
+                        children: [
+                          e.jsx("span", {
+                            className: "text-xl group-hover:animate-spin",
+                            style: { animationDuration: "0.8s" },
+                            children: "🔄",
+                          }),
+                          "Reload",
+                        ],
+                      }),
+                    ],
+                  }),
+                  e.jsxs("a", {
+                    href: "https://terms.ajayos.in",
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    className:
+                      "group relative px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl overflow-hidden",
+                    children: [
+                      e.jsx("div", {
+                        className:
+                          "absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+                      }),
+                      e.jsxs("span", {
+                        className:
+                          "relative flex items-center justify-center gap-2",
+                        children: [
+                          e.jsx("span", {
+                            className: "text-xl",
+                            children: "📋",
+                          }),
+                          "Terms & Conditions",
+                        ],
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+              e.jsxs("div", {
+                className:
+                  "w-full space-y-2 text-center text-xs text-gray-400 animate-in fade-in duration-700 delay-500",
+                children: [
+                  e.jsxs("p", {
+                    className: "flex items-center justify-center gap-2",
+                    children: [
+                      e.jsx("span", { children: "💡" }),
+                      e.jsxs("span", {
+                        children: [
+                          "Press",
+                          " ",
+                          e.jsx("span", {
+                            className: "font-mono font-bold text-gray-300",
+                            children: "F12",
+                          }),
+                          " or",
+                          " ",
+                          e.jsx("span", {
+                            className: "font-mono font-bold text-gray-300",
+                            children: "Ctrl+Shift+I",
+                          }),
+                          " ",
+                          "to close Developer Tools",
+                        ],
+                      }),
+                    ],
+                  }),
+                  e.jsxs("div", {
+                    className: "pt-2 border-t border-gray-700/50",
+                    children: [
+                      e.jsxs("p", {
+                        className: "text-gray-500",
+                        children: [
+                          "Contact:",
+                          " ",
+                          e.jsx("span", {
+                            className: "text-gray-400 font-mono",
+                            children: "support@ajayos.in",
+                          }),
+                        ],
+                      }),
+                      e.jsx("p", {
+                        className: "text-gray-600",
+                        children: "© 2025 ajayos.in | Encrypted Connection",
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          }),
+          e.jsx("style", {
+            children: `
         @keyframes float {
           0%, 100% { transform: translateY(0px) translateX(0px); }
           50% { transform: translateY(-30px) translateX(20px); }
@@ -50,7 +3222,138 @@ var Nt=Object.defineProperty,St=Object.defineProperties;var kt=Object.getOwnProp
         .animate-float-delayed { animation: float-delayed 8s ease-in-out infinite; }
         .animate-float-delayed-2 { animation: float-delayed-2 8s ease-in-out infinite; }
         .animate-pulse-custom { animation: pulse-custom 3s ease-in-out infinite; }
-      `})]})},rt=({children:t})=>{const[a,s]=c.useState(0);return c.useEffect(()=>O.on(U.API_LOADING,({inFlight:r})=>s(r||0)),[]),e.jsxs("div",{className:"relative",children:[t,a>0&&e.jsxs("div",{className:"fixed inset-0 z-50 flex flex-col items-center justify-center",children:[e.jsx("div",{className:"absolute inset-0 bg-black/40 backdrop-blur-md"}),e.jsx("div",{className:"absolute inset-0 bg-gradient-to-br from-slate-900/10 via-purple-900/10 to-slate-900/10"}),e.jsx("div",{className:"absolute top-1/3 left-1/3 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob"}),e.jsx("div",{className:"absolute bottom-1/3 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob",style:{animationDelay:"2s"}}),e.jsx("div",{className:"absolute top-1/4 right-1/3 w-80 h-80 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-blob",style:{animationDelay:"4s"}}),e.jsxs("div",{className:"relative z-10 flex flex-col items-center gap-8 p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl",children:[e.jsxs("div",{className:"relative w-28 h-28",children:[e.jsx("div",{className:"absolute inset-0 rounded-full border-3 border-transparent border-t-purple-400 border-r-pink-400 animate-spin"}),e.jsx("div",{className:"absolute inset-3 rounded-full border-2 border-transparent border-b-pink-400 border-l-purple-400 animate-spin",style:{animationDirection:"reverse",animationDuration:"1.5s"}}),e.jsx("div",{className:"absolute inset-6 rounded-full border-2 border-transparent border-t-blue-300 border-r-purple-300 animate-spin",style:{animationDuration:"2s"}}),e.jsx("div",{className:"absolute inset-0 flex items-center justify-center",children:e.jsx(De,{className:"w-10 h-10 text-purple-300 drop-shadow-lg",fill:"currentColor"})})]}),e.jsxs("div",{className:"text-center space-y-2",children:[e.jsx("h2",{className:"text-lg font-semibold text-white drop-shadow-lg",children:"Processing"}),e.jsxs("div",{className:"flex items-center justify-center gap-2",children:[e.jsx("span",{className:"text-sm text-purple-200",children:"Running API"}),e.jsxs("span",{className:"inline-flex gap-1.5",children:[e.jsx("span",{className:"w-2 h-2 bg-purple-400 rounded-full animate-bounce",style:{animationDelay:"0s"}}),e.jsx("span",{className:"w-2 h-2 bg-pink-400 rounded-full animate-bounce",style:{animationDelay:"0.15s"}}),e.jsx("span",{className:"w-2 h-2 bg-blue-400 rounded-full animate-bounce",style:{animationDelay:"0.3s"}})]})]})]})]}),e.jsx("div",{className:"absolute bottom-12 z-10 w-48 h-1 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm border border-white/20",children:e.jsx("div",{className:"h-full bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 animate-pulse",style:{animation:"shimmer 2s infinite"}})})]}),e.jsx("style",{children:`
+      `,
+          }),
+        ],
+      })
+    );
+  },
+  rt = ({ children: t }) => {
+    const [a, s] = c.useState(0);
+    return (
+      c.useEffect(
+        () => O.on(U.API_LOADING, ({ inFlight: r }) => s(r || 0)),
+        [],
+      ),
+      e.jsxs("div", {
+        className: "relative",
+        children: [
+          t,
+          a > 0 &&
+            e.jsxs("div", {
+              className:
+                "fixed inset-0 z-50 flex flex-col items-center justify-center",
+              children: [
+                e.jsx("div", {
+                  className: "absolute inset-0 bg-black/40 backdrop-blur-md",
+                }),
+                e.jsx("div", {
+                  className:
+                    "absolute inset-0 bg-gradient-to-br from-slate-900/10 via-purple-900/10 to-slate-900/10",
+                }),
+                e.jsx("div", {
+                  className:
+                    "absolute top-1/3 left-1/3 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob",
+                }),
+                e.jsx("div", {
+                  className:
+                    "absolute bottom-1/3 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob",
+                  style: { animationDelay: "2s" },
+                }),
+                e.jsx("div", {
+                  className:
+                    "absolute top-1/4 right-1/3 w-80 h-80 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-blob",
+                  style: { animationDelay: "4s" },
+                }),
+                e.jsxs("div", {
+                  className:
+                    "relative z-10 flex flex-col items-center gap-8 p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl",
+                  children: [
+                    e.jsxs("div", {
+                      className: "relative w-28 h-28",
+                      children: [
+                        e.jsx("div", {
+                          className:
+                            "absolute inset-0 rounded-full border-3 border-transparent border-t-purple-400 border-r-pink-400 animate-spin",
+                        }),
+                        e.jsx("div", {
+                          className:
+                            "absolute inset-3 rounded-full border-2 border-transparent border-b-pink-400 border-l-purple-400 animate-spin",
+                          style: {
+                            animationDirection: "reverse",
+                            animationDuration: "1.5s",
+                          },
+                        }),
+                        e.jsx("div", {
+                          className:
+                            "absolute inset-6 rounded-full border-2 border-transparent border-t-blue-300 border-r-purple-300 animate-spin",
+                          style: { animationDuration: "2s" },
+                        }),
+                        e.jsx("div", {
+                          className:
+                            "absolute inset-0 flex items-center justify-center",
+                          children: e.jsx(De, {
+                            className:
+                              "w-10 h-10 text-purple-300 drop-shadow-lg",
+                            fill: "currentColor",
+                          }),
+                        }),
+                      ],
+                    }),
+                    e.jsxs("div", {
+                      className: "text-center space-y-2",
+                      children: [
+                        e.jsx("h2", {
+                          className:
+                            "text-lg font-semibold text-white drop-shadow-lg",
+                          children: "Processing",
+                        }),
+                        e.jsxs("div", {
+                          className: "flex items-center justify-center gap-2",
+                          children: [
+                            e.jsx("span", {
+                              className: "text-sm text-purple-200",
+                              children: "Running API",
+                            }),
+                            e.jsxs("span", {
+                              className: "inline-flex gap-1.5",
+                              children: [
+                                e.jsx("span", {
+                                  className:
+                                    "w-2 h-2 bg-purple-400 rounded-full animate-bounce",
+                                  style: { animationDelay: "0s" },
+                                }),
+                                e.jsx("span", {
+                                  className:
+                                    "w-2 h-2 bg-pink-400 rounded-full animate-bounce",
+                                  style: { animationDelay: "0.15s" },
+                                }),
+                                e.jsx("span", {
+                                  className:
+                                    "w-2 h-2 bg-blue-400 rounded-full animate-bounce",
+                                  style: { animationDelay: "0.3s" },
+                                }),
+                              ],
+                            }),
+                          ],
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+                e.jsx("div", {
+                  className:
+                    "absolute bottom-12 z-10 w-48 h-1 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm border border-white/20",
+                  children: e.jsx("div", {
+                    className:
+                      "h-full bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 animate-pulse",
+                    style: { animation: "shimmer 2s infinite" },
+                  }),
+                }),
+              ],
+            }),
+          e.jsx("style", {
+            children: `
         @keyframes blob {
           0%, 100% { transform: translate(0, 0) scale(1); }
           33% { transform: translate(40px, -60px) scale(1.1); }
@@ -62,7 +3365,455 @@ var Nt=Object.defineProperty,St=Object.defineProperties;var kt=Object.getOwnProp
           100% { width: 0%; }
         }
         .animate-blob { animation: blob 8s infinite; }
-      `})]})};function Ts({children:t}){var b,y;const[a,s]=c.useState(!1),[n,r]=c.useState(!1),[o,l]=c.useState("idle"),[d,i]=c.useState(0),[p,u]=c.useState(null),h=(x,g)=>{const v=x.split(".").map(Number),j=g.split(".").map(Number);for(let E=0;E<Math.max(v.length,j.length);E++){const D=v[E]||0,k=j[E]||0;if(D>k)return 1;if(D<k)return-1}return 0};c.useEffect(()=>{u(M.appVersion);const g=setTimeout(()=>{const v=H.get("appVersion")||M.appVersion,j=H.get("skippedVersion"),E=H.get("lastSkipDate"),D=Date.now(),k=1440*60*1e3;if(p&&h(p,v)>0){const S=!j||j!==p||!E||D-E>1*k;r(S)}H.get("appVersion")||H.set("appVersion",M.appVersion)},500);return()=>clearTimeout(g)},[p]);const w=()=>{H.set("skippedVersion",p),H.set("lastSkipDate",Date.now()),setTimeout(()=>{r(!1)},300)},f=()=>{l("checking"),i(0),setTimeout(()=>{l("downloading"),i(15)},1200);const x=setInterval(()=>{i(g=>g>=85?(clearInterval(x),85):g+Math.random()*20)},300);setTimeout(()=>{clearInterval(x),l("installing"),i(90)},3e3),setTimeout(()=>{i(100),l("complete")},4500),setTimeout(()=>{window.location.reload()},5500),H.remove("skippedVersion"),H.remove("lastSkipDate"),H.set("appVersion",p)};if(!n||!p)return t;const m=H.get("appVersion")||M.appVersion;return e.jsxs("div",{className:"w-full min-h-screen bg-gradient-to-br from-slate-950 via-purple-900 to-slate-950 flex items-center justify-center p-4 relative overflow-hidden",children:[e.jsxs("div",{className:"fixed inset-0 overflow-hidden pointer-events-none",children:[e.jsx("div",{className:"absolute top-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-blob"}),e.jsx("div",{className:"absolute bottom-0 left-0 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-blob",style:{animationDelay:"2s"}}),e.jsx("div",{className:"absolute top-1/2 left-1/2 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-blob",style:{animationDelay:"4s"}})]}),e.jsx("div",{className:"relative z-10 w-full max-w-sm sm:max-w-md",children:e.jsxs("div",{className:"bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl overflow-hidden hover:shadow-purple-500/20 hover:shadow-2xl transition-all duration-300 group",children:[e.jsx("div",{className:"relative h-28 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 border-b border-white/20 flex items-center justify-between px-6",children:e.jsxs("div",{className:"space-y-1",children:[e.jsxs("div",{className:"flex items-center gap-2",children:[e.jsx(At,{className:"w-5 h-5 text-yellow-300 animate-pulse"}),e.jsx("h1",{className:"text-2xl font-bold text-white drop-shadow-lg",children:o==="idle"?"Update Available":"Updating..."})]}),e.jsxs("p",{className:"text-purple-100 text-sm font-medium",children:[m," → ",p]})]})}),e.jsx("div",{className:"px-6 py-6 space-y-5",children:o==="idle"?e.jsxs(e.Fragment,{children:[e.jsx("p",{className:"text-slate-200 text-sm leading-relaxed text-center",children:"A major new version is available with exciting features, bug fixes, and performance improvements."}),e.jsxs("button",{onClick:()=>s(!0),className:"w-full flex items-center justify-between py-3 px-4 bg-gradient-to-r from-purple-500/30 to-pink-500/30 hover:from-purple-500/50 hover:to-pink-500/50 rounded-xl border border-purple-400/60 transition-all group hover:shadow-lg hover:shadow-purple-500/30 backdrop-blur-sm",children:[e.jsxs("span",{className:"font-semibold text-white text-sm",children:["What's New in v",p]}),e.jsx(Pt,{className:"w-4 h-4 text-purple-200 group-hover:rotate-180 transition-transform"})]}),e.jsxs("div",{className:"space-y-3 pt-2",children:[e.jsxs("button",{onClick:f,className:"w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 rounded-xl transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-lg hover:shadow-pink-500/50",children:[e.jsx(Rt,{className:"w-4 h-4"}),"Update Now"]}),e.jsxs("button",{onClick:w,className:"w-full bg-gradient-to-r from-blue-500/30 to-cyan-500/30 hover:from-blue-500/50 hover:to-cyan-500/50 text-slate-100 font-semibold py-3 rounded-xl transition-all border border-blue-400/60 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-cyan-500/30 backdrop-blur-sm",children:[e.jsx(It,{className:"w-4 h-4"}),"Remind Me Later"]})]}),e.jsx("p",{className:"text-xs text-slate-500 text-center pt-2",children:"Updates keep your app secure and running smoothly"})]}):e.jsx(e.Fragment,{children:e.jsxs("div",{className:"space-y-4",children:[e.jsx("div",{className:"flex justify-center py-6",children:e.jsxs("div",{className:"relative w-24 h-24",children:[e.jsx("div",{className:"absolute inset-0 rounded-full border-4 border-transparent border-t-purple-500 border-r-pink-500 animate-spin"}),e.jsx("div",{className:"absolute inset-2 rounded-full border-4 border-transparent border-b-cyan-500 border-l-orange-500 animate-spin",style:{animationDirection:"reverse"}}),e.jsx("div",{className:"absolute inset-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 animate-pulse flex items-center justify-center",children:e.jsx(De,{className:"w-6 h-6 text-white animate-bounce"})})]})}),e.jsxs("div",{className:"text-center space-y-2",children:[e.jsxs("p",{className:"text-white font-semibold text-lg capitalize",children:[o==="checking"&&"Checking for updates...",o==="downloading"&&"Downloading update...",o==="installing"&&"Installing update...",o==="complete"&&"Update complete!"]}),e.jsxs("p",{className:"text-slate-400 text-sm",children:[o==="checking"&&"Verifying latest version",o==="downloading"&&"Fetching update files",o==="installing"&&"Installing and configuring",o==="complete"&&"Preparing to restart..."]})]}),e.jsxs("div",{className:"space-y-2",children:[e.jsx("div",{className:"w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 backdrop-blur-sm",children:e.jsx("div",{className:"h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 transition-all duration-500 ease-out rounded-full shadow-lg shadow-pink-500/50",style:{width:`${d}%`}})}),e.jsxs("p",{className:"text-center text-white font-semibold text-sm",children:[Math.round(d),"%"]})]}),e.jsx("div",{className:"grid grid-cols-4 gap-2 pt-4",children:["Checking","Download","Install","Complete"].map((x,g)=>{const j=["checking","downloading","installing","complete"].indexOf(o),E=g<j||g===j&&o==="complete",D=g===j;return e.jsxs("div",{className:`text-center p-2 rounded-lg transition-all ${E?"bg-green-500/30 border border-green-400/60":D?"bg-purple-500/40 border border-purple-400/60 animate-pulse":"bg-white/10 border border-white/20"}`,children:[e.jsx("p",{className:"text-xs font-semibold text-white",children:x}),E&&e.jsx("p",{className:"text-green-400 text-lg",children:"✓"})]},x)})})]})})})]})}),a&&((b=M==null?void 0:M.changelog)==null?void 0:b.length)>0&&e.jsx("div",{className:"fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in",children:e.jsxs("div",{className:"bg-gradient-to-br from-slate-900/95 via-purple-900/50 to-slate-900/95 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl w-full max-w-2xl max-h-[85vh] overflow-hidden flex flex-col",children:[e.jsxs("div",{className:"bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 border-b border-white/20 p-6 flex items-center justify-between",children:[e.jsxs("h2",{className:"text-2xl font-bold text-white flex items-center gap-2 drop-shadow-lg",children:[e.jsx("span",{children:"📝"}),"Changelog v",p]}),e.jsx("button",{onClick:()=>s(!1),className:"p-2 hover:bg-white/20 rounded-lg transition-colors",children:e.jsx(Tt,{className:"w-5 h-5 text-white"})})]}),e.jsxs("div",{className:"overflow-y-auto flex-1 p-6 space-y-6",children:[(y=M==null?void 0:M.changelog)==null?void 0:y.map(x=>e.jsxs("div",{className:"space-y-4 animate-slide-up",children:[e.jsxs("div",{className:`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r ${x.badgeGradient} border ${x.borderColor} backdrop-blur-sm shadow-lg`,children:[e.jsx("span",{className:"text-lg",children:x.icon}),x.category]}),e.jsx("div",{className:"grid grid-cols-1 md:grid-cols-2 gap-4",children:x.items.map((g,v)=>e.jsx("div",{className:`bg-gradient-to-br ${x.gradient} hover:shadow-lg hover:-translate-y-1 border ${x.borderColor} rounded-xl p-4 transition-all space-y-2 group backdrop-blur-sm`,children:e.jsxs("div",{className:"flex items-start gap-3",children:[e.jsx("div",{className:"text-3xl flex-shrink-0 group-hover:scale-110 transition-transform",children:g.image}),e.jsxs("div",{className:"flex-1",children:[e.jsx("h4",{className:"text-white font-semibold text-sm",children:g.title}),e.jsx("p",{className:"text-slate-300 text-xs mt-1",children:g.description})]})]})},v))})]},x.id)),e.jsxs("div",{className:"bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/40 rounded-xl p-4 backdrop-blur-sm animate-slide-up",children:[e.jsxs("p",{className:"text-slate-200 text-sm flex items-center gap-2",children:[e.jsx("span",{className:"font-semibold",children:"📅 Release Date:"})," ",M.releaseDate]}),e.jsx("p",{className:"text-slate-400 text-xs mt-2",children:"All updates are tested thoroughly to ensure stability and security"})]})]}),e.jsxs("div",{className:"bg-white/10 border-t border-white/20 p-4 flex gap-3 backdrop-blur-sm",children:[e.jsx("button",{onClick:()=>s(!1),className:"flex-1 bg-white/10 hover:bg-white/20 text-white font-semibold py-2.5 rounded-lg transition-all border border-white/20",children:"Close"}),e.jsx("button",{onClick:()=>{f(),s(!1)},className:"flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-2.5 rounded-lg transition-all shadow-lg hover:shadow-pink-500/50",children:"Update Now"})]})]})}),e.jsx("style",{children:`
+      `,
+          }),
+        ],
+      })
+    );
+  };
+function Ts({ children: t }) {
+  var b, y;
+  const [a, s] = c.useState(!1),
+    [n, r] = c.useState(!1),
+    [o, l] = c.useState("idle"),
+    [d, i] = c.useState(0),
+    [p, u] = c.useState(null),
+    h = (x, g) => {
+      const v = x.split(".").map(Number),
+        j = g.split(".").map(Number);
+      for (let E = 0; E < Math.max(v.length, j.length); E++) {
+        const D = v[E] || 0,
+          k = j[E] || 0;
+        if (D > k) return 1;
+        if (D < k) return -1;
+      }
+      return 0;
+    };
+  c.useEffect(() => {
+    u(M.appVersion);
+    const g = setTimeout(() => {
+      const v = H.get("appVersion") || M.appVersion,
+        j = H.get("skippedVersion"),
+        E = H.get("lastSkipDate"),
+        D = Date.now(),
+        k = 1440 * 60 * 1e3;
+      if (p && h(p, v) > 0) {
+        const S = !j || j !== p || !E || D - E > 1 * k;
+        r(S);
+      }
+      H.get("appVersion") || H.set("appVersion", M.appVersion);
+    }, 500);
+    return () => clearTimeout(g);
+  }, [p]);
+  const w = () => {
+      H.set("skippedVersion", p),
+        H.set("lastSkipDate", Date.now()),
+        setTimeout(() => {
+          r(!1);
+        }, 300);
+    },
+    f = () => {
+      l("checking"),
+        i(0),
+        setTimeout(() => {
+          l("downloading"), i(15);
+        }, 1200);
+      const x = setInterval(() => {
+        i((g) => (g >= 85 ? (clearInterval(x), 85) : g + Math.random() * 20));
+      }, 300);
+      setTimeout(() => {
+        clearInterval(x), l("installing"), i(90);
+      }, 3e3),
+        setTimeout(() => {
+          i(100), l("complete");
+        }, 4500),
+        setTimeout(() => {
+          window.location.reload();
+        }, 5500),
+        H.remove("skippedVersion"),
+        H.remove("lastSkipDate"),
+        H.set("appVersion", p);
+    };
+  if (!n || !p) return t;
+  const m = H.get("appVersion") || M.appVersion;
+  return e.jsxs("div", {
+    className:
+      "w-full min-h-screen bg-gradient-to-br from-slate-950 via-purple-900 to-slate-950 flex items-center justify-center p-4 relative overflow-hidden",
+    children: [
+      e.jsxs("div", {
+        className: "fixed inset-0 overflow-hidden pointer-events-none",
+        children: [
+          e.jsx("div", {
+            className:
+              "absolute top-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-blob",
+          }),
+          e.jsx("div", {
+            className:
+              "absolute bottom-0 left-0 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-blob",
+            style: { animationDelay: "2s" },
+          }),
+          e.jsx("div", {
+            className:
+              "absolute top-1/2 left-1/2 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-blob",
+            style: { animationDelay: "4s" },
+          }),
+        ],
+      }),
+      e.jsx("div", {
+        className: "relative z-10 w-full max-w-sm sm:max-w-md",
+        children: e.jsxs("div", {
+          className:
+            "bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl overflow-hidden hover:shadow-purple-500/20 hover:shadow-2xl transition-all duration-300 group",
+          children: [
+            e.jsx("div", {
+              className:
+                "relative h-28 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 border-b border-white/20 flex items-center justify-between px-6",
+              children: e.jsxs("div", {
+                className: "space-y-1",
+                children: [
+                  e.jsxs("div", {
+                    className: "flex items-center gap-2",
+                    children: [
+                      e.jsx(At, {
+                        className: "w-5 h-5 text-yellow-300 animate-pulse",
+                      }),
+                      e.jsx("h1", {
+                        className:
+                          "text-2xl font-bold text-white drop-shadow-lg",
+                        children:
+                          o === "idle" ? "Update Available" : "Updating...",
+                      }),
+                    ],
+                  }),
+                  e.jsxs("p", {
+                    className: "text-purple-100 text-sm font-medium",
+                    children: [m, " → ", p],
+                  }),
+                ],
+              }),
+            }),
+            e.jsx("div", {
+              className: "px-6 py-6 space-y-5",
+              children:
+                o === "idle"
+                  ? e.jsxs(e.Fragment, {
+                      children: [
+                        e.jsx("p", {
+                          className:
+                            "text-slate-200 text-sm leading-relaxed text-center",
+                          children:
+                            "A major new version is available with exciting features, bug fixes, and performance improvements.",
+                        }),
+                        e.jsxs("button", {
+                          onClick: () => s(!0),
+                          className:
+                            "w-full flex items-center justify-between py-3 px-4 bg-gradient-to-r from-purple-500/30 to-pink-500/30 hover:from-purple-500/50 hover:to-pink-500/50 rounded-xl border border-purple-400/60 transition-all group hover:shadow-lg hover:shadow-purple-500/30 backdrop-blur-sm",
+                          children: [
+                            e.jsxs("span", {
+                              className: "font-semibold text-white text-sm",
+                              children: ["What's New in v", p],
+                            }),
+                            e.jsx(Pt, {
+                              className:
+                                "w-4 h-4 text-purple-200 group-hover:rotate-180 transition-transform",
+                            }),
+                          ],
+                        }),
+                        e.jsxs("div", {
+                          className: "space-y-3 pt-2",
+                          children: [
+                            e.jsxs("button", {
+                              onClick: f,
+                              className:
+                                "w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 rounded-xl transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-lg hover:shadow-pink-500/50",
+                              children: [
+                                e.jsx(Rt, { className: "w-4 h-4" }),
+                                "Update Now",
+                              ],
+                            }),
+                            e.jsxs("button", {
+                              onClick: w,
+                              className:
+                                "w-full bg-gradient-to-r from-blue-500/30 to-cyan-500/30 hover:from-blue-500/50 hover:to-cyan-500/50 text-slate-100 font-semibold py-3 rounded-xl transition-all border border-blue-400/60 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-cyan-500/30 backdrop-blur-sm",
+                              children: [
+                                e.jsx(It, { className: "w-4 h-4" }),
+                                "Remind Me Later",
+                              ],
+                            }),
+                          ],
+                        }),
+                        e.jsx("p", {
+                          className: "text-xs text-slate-500 text-center pt-2",
+                          children:
+                            "Updates keep your app secure and running smoothly",
+                        }),
+                      ],
+                    })
+                  : e.jsx(e.Fragment, {
+                      children: e.jsxs("div", {
+                        className: "space-y-4",
+                        children: [
+                          e.jsx("div", {
+                            className: "flex justify-center py-6",
+                            children: e.jsxs("div", {
+                              className: "relative w-24 h-24",
+                              children: [
+                                e.jsx("div", {
+                                  className:
+                                    "absolute inset-0 rounded-full border-4 border-transparent border-t-purple-500 border-r-pink-500 animate-spin",
+                                }),
+                                e.jsx("div", {
+                                  className:
+                                    "absolute inset-2 rounded-full border-4 border-transparent border-b-cyan-500 border-l-orange-500 animate-spin",
+                                  style: { animationDirection: "reverse" },
+                                }),
+                                e.jsx("div", {
+                                  className:
+                                    "absolute inset-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 animate-pulse flex items-center justify-center",
+                                  children: e.jsx(De, {
+                                    className:
+                                      "w-6 h-6 text-white animate-bounce",
+                                  }),
+                                }),
+                              ],
+                            }),
+                          }),
+                          e.jsxs("div", {
+                            className: "text-center space-y-2",
+                            children: [
+                              e.jsxs("p", {
+                                className:
+                                  "text-white font-semibold text-lg capitalize",
+                                children: [
+                                  o === "checking" && "Checking for updates...",
+                                  o === "downloading" &&
+                                    "Downloading update...",
+                                  o === "installing" && "Installing update...",
+                                  o === "complete" && "Update complete!",
+                                ],
+                              }),
+                              e.jsxs("p", {
+                                className: "text-slate-400 text-sm",
+                                children: [
+                                  o === "checking" &&
+                                    "Verifying latest version",
+                                  o === "downloading" &&
+                                    "Fetching update files",
+                                  o === "installing" &&
+                                    "Installing and configuring",
+                                  o === "complete" && "Preparing to restart...",
+                                ],
+                              }),
+                            ],
+                          }),
+                          e.jsxs("div", {
+                            className: "space-y-2",
+                            children: [
+                              e.jsx("div", {
+                                className:
+                                  "w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 backdrop-blur-sm",
+                                children: e.jsx("div", {
+                                  className:
+                                    "h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 transition-all duration-500 ease-out rounded-full shadow-lg shadow-pink-500/50",
+                                  style: { width: `${d}%` },
+                                }),
+                              }),
+                              e.jsxs("p", {
+                                className:
+                                  "text-center text-white font-semibold text-sm",
+                                children: [Math.round(d), "%"],
+                              }),
+                            ],
+                          }),
+                          e.jsx("div", {
+                            className: "grid grid-cols-4 gap-2 pt-4",
+                            children: [
+                              "Checking",
+                              "Download",
+                              "Install",
+                              "Complete",
+                            ].map((x, g) => {
+                              const j = [
+                                  "checking",
+                                  "downloading",
+                                  "installing",
+                                  "complete",
+                                ].indexOf(o),
+                                E = g < j || (g === j && o === "complete"),
+                                D = g === j;
+                              return e.jsxs(
+                                "div",
+                                {
+                                  className: `text-center p-2 rounded-lg transition-all ${E ? "bg-green-500/30 border border-green-400/60" : D ? "bg-purple-500/40 border border-purple-400/60 animate-pulse" : "bg-white/10 border border-white/20"}`,
+                                  children: [
+                                    e.jsx("p", {
+                                      className:
+                                        "text-xs font-semibold text-white",
+                                      children: x,
+                                    }),
+                                    E &&
+                                      e.jsx("p", {
+                                        className: "text-green-400 text-lg",
+                                        children: "✓",
+                                      }),
+                                  ],
+                                },
+                                x,
+                              );
+                            }),
+                          }),
+                        ],
+                      }),
+                    }),
+            }),
+          ],
+        }),
+      }),
+      a &&
+        ((b = M == null ? void 0 : M.changelog) == null ? void 0 : b.length) >
+          0 &&
+        e.jsx("div", {
+          className:
+            "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in",
+          children: e.jsxs("div", {
+            className:
+              "bg-gradient-to-br from-slate-900/95 via-purple-900/50 to-slate-900/95 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl w-full max-w-2xl max-h-[85vh] overflow-hidden flex flex-col",
+            children: [
+              e.jsxs("div", {
+                className:
+                  "bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 border-b border-white/20 p-6 flex items-center justify-between",
+                children: [
+                  e.jsxs("h2", {
+                    className:
+                      "text-2xl font-bold text-white flex items-center gap-2 drop-shadow-lg",
+                    children: [
+                      e.jsx("span", { children: "📝" }),
+                      "Changelog v",
+                      p,
+                    ],
+                  }),
+                  e.jsx("button", {
+                    onClick: () => s(!1),
+                    className:
+                      "p-2 hover:bg-white/20 rounded-lg transition-colors",
+                    children: e.jsx(Tt, { className: "w-5 h-5 text-white" }),
+                  }),
+                ],
+              }),
+              e.jsxs("div", {
+                className: "overflow-y-auto flex-1 p-6 space-y-6",
+                children: [
+                  (y = M == null ? void 0 : M.changelog) == null
+                    ? void 0
+                    : y.map((x) =>
+                        e.jsxs(
+                          "div",
+                          {
+                            className: "space-y-4 animate-slide-up",
+                            children: [
+                              e.jsxs("div", {
+                                className: `inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r ${x.badgeGradient} border ${x.borderColor} backdrop-blur-sm shadow-lg`,
+                                children: [
+                                  e.jsx("span", {
+                                    className: "text-lg",
+                                    children: x.icon,
+                                  }),
+                                  x.category,
+                                ],
+                              }),
+                              e.jsx("div", {
+                                className:
+                                  "grid grid-cols-1 md:grid-cols-2 gap-4",
+                                children: x.items.map((g, v) =>
+                                  e.jsx(
+                                    "div",
+                                    {
+                                      className: `bg-gradient-to-br ${x.gradient} hover:shadow-lg hover:-translate-y-1 border ${x.borderColor} rounded-xl p-4 transition-all space-y-2 group backdrop-blur-sm`,
+                                      children: e.jsxs("div", {
+                                        className: "flex items-start gap-3",
+                                        children: [
+                                          e.jsx("div", {
+                                            className:
+                                              "text-3xl flex-shrink-0 group-hover:scale-110 transition-transform",
+                                            children: g.image,
+                                          }),
+                                          e.jsxs("div", {
+                                            className: "flex-1",
+                                            children: [
+                                              e.jsx("h4", {
+                                                className:
+                                                  "text-white font-semibold text-sm",
+                                                children: g.title,
+                                              }),
+                                              e.jsx("p", {
+                                                className:
+                                                  "text-slate-300 text-xs mt-1",
+                                                children: g.description,
+                                              }),
+                                            ],
+                                          }),
+                                        ],
+                                      }),
+                                    },
+                                    v,
+                                  ),
+                                ),
+                              }),
+                            ],
+                          },
+                          x.id,
+                        ),
+                      ),
+                  e.jsxs("div", {
+                    className:
+                      "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/40 rounded-xl p-4 backdrop-blur-sm animate-slide-up",
+                    children: [
+                      e.jsxs("p", {
+                        className:
+                          "text-slate-200 text-sm flex items-center gap-2",
+                        children: [
+                          e.jsx("span", {
+                            className: "font-semibold",
+                            children: "📅 Release Date:",
+                          }),
+                          " ",
+                          M.releaseDate,
+                        ],
+                      }),
+                      e.jsx("p", {
+                        className: "text-slate-400 text-xs mt-2",
+                        children:
+                          "All updates are tested thoroughly to ensure stability and security",
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+              e.jsxs("div", {
+                className:
+                  "bg-white/10 border-t border-white/20 p-4 flex gap-3 backdrop-blur-sm",
+                children: [
+                  e.jsx("button", {
+                    onClick: () => s(!1),
+                    className:
+                      "flex-1 bg-white/10 hover:bg-white/20 text-white font-semibold py-2.5 rounded-lg transition-all border border-white/20",
+                    children: "Close",
+                  }),
+                  e.jsx("button", {
+                    onClick: () => {
+                      f(), s(!1);
+                    },
+                    className:
+                      "flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-2.5 rounded-lg transition-all shadow-lg hover:shadow-pink-500/50",
+                    children: "Update Now",
+                  }),
+                ],
+              }),
+            ],
+          }),
+        }),
+      e.jsx("style", {
+        children: `
         @keyframes blob {
           0%, 100% { transform: translate(0, 0) scale(1); }
           33% { transform: translate(40px, -60px) scale(1.1); }
@@ -79,4 +3830,301 @@ var Nt=Object.defineProperty,St=Object.defineProperties;var kt=Object.getOwnProp
           to { opacity: 1; transform: translateY(0); }
         }
         .animate-slide-up { animation: slide-up 0.4s ease-out; }
-      `})]})}function Ls(){const[t,a]=c.useState(0),[s,n]=c.useState(!1);c.useEffect(()=>{const l=setInterval(()=>{a(d=>d+1)},1e3);return()=>clearInterval(l)},[]);const r=()=>{n(!0),setTimeout(()=>{window.location.reload()},500)},o=l=>{const d=Math.floor(l/60),i=l%60;return`${d}:${i.toString().padStart(2,"0")}`};return e.jsxs("div",{className:"w-full min-h-screen bg-gradient-to-br from-slate-950 via-red-950 to-slate-950 flex items-center justify-center p-4 relative overflow-hidden",children:[e.jsxs("div",{className:"fixed inset-0 overflow-hidden pointer-events-none",children:[e.jsx("div",{className:"absolute -top-40 -right-40 w-80 h-80 bg-red-600/30 rounded-full blur-3xl animate-pulse"}),e.jsx("div",{className:"absolute -bottom-40 -left-40 w-80 h-80 bg-red-500/20 rounded-full blur-3xl animate-pulse",style:{animationDelay:"1s"}})]}),e.jsxs("div",{className:"relative z-10 w-full max-w-5xl",children:[e.jsxs("div",{className:"grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center",children:[e.jsx("div",{className:"hidden lg:flex justify-center",children:e.jsxs("div",{className:"relative w-64 h-80",children:[e.jsx("div",{className:"absolute inset-0 bg-gradient-to-b from-red-500/10 to-transparent rounded-3xl blur-3xl"}),e.jsx("div",{className:"absolute inset-0 rounded-full border border-red-500/20 animate-pulse"}),e.jsx("div",{className:"absolute inset-6 rounded-full border border-red-500/10 animate-pulse",style:{animationDelay:"0.3s"}}),e.jsx("div",{className:"absolute inset-0 flex items-center justify-center",children:e.jsxs("div",{className:"w-40 h-56 relative",children:[e.jsxs("div",{className:"absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border-2 border-red-500/40 shadow-2xl shadow-red-500/20",children:[e.jsxs("div",{className:"h-10 bg-gradient-to-r from-slate-700 to-slate-800 rounded-t-xl border-b border-red-500/30 flex items-center px-4 gap-3",children:[e.jsx("div",{className:"w-2 h-2 rounded-full bg-red-500 animate-pulse"}),e.jsx("span",{className:"text-xs text-slate-400 font-mono",children:"SERVER"})]}),e.jsx("div",{className:"flex-1 flex flex-col justify-center px-4 gap-2",children:[0,1,2].map(l=>e.jsxs("div",{className:"flex items-center gap-2",children:[e.jsx("div",{className:`w-2 h-2 rounded-full ${l===0?"bg-red-500 animate-pulse":"bg-slate-700"}`}),e.jsx("div",{className:"flex-1 h-1 bg-slate-700 rounded"})]},l))}),e.jsx("div",{className:"h-10 bg-gradient-to-r from-slate-800 to-slate-900 rounded-b-xl border-t border-red-500/30 flex items-center justify-center",children:e.jsx(et,{className:"w-5 h-5 text-red-500 animate-pulse"})})]}),e.jsx("div",{className:"absolute -top-6 -right-6 animate-bounce",children:e.jsx("div",{className:"bg-red-500/30 p-2 rounded-full border border-red-500/60 backdrop-blur",children:e.jsx(Lt,{className:"w-5 h-5 text-red-300"})})}),e.jsx("div",{className:"absolute -bottom-2 -left-6",children:e.jsx("div",{className:"bg-red-500/20 p-2 rounded-full border border-red-500/40",children:e.jsx(De,{className:"w-4 h-4 text-red-300 animate-pulse"})})})]})})]})}),e.jsx("div",{className:"flex flex-col justify-center space-y-6",children:e.jsxs("div",{className:"bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl border border-white/20 p-8 space-y-6",children:[e.jsxs("div",{className:"space-y-3",children:[e.jsxs("div",{className:"flex items-center gap-3",children:[e.jsx("div",{className:"p-2 bg-red-500/20 rounded-lg border border-red-500/40",children:e.jsx(et,{className:"w-6 h-6 text-red-400"})}),e.jsx("h1",{className:"text-4xl font-bold text-white",children:"Service Down"})]}),e.jsx("p",{className:"text-slate-300 text-sm",children:"We're experiencing temporary issues"})]}),e.jsxs("div",{className:"bg-red-500/10 border border-red-500/30 rounded-2xl p-5 backdrop-blur-sm space-y-2",children:[e.jsx("p",{className:"text-slate-200 text-sm leading-relaxed",children:"Our backend infrastructure is currently unavailable. Our engineering team is actively investigating and working to restore service as quickly as possible."}),e.jsxs("p",{className:"text-red-300 text-xs font-mono",children:["Downtime: ",o(t)]})]}),e.jsx("div",{className:"grid ",children:e.jsxs("button",{onClick:r,disabled:s,className:"bg-red-600 hover:bg-red-700 disabled:bg-red-600/50 text-white font-semibold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 group",children:[e.jsx(zt,{className:`w-4 h-4 ${s?"animate-spin":"group-hover:rotate-180 transition-transform"}`}),"Retry"]})})]})})]}),e.jsx("div",{className:"mt-12 bg-gradient-to-r from-red-500/15 to-rose-500/10 border border-red-500/30 rounded-2xl p-5 backdrop-blur-sm",children:e.jsxs("div",{className:"flex items-center gap-4",children:[e.jsx(Dt,{className:"w-5 h-5 text-red-400 flex-shrink-0 animate-pulse"}),e.jsxs("div",{className:"flex-1 min-w-0",children:[e.jsx("p",{className:"text-white font-semibold text-sm",children:"Real-time Updates"}),e.jsx("p",{className:"text-slate-400 text-xs",children:"Visit our status page for live incident reports"})]}),e.jsxs("a",{href:"https://status.ajayos.in",target:"_blank",rel:"noopener noreferrer",className:"text-red-400 hover:text-red-300 text-sm font-semibold flex items-center gap-1 flex-shrink-0",children:["View ",e.jsx(_t,{className:"w-3 h-3"})]})]})})]})]})}const Us=()=>{const[t,a]=c.useState("SYSTEM_UPDATE"),[s,n]=c.useState(!1);return c.useEffect(()=>{const r=[O.on("SYSTEM_GUARD",({model:o=null})=>{a(o)})];return()=>r.forEach(o=>o())},[]),c.useEffect(()=>(Object.keys(Re).forEach(r=>{if(Ne(r)&&typeof Re[r]=="function")try{Re[r]()}catch(o){console.error(`[SystemGuard] Error initializing feature: ${r}`,o)}}),n(!0)),[]),s?t==="LOADING"?e.jsx(rt,{}):t==="INSPECT_BLOCKER"?e.jsx(Is,{}):t==="SERVER_DOWN"?e.jsx(Ls,{}):e.jsx(rt,{children:e.jsx(Ts,{children:e.jsx(Rs,{})})}):e.jsx(qt,{})};export{Us as default};
+      `,
+      }),
+    ],
+  });
+}
+function Ls() {
+  const [t, a] = c.useState(0),
+    [s, n] = c.useState(!1);
+  c.useEffect(() => {
+    const l = setInterval(() => {
+      a((d) => d + 1);
+    }, 1e3);
+    return () => clearInterval(l);
+  }, []);
+  const r = () => {
+      n(!0),
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+    },
+    o = (l) => {
+      const d = Math.floor(l / 60),
+        i = l % 60;
+      return `${d}:${i.toString().padStart(2, "0")}`;
+    };
+  return e.jsxs("div", {
+    className:
+      "w-full min-h-screen bg-gradient-to-br from-slate-950 via-red-950 to-slate-950 flex items-center justify-center p-4 relative overflow-hidden",
+    children: [
+      e.jsxs("div", {
+        className: "fixed inset-0 overflow-hidden pointer-events-none",
+        children: [
+          e.jsx("div", {
+            className:
+              "absolute -top-40 -right-40 w-80 h-80 bg-red-600/30 rounded-full blur-3xl animate-pulse",
+          }),
+          e.jsx("div", {
+            className:
+              "absolute -bottom-40 -left-40 w-80 h-80 bg-red-500/20 rounded-full blur-3xl animate-pulse",
+            style: { animationDelay: "1s" },
+          }),
+        ],
+      }),
+      e.jsxs("div", {
+        className: "relative z-10 w-full max-w-5xl",
+        children: [
+          e.jsxs("div", {
+            className:
+              "grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center",
+            children: [
+              e.jsx("div", {
+                className: "hidden lg:flex justify-center",
+                children: e.jsxs("div", {
+                  className: "relative w-64 h-80",
+                  children: [
+                    e.jsx("div", {
+                      className:
+                        "absolute inset-0 bg-gradient-to-b from-red-500/10 to-transparent rounded-3xl blur-3xl",
+                    }),
+                    e.jsx("div", {
+                      className:
+                        "absolute inset-0 rounded-full border border-red-500/20 animate-pulse",
+                    }),
+                    e.jsx("div", {
+                      className:
+                        "absolute inset-6 rounded-full border border-red-500/10 animate-pulse",
+                      style: { animationDelay: "0.3s" },
+                    }),
+                    e.jsx("div", {
+                      className:
+                        "absolute inset-0 flex items-center justify-center",
+                      children: e.jsxs("div", {
+                        className: "w-40 h-56 relative",
+                        children: [
+                          e.jsxs("div", {
+                            className:
+                              "absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border-2 border-red-500/40 shadow-2xl shadow-red-500/20",
+                            children: [
+                              e.jsxs("div", {
+                                className:
+                                  "h-10 bg-gradient-to-r from-slate-700 to-slate-800 rounded-t-xl border-b border-red-500/30 flex items-center px-4 gap-3",
+                                children: [
+                                  e.jsx("div", {
+                                    className:
+                                      "w-2 h-2 rounded-full bg-red-500 animate-pulse",
+                                  }),
+                                  e.jsx("span", {
+                                    className:
+                                      "text-xs text-slate-400 font-mono",
+                                    children: "SERVER",
+                                  }),
+                                ],
+                              }),
+                              e.jsx("div", {
+                                className:
+                                  "flex-1 flex flex-col justify-center px-4 gap-2",
+                                children: [0, 1, 2].map((l) =>
+                                  e.jsxs(
+                                    "div",
+                                    {
+                                      className: "flex items-center gap-2",
+                                      children: [
+                                        e.jsx("div", {
+                                          className: `w-2 h-2 rounded-full ${l === 0 ? "bg-red-500 animate-pulse" : "bg-slate-700"}`,
+                                        }),
+                                        e.jsx("div", {
+                                          className:
+                                            "flex-1 h-1 bg-slate-700 rounded",
+                                        }),
+                                      ],
+                                    },
+                                    l,
+                                  ),
+                                ),
+                              }),
+                              e.jsx("div", {
+                                className:
+                                  "h-10 bg-gradient-to-r from-slate-800 to-slate-900 rounded-b-xl border-t border-red-500/30 flex items-center justify-center",
+                                children: e.jsx(et, {
+                                  className:
+                                    "w-5 h-5 text-red-500 animate-pulse",
+                                }),
+                              }),
+                            ],
+                          }),
+                          e.jsx("div", {
+                            className:
+                              "absolute -top-6 -right-6 animate-bounce",
+                            children: e.jsx("div", {
+                              className:
+                                "bg-red-500/30 p-2 rounded-full border border-red-500/60 backdrop-blur",
+                              children: e.jsx(Lt, {
+                                className: "w-5 h-5 text-red-300",
+                              }),
+                            }),
+                          }),
+                          e.jsx("div", {
+                            className: "absolute -bottom-2 -left-6",
+                            children: e.jsx("div", {
+                              className:
+                                "bg-red-500/20 p-2 rounded-full border border-red-500/40",
+                              children: e.jsx(De, {
+                                className: "w-4 h-4 text-red-300 animate-pulse",
+                              }),
+                            }),
+                          }),
+                        ],
+                      }),
+                    }),
+                  ],
+                }),
+              }),
+              e.jsx("div", {
+                className: "flex flex-col justify-center space-y-6",
+                children: e.jsxs("div", {
+                  className:
+                    "bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl border border-white/20 p-8 space-y-6",
+                  children: [
+                    e.jsxs("div", {
+                      className: "space-y-3",
+                      children: [
+                        e.jsxs("div", {
+                          className: "flex items-center gap-3",
+                          children: [
+                            e.jsx("div", {
+                              className:
+                                "p-2 bg-red-500/20 rounded-lg border border-red-500/40",
+                              children: e.jsx(et, {
+                                className: "w-6 h-6 text-red-400",
+                              }),
+                            }),
+                            e.jsx("h1", {
+                              className: "text-4xl font-bold text-white",
+                              children: "Service Down",
+                            }),
+                          ],
+                        }),
+                        e.jsx("p", {
+                          className: "text-slate-300 text-sm",
+                          children: "We're experiencing temporary issues",
+                        }),
+                      ],
+                    }),
+                    e.jsxs("div", {
+                      className:
+                        "bg-red-500/10 border border-red-500/30 rounded-2xl p-5 backdrop-blur-sm space-y-2",
+                      children: [
+                        e.jsx("p", {
+                          className: "text-slate-200 text-sm leading-relaxed",
+                          children:
+                            "Our backend infrastructure is currently unavailable. Our engineering team is actively investigating and working to restore service as quickly as possible.",
+                        }),
+                        e.jsxs("p", {
+                          className: "text-red-300 text-xs font-mono",
+                          children: ["Downtime: ", o(t)],
+                        }),
+                      ],
+                    }),
+                    e.jsx("div", {
+                      className: "grid ",
+                      children: e.jsxs("button", {
+                        onClick: r,
+                        disabled: s,
+                        className:
+                          "bg-red-600 hover:bg-red-700 disabled:bg-red-600/50 text-white font-semibold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 group",
+                        children: [
+                          e.jsx(zt, {
+                            className: `w-4 h-4 ${s ? "animate-spin" : "group-hover:rotate-180 transition-transform"}`,
+                          }),
+                          "Retry",
+                        ],
+                      }),
+                    }),
+                  ],
+                }),
+              }),
+            ],
+          }),
+          e.jsx("div", {
+            className:
+              "mt-12 bg-gradient-to-r from-red-500/15 to-rose-500/10 border border-red-500/30 rounded-2xl p-5 backdrop-blur-sm",
+            children: e.jsxs("div", {
+              className: "flex items-center gap-4",
+              children: [
+                e.jsx(Dt, {
+                  className: "w-5 h-5 text-red-400 flex-shrink-0 animate-pulse",
+                }),
+                e.jsxs("div", {
+                  className: "flex-1 min-w-0",
+                  children: [
+                    e.jsx("p", {
+                      className: "text-white font-semibold text-sm",
+                      children: "Real-time Updates",
+                    }),
+                    e.jsx("p", {
+                      className: "text-slate-400 text-xs",
+                      children:
+                        "Visit our status page for live incident reports",
+                    }),
+                  ],
+                }),
+                e.jsxs("a", {
+                  href: "https://status.ajayos.in",
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  className:
+                    "text-red-400 hover:text-red-300 text-sm font-semibold flex items-center gap-1 flex-shrink-0",
+                  children: ["View ", e.jsx(_t, { className: "w-3 h-3" })],
+                }),
+              ],
+            }),
+          }),
+        ],
+      }),
+    ],
+  });
+}
+const Us = () => {
+  const [t, a] = c.useState("SYSTEM_UPDATE"),
+    [s, n] = c.useState(!1);
+  return (
+    c.useEffect(() => {
+      const r = [
+        O.on("SYSTEM_GUARD", ({ model: o = null }) => {
+          a(o);
+        }),
+      ];
+      return () => r.forEach((o) => o());
+    }, []),
+    c.useEffect(
+      () => (
+        Object.keys(Re).forEach((r) => {
+          if (Ne(r) && typeof Re[r] == "function")
+            try {
+              Re[r]();
+            } catch (o) {
+              console.error(
+                `[SystemGuard] Error initializing feature: ${r}`,
+                o,
+              );
+            }
+        }),
+        n(!0)
+      ),
+      [],
+    ),
+    s
+      ? t === "LOADING"
+        ? e.jsx(rt, {})
+        : t === "INSPECT_BLOCKER"
+          ? e.jsx(Is, {})
+          : t === "SERVER_DOWN"
+            ? e.jsx(Ls, {})
+            : e.jsx(rt, { children: e.jsx(Ts, { children: e.jsx(Rs, {}) }) })
+      : e.jsx(qt, {})
+  );
+};
+export { Us as default };
