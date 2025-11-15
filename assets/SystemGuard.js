@@ -1,40 +1,40 @@
-var Nt = Object.defineProperty,
+var St = Object.defineProperty,
   kt = Object.defineProperties;
-var St = Object.getOwnPropertyDescriptors;
+var Ct = Object.getOwnPropertyDescriptors;
 var Qe = Object.getOwnPropertySymbols;
-var Ct = Object.prototype.hasOwnProperty,
-  Mt = Object.prototype.propertyIsEnumerable;
-var Ze = (t, r, s) =>
-    r in t
-      ? Nt(t, r, { enumerable: !0, configurable: !0, writable: !0, value: s })
-      : (t[r] = s),
-  H = (t, r) => {
-    for (var s in r || (r = {})) Ct.call(r, s) && Ze(t, s, r[s]);
-    if (Qe) for (var s of Qe(r)) Mt.call(r, s) && Ze(t, s, r[s]);
+var Mt = Object.prototype.hasOwnProperty,
+  Et = Object.prototype.propertyIsEnumerable;
+var Ze = (t, a, s) =>
+    a in t
+      ? St(t, a, { enumerable: !0, configurable: !0, writable: !0, value: s })
+      : (t[a] = s),
+  V = (t, a) => {
+    for (var s in a || (a = {})) Mt.call(a, s) && Ze(t, s, a[s]);
+    if (Qe) for (var s of Qe(a)) Et.call(a, s) && Ze(t, s, a[s]);
     return t;
   },
-  Z = (t, r) => kt(t, St(r));
+  ee = (t, a) => kt(t, Ct(a));
 import {
-  r as l,
+  r as c,
   j as e,
-  u as V,
-  d as Et,
+  u as H,
+  d as nt,
   P as Pt,
   L as At,
   S as Rt,
-  A as Lt,
-  e as Tt,
+  A as Tt,
+  e as It,
   Z as ze,
-  f as It,
+  f as Lt,
   C as Dt,
   D as zt,
   g as Ot,
   X as _t,
   W as et,
-  T as Gt,
-  h as Ut,
-  i as Ft,
-  k as $t,
+  T as $t,
+  h as Gt,
+  i as Ut,
+  k as Ft,
 } from "./aos_vendor.js";
 import {
   C as Ce,
@@ -42,25 +42,25 @@ import {
   P as de,
   W as ue,
   B as q,
-  e as z,
-  f as K,
-  h as X,
-  G as Ie,
+  e as D,
+  f as X,
+  h as K,
+  G as Le,
   T as Bt,
-  k as Ht,
+  k as Vt,
   l as xe,
-  n as Vt,
+  n as Ht,
   o as Wt,
   M as le,
-  q as ae,
-  t as F,
+  q as re,
+  t as U,
   u as Me,
   v as ne,
   w as Ee,
   x as Yt,
   y as qt,
-  z as Kt,
-  D as Xt,
+  z as Xt,
+  D as Kt,
   F as Jt,
   H as Qt,
 } from "./aos.js";
@@ -68,28 +68,28 @@ import { L as Zt } from "./index.js";
 const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
   tt = "super-secret-key-ajayos",
   B = {
-    get(t, r = null) {
+    get(t, a = null) {
       try {
         const s = localStorage.getItem(Pe(t));
-        if (!s) return r;
-        const a = Ce.AES.decrypt(s, tt).toString(Ce.enc.Utf8);
-        if (!a) return r;
+        if (!s) return a;
+        const r = Ce.AES.decrypt(s, tt).toString(Ce.enc.Utf8);
+        if (!r) return a;
         try {
-          const i = JSON.parse(a);
+          const i = JSON.parse(r);
           return i && i.__type === "string" ? i.value : i;
         } catch (i) {
-          return a;
+          return r;
         }
       } catch (s) {
-        return r;
+        return a;
       }
     },
-    set(t, r) {
+    set(t, a) {
       try {
         let s;
-        typeof r == "string"
-          ? (s = JSON.stringify({ __type: "string", value: r }))
-          : (s = JSON.stringify(r));
+        typeof a == "string"
+          ? (s = JSON.stringify({ __type: "string", value: a }))
+          : (s = JSON.stringify(a));
         const n = Ce.AES.encrypt(s, tt).toString();
         localStorage.setItem(Pe(t), n);
       } catch (s) {
@@ -104,73 +104,73 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
     },
   },
   es = () => {
-    const t = l.useRef(null);
+    const t = c.useRef(null);
     return (
-      l.useEffect(() => {
-        const r = t.current;
-        if (!r) return;
+      c.useEffect(() => {
+        const a = t.current;
+        if (!a) return;
         const s = new ce(),
-          n = new de(75, r.clientWidth / r.clientHeight, 0.1, 1e3);
+          n = new de(75, a.clientWidth / a.clientHeight, 0.1, 1e3);
         n.position.z = 50;
-        const a = new ue({ alpha: !0, antialias: !0 });
-        a.setSize(r.clientWidth, r.clientHeight),
-          a.setPixelRatio(window.devicePixelRatio),
-          r.appendChild(a.domElement);
+        const r = new ue({ alpha: !0, antialias: !0 });
+        r.setSize(a.clientWidth, a.clientHeight),
+          r.setPixelRatio(window.devicePixelRatio),
+          a.appendChild(r.domElement);
         const i = new q(),
           d = 8e3,
-          c = new Float32Array(d * 3),
+          l = new Float32Array(d * 3),
           o = new Float32Array(d * 3);
-        for (let v = 0; v < d; v++) {
-          const w = v * 3,
-            f = Math.random() * 50,
-            N = Math.random() * Math.PI * 2,
-            h = f * 0.2;
-          (c[w] = Math.cos(N + h) * f),
-            (c[w + 1] = (Math.random() - 0.5) * 20),
-            (c[w + 2] = Math.sin(N + h) * f),
+        for (let j = 0; j < d; j++) {
+          const w = j * 3,
+            x = Math.random() * 50,
+            k = Math.random() * Math.PI * 2,
+            S = x * 0.2;
+          (l[w] = Math.cos(k + S) * x),
+            (l[w + 1] = (Math.random() - 0.5) * 20),
+            (l[w + 2] = Math.sin(k + S) * x),
             (o[w] = Math.random()),
             (o[w + 1] = Math.random() * 0.5 + 0.5),
             (o[w + 2] = 1);
         }
-        i.setAttribute("position", new z(c, 3)),
-          i.setAttribute("color", new z(o, 3));
-        const u = new K({
+        i.setAttribute("position", new D(l, 3)),
+          i.setAttribute("color", new D(o, 3));
+        const m = new X({
             size: 0.15,
             vertexColors: !0,
             transparent: !0,
             opacity: 0.7,
           }),
-          m = new X(i, u);
-        s.add(m);
-        let x = 0,
-          b = 0;
-        const g = (v) => {
-          (x = (v.clientX / window.innerWidth - 0.5) * 2),
-            (b = (v.clientY / window.innerHeight - 0.5) * 2);
+          h = new K(i, m);
+        s.add(h);
+        let p = 0,
+          y = 0;
+        const f = (j) => {
+          (p = (j.clientX / window.innerWidth - 0.5) * 2),
+            (y = (j.clientY / window.innerHeight - 0.5) * 2);
         };
-        window.addEventListener("mousemove", g);
-        const p = () => {
-          (m.rotation.y += 8e-4),
-            (m.rotation.x += (b * 0.05 - m.rotation.x) * 0.05),
-            (m.rotation.z += (x * 0.05 - m.rotation.z) * 0.05),
-            a.render(s, n),
-            requestAnimationFrame(p);
+        window.addEventListener("mousemove", f);
+        const u = () => {
+          (h.rotation.y += 8e-4),
+            (h.rotation.x += (y * 0.05 - h.rotation.x) * 0.05),
+            (h.rotation.z += (p * 0.05 - h.rotation.z) * 0.05),
+            r.render(s, n),
+            requestAnimationFrame(u);
         };
-        p();
-        const y = () => {
-          (n.aspect = r.clientWidth / r.clientHeight),
+        u();
+        const b = () => {
+          (n.aspect = a.clientWidth / a.clientHeight),
             n.updateProjectionMatrix(),
-            a.setSize(r.clientWidth, r.clientHeight);
+            r.setSize(a.clientWidth, a.clientHeight);
         };
         return (
-          window.addEventListener("resize", y),
+          window.addEventListener("resize", b),
           () => {
-            window.removeEventListener("mousemove", g),
-              window.removeEventListener("resize", y),
-              r.removeChild(a.domElement),
+            window.removeEventListener("mousemove", f),
+              window.removeEventListener("resize", b),
+              a.removeChild(r.domElement),
               i.dispose(),
-              u.dispose(),
-              a.dispose();
+              m.dispose(),
+              r.dispose();
           }
         );
       }, []),
@@ -178,119 +178,119 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
     );
   },
   ts = () => {
-    const t = l.useRef(null);
+    const t = c.useRef(null);
     return (
-      l.useEffect(() => {
-        const r = t.current;
-        if (!r) return;
+      c.useEffect(() => {
+        const a = t.current;
+        if (!a) return;
         const s = new ce(),
-          n = new de(75, r.clientWidth / r.clientHeight, 0.1, 2e3);
+          n = new de(75, a.clientWidth / a.clientHeight, 0.1, 2e3);
         n.position.z = 60;
-        const a = new ue({ alpha: !0, antialias: !0 });
-        a.setSize(r.clientWidth, r.clientHeight),
-          a.setPixelRatio(window.devicePixelRatio),
-          r.appendChild(a.domElement);
+        const r = new ue({ alpha: !0, antialias: !0 });
+        r.setSize(a.clientWidth, a.clientHeight),
+          r.setPixelRatio(window.devicePixelRatio),
+          a.appendChild(r.domElement);
         const i = new q(),
           d = 4e3,
-          c = new Float32Array(d * 3),
+          l = new Float32Array(d * 3),
           o = new Float32Array(d * 3);
-        for (let A = 0; A < d; A++) {
-          const E = A * 3;
-          (c[E] = (Math.random() - 0.5) * 400),
-            (c[E + 1] = (Math.random() - 0.5) * 400),
-            (c[E + 2] = (Math.random() - 0.5) * 400);
+        for (let N = 0; N < d; N++) {
+          const v = N * 3;
+          (l[v] = (Math.random() - 0.5) * 400),
+            (l[v + 1] = (Math.random() - 0.5) * 400),
+            (l[v + 2] = (Math.random() - 0.5) * 400);
           const C = Math.random();
-          (o[E] = C), (o[E + 1] = C * 0.9 + 0.1), (o[E + 2] = 1);
+          (o[v] = C), (o[v + 1] = C * 0.9 + 0.1), (o[v + 2] = 1);
         }
-        i.setAttribute("position", new z(c, 3)),
-          i.setAttribute("color", new z(o, 3));
-        const u = new K({
+        i.setAttribute("position", new D(l, 3)),
+          i.setAttribute("color", new D(o, 3));
+        const m = new X({
             size: 0.1,
             vertexColors: !0,
             transparent: !0,
             opacity: 0.8,
           }),
-          m = new X(i, u);
-        s.add(m);
-        const x = new Ie(),
-          g = new Bt().load(
+          h = new K(i, m);
+        s.add(h);
+        const p = new Le(),
+          f = new Bt().load(
             "https://threejs.org/examples/textures/sprites/smoke.png",
           );
-        for (let A = 0; A < 15; A++) {
-          const E = new Ht({
-              map: g,
+        for (let N = 0; N < 15; N++) {
+          const v = new Vt({
+              map: f,
               color: new xe().setHSL(Math.random(), 0.7, 0.5),
               transparent: !0,
               opacity: 0.15 + Math.random() * 0.1,
               depthWrite: !1,
             }),
-            C = new Vt(E);
+            C = new Ht(v);
           C.position.set(
             (Math.random() - 0.5) * 300,
             (Math.random() - 0.5) * 200,
             (Math.random() - 0.5) * 300,
           );
-          const R = 80 + Math.random() * 100;
-          C.scale.set(R, R, 1), x.add(C);
+          const P = 80 + Math.random() * 100;
+          C.scale.set(P, P, 1), p.add(C);
         }
-        s.add(x);
-        const p = new q(),
-          y = 2e3,
-          v = new Float32Array(y * 3),
-          w = new Float32Array(y * 3);
-        for (let A = 0; A < y; A++) {
-          const E = A * 3,
+        s.add(p);
+        const u = new q(),
+          b = 2e3,
+          j = new Float32Array(b * 3),
+          w = new Float32Array(b * 3);
+        for (let N = 0; N < b; N++) {
+          const v = N * 3,
             C = Math.random() * 100,
-            R = Math.random() * Math.PI * 2,
-            D = Math.acos(Math.random() * 2 - 1);
-          (v[E] = C * Math.sin(D) * Math.cos(R)),
-            (v[E + 1] = C * Math.sin(D) * Math.sin(R)),
-            (v[E + 2] = C * Math.cos(D));
+            P = Math.random() * Math.PI * 2,
+            L = Math.acos(Math.random() * 2 - 1);
+          (j[v] = C * Math.sin(L) * Math.cos(P)),
+            (j[v + 1] = C * Math.sin(L) * Math.sin(P)),
+            (j[v + 2] = C * Math.cos(L));
           const I = new xe().setHSL(Math.random(), 1, 0.6);
-          (w[E] = I.r), (w[E + 1] = I.g), (w[E + 2] = I.b);
+          (w[v] = I.r), (w[v + 1] = I.g), (w[v + 2] = I.b);
         }
-        p.setAttribute("position", new z(v, 3)),
-          p.setAttribute("color", new z(w, 3));
-        const f = new K({
+        u.setAttribute("position", new D(j, 3)),
+          u.setAttribute("color", new D(w, 3));
+        const x = new X({
             size: 0.5,
             vertexColors: !0,
             transparent: !0,
             opacity: 0.9,
             blending: Wt,
           }),
-          N = new X(p, f);
-        s.add(N);
-        let h = 0,
-          j = 0;
-        const S = (A) => {
-          (h = (A.clientX / window.innerWidth - 0.5) * 2),
-            (j = (A.clientY / window.innerHeight - 0.5) * 2);
+          k = new K(u, x);
+        s.add(k);
+        let S = 0,
+          M = 0;
+        const z = (N) => {
+          (S = (N.clientX / window.innerWidth - 0.5) * 2),
+            (M = (N.clientY / window.innerHeight - 0.5) * 2);
         };
-        window.addEventListener("mousemove", S);
-        const k = () => {
-          requestAnimationFrame(k),
-            (m.rotation.y += 2e-4),
-            (N.rotation.y += 5e-4),
-            (x.rotation.y += 1e-4),
-            (x.rotation.x = Math.sin(Date.now() * 5e-5) * 0.1),
-            (n.position.x += (h * 30 - n.position.x) * 0.05),
-            (n.position.y += (-j * 20 - n.position.y) * 0.05),
+        window.addEventListener("mousemove", z);
+        const E = () => {
+          requestAnimationFrame(E),
+            (h.rotation.y += 2e-4),
+            (k.rotation.y += 5e-4),
+            (p.rotation.y += 1e-4),
+            (p.rotation.x = Math.sin(Date.now() * 5e-5) * 0.1),
+            (n.position.x += (S * 30 - n.position.x) * 0.05),
+            (n.position.y += (-M * 20 - n.position.y) * 0.05),
             n.lookAt(s.position),
-            a.render(s, n);
+            r.render(s, n);
         };
-        k();
-        const M = () => {
-          (n.aspect = r.clientWidth / r.clientHeight),
+        E();
+        const g = () => {
+          (n.aspect = a.clientWidth / a.clientHeight),
             n.updateProjectionMatrix(),
-            a.setSize(r.clientWidth, r.clientHeight);
+            r.setSize(a.clientWidth, a.clientHeight);
         };
         return (
-          window.addEventListener("resize", M),
+          window.addEventListener("resize", g),
           () => {
-            window.removeEventListener("mousemove", S),
-              window.removeEventListener("resize", M),
-              r.removeChild(a.domElement),
-              a.dispose();
+            window.removeEventListener("mousemove", z),
+              window.removeEventListener("resize", g),
+              a.removeChild(r.domElement),
+              r.dispose();
           }
         );
       }, []),
@@ -298,31 +298,31 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
     );
   },
   ss = () => {
-    const t = l.useRef(null),
-      r = l.useRef(null),
-      s = l.useRef(null),
-      n = l.useRef(null),
-      a = l.useRef(null),
-      i = l.useRef(!1);
+    const t = c.useRef(null),
+      a = c.useRef(null),
+      s = c.useRef(null),
+      n = c.useRef(null),
+      r = c.useRef(null),
+      i = c.useRef(!1);
     return (
-      l.useEffect(() => {
+      c.useEffect(() => {
         if (!t.current || i.current) return;
         i.current = !0;
         const d = new ce();
         n.current = d;
-        const c = new de(75, window.innerWidth / window.innerHeight, 0.1, 2e3);
-        (c.position.z = 60), (a.current = c);
+        const l = new de(75, window.innerWidth / window.innerHeight, 0.1, 2e3);
+        (l.position.z = 60), (r.current = l);
         const o = new ue({ alpha: !0, antialias: !0 });
         o.setSize(window.innerWidth, window.innerHeight),
           o.setPixelRatio(window.devicePixelRatio),
           o.setClearColor(0, 1),
           (s.current = o),
           t.current.appendChild(o.domElement);
-        const u = new q(),
-          m = 12e3,
-          x = new Float32Array(m * 3),
-          b = new Float32Array(m * 3),
-          g = [
+        const m = new q(),
+          h = 12e3,
+          p = new Float32Array(h * 3),
+          y = new Float32Array(h * 3),
+          f = [
             { r: 0.1, g: 0.6, b: 1 },
             { r: 0.6, g: 0.2, b: 1 },
             { r: 1, g: 0.2, b: 0.6 },
@@ -332,64 +332,64 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
             { r: 0.5, g: 1, b: 0.5 },
             { r: 1, g: 1, b: 0.5 },
           ];
-        for (let C = 0; C < m; C++) {
-          const R = C * 3,
-            D = Math.random() * Math.PI * 2,
+        for (let C = 0; C < h; C++) {
+          const P = C * 3,
+            L = Math.random() * Math.PI * 2,
             I = Math.pow(Math.random(), 0.5) * 60,
             te = 3,
             se = (I / 60) * Math.PI * 4,
             ge = (Math.floor(Math.random() * te) / te) * Math.PI * 2;
-          (x[R] = Math.cos(D + se + ge) * I),
-            (x[R + 1] = (Math.random() - 0.5) * 40),
-            (x[R + 2] = Math.sin(D + se + ge) * I);
-          const re = g[Math.floor(Math.random() * g.length)];
-          (b[R] = re.r + (Math.random() - 0.5) * 0.2),
-            (b[R + 1] = re.g + (Math.random() - 0.5) * 0.2),
-            (b[R + 2] = re.b + (Math.random() - 0.5) * 0.2);
+          (p[P] = Math.cos(L + se + ge) * I),
+            (p[P + 1] = (Math.random() - 0.5) * 40),
+            (p[P + 2] = Math.sin(L + se + ge) * I);
+          const ae = f[Math.floor(Math.random() * f.length)];
+          (y[P] = ae.r + (Math.random() - 0.5) * 0.2),
+            (y[P + 1] = ae.g + (Math.random() - 0.5) * 0.2),
+            (y[P + 2] = ae.b + (Math.random() - 0.5) * 0.2);
         }
-        u.setAttribute("position", new z(x, 3)),
-          u.setAttribute("color", new z(b, 3));
-        const p = new K({
+        m.setAttribute("position", new D(p, 3)),
+          m.setAttribute("color", new D(y, 3));
+        const u = new X({
             size: 0.25,
             vertexColors: !0,
             transparent: !0,
             opacity: 0.8,
             sizeAttenuation: !0,
           }),
-          y = new X(u, p);
-        d.add(y);
-        const v = new q(),
+          b = new K(m, u);
+        d.add(b);
+        const j = new q(),
           w = 5e3,
-          f = new Float32Array(w * 3),
-          N = new Float32Array(w * 3);
+          x = new Float32Array(w * 3),
+          k = new Float32Array(w * 3);
         for (let C = 0; C < w; C++) {
-          const R = C * 3;
-          (f[R] = (Math.random() - 0.5) * 300),
-            (f[R + 1] = (Math.random() - 0.5) * 300),
-            (f[R + 2] = (Math.random() - 0.5) * 300);
-          const D = Math.random();
-          (N[R] = D * 0.8 + 0.2), (N[R + 1] = D * 0.8 + 0.2), (N[R + 2] = D);
+          const P = C * 3;
+          (x[P] = (Math.random() - 0.5) * 300),
+            (x[P + 1] = (Math.random() - 0.5) * 300),
+            (x[P + 2] = (Math.random() - 0.5) * 300);
+          const L = Math.random();
+          (k[P] = L * 0.8 + 0.2), (k[P + 1] = L * 0.8 + 0.2), (k[P + 2] = L);
         }
-        v.setAttribute("position", new z(f, 3)),
-          v.setAttribute("color", new z(N, 3));
-        const h = new K({
+        j.setAttribute("position", new D(x, 3)),
+          j.setAttribute("color", new D(k, 3));
+        const S = new X({
             size: 0.08,
             vertexColors: !0,
             transparent: !0,
             opacity: 0.6,
             sizeAttenuation: !0,
           }),
-          j = new X(v, h);
-        d.add(j);
+          M = new K(j, S);
+        d.add(M);
         for (let C = 0; C < 12; C++) {
-          const R = new le({
+          const P = new le({
               color: new xe().setHSL(0.5 + Math.random() * 0.4, 0.8, 0.4),
               transparent: !0,
               opacity: 0.06 + Math.random() * 0.08,
               depthWrite: !1,
             }),
-            D = new ae(Math.random() * 40 + 25, 32, 32),
-            I = new F(D, R);
+            L = new re(Math.random() * 40 + 25, 32, 32),
+            I = new U(L, P);
           I.position.set(
             (Math.random() - 0.5) * 150,
             (Math.random() - 0.5) * 120,
@@ -402,42 +402,42 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
             ),
             d.add(I);
         }
-        let S = 0,
-          k = 0;
-        const M = (C) => {
-          (S = (C.clientX / window.innerWidth) * 2 - 1),
-            (k = -(C.clientY / window.innerHeight) * 2 + 1);
+        let z = 0,
+          E = 0;
+        const g = (C) => {
+          (z = (C.clientX / window.innerWidth) * 2 - 1),
+            (E = -(C.clientY / window.innerHeight) * 2 + 1);
         };
-        window.addEventListener("mousemove", M);
-        const A = () => {
-          (r.current = requestAnimationFrame(A)),
-            (y.rotation.z += 15e-5),
-            (y.rotation.x += 8e-5),
-            (y.rotation.y += 1e-4),
-            (j.rotation.z += 5e-5),
-            (j.rotation.x += 2e-5),
-            (c.position.x = S * 25),
-            (c.position.y = k * 20),
-            c.lookAt(0, 0, 0),
-            o.render(d, c);
+        window.addEventListener("mousemove", g);
+        const N = () => {
+          (a.current = requestAnimationFrame(N)),
+            (b.rotation.z += 15e-5),
+            (b.rotation.x += 8e-5),
+            (b.rotation.y += 1e-4),
+            (M.rotation.z += 5e-5),
+            (M.rotation.x += 2e-5),
+            (l.position.x = z * 25),
+            (l.position.y = E * 20),
+            l.lookAt(0, 0, 0),
+            o.render(d, l);
         };
-        A();
-        const E = () => {
+        N();
+        const v = () => {
           if (!o) return;
           const C = window.innerWidth,
-            R = window.innerHeight;
-          (c.aspect = C / R), c.updateProjectionMatrix(), o.setSize(C, R);
+            P = window.innerHeight;
+          (l.aspect = C / P), l.updateProjectionMatrix(), o.setSize(C, P);
         };
         return (
-          window.addEventListener("resize", E),
+          window.addEventListener("resize", v),
           () => {
-            window.removeEventListener("mousemove", M),
-              window.removeEventListener("resize", E),
-              cancelAnimationFrame(r.current),
+            window.removeEventListener("mousemove", g),
+              window.removeEventListener("resize", v),
+              cancelAnimationFrame(a.current),
+              m.dispose(),
               u.dispose(),
-              p.dispose(),
-              v.dispose(),
-              h.dispose(),
+              j.dispose(),
+              S.dispose(),
               o.dispose(),
               t.current &&
                 o.domElement.parentNode === t.current &&
@@ -449,26 +449,26 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
       e.jsx("div", { ref: t, className: "fixed inset-0 z-0" })
     );
   },
-  rs = () => {
-    const t = l.useRef(null),
-      r = l.useRef(!1);
+  as = () => {
+    const t = c.useRef(null),
+      a = c.useRef(!1);
     return (
-      l.useEffect(() => {
-        if (!t.current || r.current) return;
-        r.current = !0;
+      c.useEffect(() => {
+        if (!t.current || a.current) return;
+        a.current = !0;
         const s = new ce(),
           n = new de(75, window.innerWidth / window.innerHeight, 0.1, 2e3);
         n.position.z = 60;
-        const a = new ue({ alpha: !0, antialias: !0 });
-        a.setSize(window.innerWidth, window.innerHeight),
-          a.setPixelRatio(window.devicePixelRatio),
-          a.setClearColor(0, 1),
-          t.current.appendChild(a.domElement);
+        const r = new ue({ alpha: !0, antialias: !0 });
+        r.setSize(window.innerWidth, window.innerHeight),
+          r.setPixelRatio(window.devicePixelRatio),
+          r.setClearColor(0, 1),
+          t.current.appendChild(r.domElement);
         const i = new q(),
           d = 12e3,
-          c = new Float32Array(d * 3),
+          l = new Float32Array(d * 3),
           o = new Float32Array(d * 3),
-          u = [
+          m = [
             { r: 0.1, g: 0.6, b: 1 },
             { r: 0.6, g: 0.2, b: 1 },
             { r: 1, g: 0.2, b: 0.6 },
@@ -478,181 +478,181 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
             { r: 0.5, g: 1, b: 0.5 },
             { r: 1, g: 1, b: 0.5 },
           ];
-        for (let k = 0; k < d; k++) {
-          const M = k * 3,
-            A = Math.random() * Math.PI * 2,
-            E = Math.pow(Math.random(), 0.5) * 60,
+        for (let E = 0; E < d; E++) {
+          const g = E * 3,
+            N = Math.random() * Math.PI * 2,
+            v = Math.pow(Math.random(), 0.5) * 60,
             C = 3,
-            D = (E / 60) * Math.PI * 4,
+            L = (v / 60) * Math.PI * 4,
             I = (Math.floor(Math.random() * C) / C) * Math.PI * 2;
-          (c[M] = Math.cos(A + D + I) * E),
-            (c[M + 1] = (Math.random() - 0.5) * 40),
-            (c[M + 2] = Math.sin(A + D + I) * E);
-          const te = u[Math.floor(Math.random() * u.length)];
-          (o[M] = te.r + (Math.random() - 0.5) * 0.2),
-            (o[M + 1] = te.g + (Math.random() - 0.5) * 0.2),
-            (o[M + 2] = te.b + (Math.random() - 0.5) * 0.2);
+          (l[g] = Math.cos(N + L + I) * v),
+            (l[g + 1] = (Math.random() - 0.5) * 40),
+            (l[g + 2] = Math.sin(N + L + I) * v);
+          const te = m[Math.floor(Math.random() * m.length)];
+          (o[g] = te.r + (Math.random() - 0.5) * 0.2),
+            (o[g + 1] = te.g + (Math.random() - 0.5) * 0.2),
+            (o[g + 2] = te.b + (Math.random() - 0.5) * 0.2);
         }
-        i.setAttribute("position", new z(c, 3)),
-          i.setAttribute("color", new z(o, 3));
-        const m = new K({
+        i.setAttribute("position", new D(l, 3)),
+          i.setAttribute("color", new D(o, 3));
+        const h = new X({
             size: 0.25,
             vertexColors: !0,
             transparent: !0,
             opacity: 0.8,
             sizeAttenuation: !0,
           }),
-          x = new X(i, m);
-        s.add(x);
-        const b = new q(),
-          g = 5e3,
-          p = new Float32Array(g * 3),
-          y = new Float32Array(g * 3);
-        for (let k = 0; k < g; k++) {
-          const M = k * 3;
-          (p[M] = (Math.random() - 0.5) * 300),
-            (p[M + 1] = (Math.random() - 0.5) * 300),
-            (p[M + 2] = (Math.random() - 0.5) * 300);
-          const A = Math.random();
-          (y[M] = A * 0.8 + 0.2), (y[M + 1] = A * 0.8 + 0.2), (y[M + 2] = A);
+          p = new K(i, h);
+        s.add(p);
+        const y = new q(),
+          f = 5e3,
+          u = new Float32Array(f * 3),
+          b = new Float32Array(f * 3);
+        for (let E = 0; E < f; E++) {
+          const g = E * 3;
+          (u[g] = (Math.random() - 0.5) * 300),
+            (u[g + 1] = (Math.random() - 0.5) * 300),
+            (u[g + 2] = (Math.random() - 0.5) * 300);
+          const N = Math.random();
+          (b[g] = N * 0.8 + 0.2), (b[g + 1] = N * 0.8 + 0.2), (b[g + 2] = N);
         }
-        b.setAttribute("position", new z(p, 3)),
-          b.setAttribute("color", new z(y, 3));
-        const v = new K({
+        y.setAttribute("position", new D(u, 3)),
+          y.setAttribute("color", new D(b, 3));
+        const j = new X({
             size: 0.08,
             vertexColors: !0,
             transparent: !0,
             opacity: 0.6,
             sizeAttenuation: !0,
           }),
-          w = new X(b, v);
+          w = new K(y, j);
         s.add(w);
-        for (let k = 0; k < 12; k++) {
-          const M = new le({
+        for (let E = 0; E < 12; E++) {
+          const g = new le({
               color: new xe().setHSL(0.5 + Math.random() * 0.4, 0.8, 0.4),
               transparent: !0,
               opacity: 0.06 + Math.random() * 0.08,
               depthWrite: !1,
             }),
-            A = new ae(Math.random() * 40 + 25, 32, 32),
-            E = new F(A, M);
-          E.position.set(
+            N = new re(Math.random() * 40 + 25, 32, 32),
+            v = new U(N, g);
+          v.position.set(
             (Math.random() - 0.5) * 150,
             (Math.random() - 0.5) * 120,
             (Math.random() - 0.5) * 150,
           ),
-            E.scale.set(
+            v.scale.set(
               Math.random() * 3 + 1,
               Math.random() * 3 + 1,
               Math.random() * 3 + 1,
             ),
-            s.add(E);
+            s.add(v);
         }
-        let f = 0,
-          N = 0;
-        const h = (k) => {
-          (f = (k.clientX / window.innerWidth) * 2 - 1),
-            (N = -(k.clientY / window.innerHeight) * 2 + 1);
+        let x = 0,
+          k = 0;
+        const S = (E) => {
+          (x = (E.clientX / window.innerWidth) * 2 - 1),
+            (k = -(E.clientY / window.innerHeight) * 2 + 1);
         };
-        window.addEventListener("mousemove", h);
-        const j = () => {
-          (x.rotation.z += 15e-5),
-            (x.rotation.x += 8e-5),
-            (x.rotation.y += 1e-4),
+        window.addEventListener("mousemove", S);
+        const M = () => {
+          (p.rotation.z += 15e-5),
+            (p.rotation.x += 8e-5),
+            (p.rotation.y += 1e-4),
             (w.rotation.z += 5e-5),
             (w.rotation.x += 2e-5),
-            (n.position.x = f * 25),
-            (n.position.y = N * 20),
+            (n.position.x = x * 25),
+            (n.position.y = k * 20),
             n.lookAt(0, 0, 0),
-            a.render(s, n),
-            requestAnimationFrame(j);
+            r.render(s, n),
+            requestAnimationFrame(M);
         };
-        j();
-        const S = () => {
-          const k = window.innerWidth,
-            M = window.innerHeight;
-          (n.aspect = k / M), n.updateProjectionMatrix(), a.setSize(k, M);
+        M();
+        const z = () => {
+          const E = window.innerWidth,
+            g = window.innerHeight;
+          (n.aspect = E / g), n.updateProjectionMatrix(), r.setSize(E, g);
         };
         return (
-          window.addEventListener("resize", S),
+          window.addEventListener("resize", z),
           () => {
-            window.removeEventListener("mousemove", h),
-              window.removeEventListener("resize", S),
-              a.dispose();
+            window.removeEventListener("mousemove", S),
+              window.removeEventListener("resize", z),
+              r.dispose();
           }
         );
       }, []),
       e.jsx("div", { ref: t, className: "fixed inset-0 z-0" })
     );
   },
-  as = () => {
-    const t = l.useRef(null);
+  rs = () => {
+    const t = c.useRef(null);
     return (
-      l.useEffect(() => {
-        const r = t.current;
-        if (!r) return;
+      c.useEffect(() => {
+        const a = t.current;
+        if (!a) return;
         const s = new ce(),
-          n = new de(75, r.clientWidth / r.clientHeight, 0.1, 1e3);
+          n = new de(75, a.clientWidth / a.clientHeight, 0.1, 1e3);
         n.position.z = 50;
-        const a = new ue({ alpha: !0, antialias: !0 });
-        a.setSize(r.clientWidth, r.clientHeight),
-          a.setPixelRatio(window.devicePixelRatio),
-          r.appendChild(a.domElement);
+        const r = new ue({ alpha: !0, antialias: !0 });
+        r.setSize(a.clientWidth, a.clientHeight),
+          r.setPixelRatio(window.devicePixelRatio),
+          a.appendChild(r.domElement);
         const i = new q(),
           d = 8e3,
-          c = new Float32Array(d * 3),
+          l = new Float32Array(d * 3),
           o = new Float32Array(d * 3);
-        for (let v = 0; v < d; v++) {
-          const w = v * 3,
-            f = Math.random() * 50,
-            N = Math.random() * Math.PI * 2,
-            h = f * 0.2;
-          (c[w] = Math.cos(N + h) * f),
-            (c[w + 1] = (Math.random() - 0.5) * 20),
-            (c[w + 2] = Math.sin(N + h) * f),
+        for (let j = 0; j < d; j++) {
+          const w = j * 3,
+            x = Math.random() * 50,
+            k = Math.random() * Math.PI * 2,
+            S = x * 0.2;
+          (l[w] = Math.cos(k + S) * x),
+            (l[w + 1] = (Math.random() - 0.5) * 20),
+            (l[w + 2] = Math.sin(k + S) * x),
             (o[w] = Math.random()),
             (o[w + 1] = Math.random() * 0.5 + 0.5),
             (o[w + 2] = 1);
         }
-        i.setAttribute("position", new z(c, 3)),
-          i.setAttribute("color", new z(o, 3));
-        const u = new K({
+        i.setAttribute("position", new D(l, 3)),
+          i.setAttribute("color", new D(o, 3));
+        const m = new X({
             size: 0.15,
             vertexColors: !0,
             transparent: !0,
             opacity: 0.7,
           }),
-          m = new X(i, u);
-        s.add(m);
-        let x = 0,
-          b = 0;
-        const g = (v) => {
-          (x = (v.clientX / window.innerWidth - 0.5) * 2),
-            (b = (v.clientY / window.innerHeight - 0.5) * 2);
+          h = new K(i, m);
+        s.add(h);
+        let p = 0,
+          y = 0;
+        const f = (j) => {
+          (p = (j.clientX / window.innerWidth - 0.5) * 2),
+            (y = (j.clientY / window.innerHeight - 0.5) * 2);
         };
-        window.addEventListener("mousemove", g);
-        const p = () => {
-          (m.rotation.y += 8e-4),
-            (m.rotation.x += (b * 0.05 - m.rotation.x) * 0.05),
-            (m.rotation.z += (x * 0.05 - m.rotation.z) * 0.05),
-            a.render(s, n),
-            requestAnimationFrame(p);
+        window.addEventListener("mousemove", f);
+        const u = () => {
+          (h.rotation.y += 8e-4),
+            (h.rotation.x += (y * 0.05 - h.rotation.x) * 0.05),
+            (h.rotation.z += (p * 0.05 - h.rotation.z) * 0.05),
+            r.render(s, n),
+            requestAnimationFrame(u);
         };
-        p();
-        const y = () => {
-          (n.aspect = r.clientWidth / r.clientHeight),
+        u();
+        const b = () => {
+          (n.aspect = a.clientWidth / a.clientHeight),
             n.updateProjectionMatrix(),
-            a.setSize(r.clientWidth, r.clientHeight);
+            r.setSize(a.clientWidth, a.clientHeight);
         };
         return (
-          window.addEventListener("resize", y),
+          window.addEventListener("resize", b),
           () => {
-            window.removeEventListener("mousemove", g),
-              window.removeEventListener("resize", y),
-              r.removeChild(a.domElement),
+            window.removeEventListener("mousemove", f),
+              window.removeEventListener("resize", b),
+              a.removeChild(r.domElement),
               i.dispose(),
-              u.dispose(),
-              a.dispose();
+              m.dispose(),
+              r.dispose();
           }
         );
       }, []),
@@ -660,242 +660,242 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
     );
   },
   ns = () => {
-    const t = l.useRef(null);
+    const t = c.useRef(null);
     return (
-      l.useEffect(() => {
-        const r = t.current;
-        if (!r) return;
+      c.useEffect(() => {
+        const a = t.current;
+        if (!a) return;
         const s = new ce(),
           n = new de(75, window.innerWidth / window.innerHeight, 0.1, 5e3);
         n.position.z = 100;
-        const a = new ue({ alpha: !0, antialias: !0 });
-        a.setSize(window.innerWidth, window.innerHeight),
-          a.setPixelRatio(window.devicePixelRatio),
-          a.setClearColor(0, 1),
-          t.current.appendChild(a.domElement);
+        const r = new ue({ alpha: !0, antialias: !0 });
+        r.setSize(window.innerWidth, window.innerHeight),
+          r.setPixelRatio(window.devicePixelRatio),
+          r.setClearColor(0, 1),
+          t.current.appendChild(r.domElement);
         const i = new q(),
           d = 1e4,
-          c = new Float32Array(d * 3),
+          l = new Float32Array(d * 3),
           o = new Float32Array(d * 3);
-        for (let L = 0; L < d; L++) {
-          const T = L * 3;
-          (c[T] = (Math.random() - 0.5) * 500),
-            (c[T + 1] = (Math.random() - 0.5) * 500),
-            (c[T + 2] = (Math.random() - 0.5) * 500);
+        for (let R = 0; R < d; R++) {
+          const T = R * 3;
+          (l[T] = (Math.random() - 0.5) * 500),
+            (l[T + 1] = (Math.random() - 0.5) * 500),
+            (l[T + 2] = (Math.random() - 0.5) * 500);
           const W = Math.random();
           (o[T] = W * 0.8 + 0.2), (o[T + 1] = W * 0.9 + 0.1), (o[T + 2] = W);
         }
-        i.setAttribute("position", new z(c, 3)),
-          i.setAttribute("color", new z(o, 3));
-        const u = new K({
+        i.setAttribute("position", new D(l, 3)),
+          i.setAttribute("color", new D(o, 3));
+        const m = new X({
             size: 0.2,
             vertexColors: !0,
             transparent: !0,
             opacity: 0.8,
             sizeAttenuation: !0,
           }),
-          m = new X(i, u);
-        s.add(m);
-        const x = new q(),
-          b = 12e3,
-          g = new Float32Array(b * 3),
-          p = new Float32Array(b * 3),
-          y = [
+          h = new K(i, m);
+        s.add(h);
+        const p = new q(),
+          y = 12e3,
+          f = new Float32Array(y * 3),
+          u = new Float32Array(y * 3),
+          b = [
             { r: 0.1, g: 0.6, b: 1 },
             { r: 0.6, g: 0.2, b: 1 },
             { r: 1, g: 0.2, b: 0.6 },
             { r: 0.2, g: 1, b: 1 },
             { r: 1, g: 0.6, b: 0.1 },
           ];
-        for (let L = 0; L < b; L++) {
-          const T = L * 3,
+        for (let R = 0; R < y; R++) {
+          const T = R * 3,
             W = Math.random() * Math.PI * 2,
-            $ = Math.pow(Math.random(), 0.6) * 45,
-            Je = ($ / 45) * Math.PI * 5;
-          (g[T] = Math.cos(W + Je) * $),
-            (g[T + 1] = (Math.random() - 0.5) * 30),
-            (g[T + 2] = Math.sin(W + Je) * $);
-          const Se = y[Math.floor(Math.random() * y.length)];
-          (p[T] = Se.r), (p[T + 1] = Se.g), (p[T + 2] = Se.b);
+            F = Math.pow(Math.random(), 0.6) * 45,
+            Je = (F / 45) * Math.PI * 5;
+          (f[T] = Math.cos(W + Je) * F),
+            (f[T + 1] = (Math.random() - 0.5) * 30),
+            (f[T + 2] = Math.sin(W + Je) * F);
+          const ke = b[Math.floor(Math.random() * b.length)];
+          (u[T] = ke.r), (u[T + 1] = ke.g), (u[T + 2] = ke.b);
         }
-        x.setAttribute("position", new z(g, 3)),
-          x.setAttribute("color", new z(p, 3));
-        const v = new K({
+        p.setAttribute("position", new D(f, 3)),
+          p.setAttribute("color", new D(u, 3));
+        const j = new X({
             size: 0.35,
             vertexColors: !0,
             transparent: !0,
             opacity: 0.8,
             sizeAttenuation: !0,
           }),
-          w = new X(x, v);
+          w = new K(p, j);
         w.position.set(-60, -20, -50), s.add(w);
-        const f = new ae(8, 32, 32),
-          N = document.createElement("canvas");
-        (N.width = 512), (N.height = 512);
-        const h = N.getContext("2d"),
-          j = h.createRadialGradient(256, 256, 0, 256, 256, 256);
-        j.addColorStop(0, "#ffff99"),
-          j.addColorStop(0.5, "#ffcc00"),
-          j.addColorStop(1, "#ff8800"),
-          (h.fillStyle = j),
-          h.fillRect(0, 0, 512, 512);
-        const S = new Me(N),
-          k = new le({ map: S }),
-          M = new F(f, k);
-        M.position.set(80, 60, -100), s.add(M);
-        const A = new ae(9, 32, 32),
-          E = new le({
+        const x = new re(8, 32, 32),
+          k = document.createElement("canvas");
+        (k.width = 512), (k.height = 512);
+        const S = k.getContext("2d"),
+          M = S.createRadialGradient(256, 256, 0, 256, 256, 256);
+        M.addColorStop(0, "#ffff99"),
+          M.addColorStop(0.5, "#ffcc00"),
+          M.addColorStop(1, "#ff8800"),
+          (S.fillStyle = M),
+          S.fillRect(0, 0, 512, 512);
+        const z = new Me(k),
+          E = new le({ map: z }),
+          g = new U(x, E);
+        g.position.set(80, 60, -100), s.add(g);
+        const N = new re(9, 32, 32),
+          v = new le({
             color: 16755200,
             transparent: !0,
             opacity: 0.3,
             depthWrite: !1,
           }),
-          C = new F(A, E);
-        C.position.copy(M.position), s.add(C);
-        const R = new ae(5, 32, 32),
-          D = document.createElement("canvas");
-        (D.width = 1024), (D.height = 512);
-        const I = D.getContext("2d");
+          C = new U(N, v);
+        C.position.copy(g.position), s.add(C);
+        const P = new re(5, 32, 32),
+          L = document.createElement("canvas");
+        (L.width = 1024), (L.height = 512);
+        const I = L.getContext("2d");
         (I.fillStyle = "#1a4d7a"),
           I.fillRect(0, 0, 1024, 512),
           (I.fillStyle = "#2d8a3d"),
           I.fillRect(100, 200, 120, 80),
           I.fillRect(400, 150, 150, 100),
           I.fillRect(750, 220, 130, 70);
-        const te = new Me(D),
-          Fe = new ne({ map: te, emissive: 1731496, emissiveIntensity: 0.2 }),
-          se = new F(R, Fe);
+        const te = new Me(L),
+          Ue = new ne({ map: te, emissive: 1731496, emissiveIntensity: 0.2 }),
+          se = new U(P, Ue);
         se.position.set(30, -10, 0), s.add(se);
-        const ge = new ae(1.5, 16, 16),
-          re = document.createElement("canvas");
-        (re.width = 256), (re.height = 256);
-        const J = re.getContext("2d");
-        (J.fillStyle = "#cccccc"),
-          J.fillRect(0, 0, 256, 256),
-          (J.fillStyle = "#999999"),
-          J.beginPath(),
-          J.arc(80, 80, 20, 0, Math.PI * 2),
-          J.fill(),
-          J.beginPath(),
-          J.arc(180, 150, 15, 0, Math.PI * 2),
-          J.fill();
-        const ct = new Me(re),
-          dt = new ne({ map: ct }),
-          me = new F(ge, dt);
+        const ge = new re(1.5, 16, 16),
+          ae = document.createElement("canvas");
+        (ae.width = 256), (ae.height = 256);
+        const Q = ae.getContext("2d");
+        (Q.fillStyle = "#cccccc"),
+          Q.fillRect(0, 0, 256, 256),
+          (Q.fillStyle = "#999999"),
+          Q.beginPath(),
+          Q.arc(80, 80, 20, 0, Math.PI * 2),
+          Q.fill(),
+          Q.beginPath(),
+          Q.arc(180, 150, 15, 0, Math.PI * 2),
+          Q.fill();
+        const dt = new Me(ae),
+          ut = new ne({ map: dt }),
+          me = new U(ge, ut);
         me.position.set(38, -8, 0), s.add(me);
-        const Q = new Ie(),
-          ut = new Ee(1.5, 6, 8),
-          mt = new ne({ color: 16711680 }),
-          $e = new F(ut, mt);
-        ($e.position.z = 3), Q.add($e);
-        const pt = new ae(1.5, 8, 8),
-          ht = new ne({ color: 16776960 }),
-          ke = new F(pt, ht);
-        (ke.position.z = 6.5), (ke.scale.z = 0.6), Q.add(ke);
-        for (let L = 0; L < 3; L++) {
+        const Z = new Le(),
+          mt = new Ee(1.5, 6, 8),
+          ht = new ne({ color: 16711680 }),
+          Fe = new U(mt, ht);
+        (Fe.position.z = 3), Z.add(Fe);
+        const pt = new re(1.5, 8, 8),
+          xt = new ne({ color: 16776960 }),
+          Se = new U(pt, xt);
+        (Se.position.z = 6.5), (Se.scale.z = 0.6), Z.add(Se);
+        for (let R = 0; R < 3; R++) {
           const T = new Ee(1, 3, 4),
             W = new ne({ color: 26367 }),
-            $ = new F(T, W);
-          $.position.set(0, 0, 0.5),
-            ($.rotation.z = (L * Math.PI * 2) / 3),
-            ($.rotation.x = Math.PI / 4),
-            Q.add($);
+            F = new U(T, W);
+          F.position.set(0, 0, 0.5),
+            (F.rotation.z = (R * Math.PI * 2) / 3),
+            (F.rotation.x = Math.PI / 4),
+            Z.add(F);
         }
-        const xt = new Ee(1, 2, 8),
-          ft = new le({ color: 16737792 }),
-          Be = new F(xt, ft);
+        const ft = new Ee(1, 2, 8),
+          gt = new le({ color: 16737792 }),
+          Be = new U(ft, gt);
         (Be.position.z = 0),
-          Q.add(Be),
-          Q.position.set(-30, 40, 20),
-          (Q.rotation.z = Math.PI / 6),
-          s.add(Q);
-        const oe = new Ie(),
-          gt = new Yt(2, 3, 1),
-          wt = new ne({ color: 13421772 }),
-          bt = new F(gt, wt);
-        oe.add(bt);
-        const yt = new qt(4, 2),
-          vt = new ne({ color: 39423 });
-        for (let L = 0; L < 2; L++) {
-          const T = new F(yt, vt);
-          (T.position.y = L === 0 ? 3 : -3),
+          Z.add(Be),
+          Z.position.set(-30, 40, 20),
+          (Z.rotation.z = Math.PI / 6),
+          s.add(Z);
+        const oe = new Le(),
+          wt = new Yt(2, 3, 1),
+          bt = new ne({ color: 13421772 }),
+          yt = new U(wt, bt);
+        oe.add(yt);
+        const vt = new qt(4, 2),
+          jt = new ne({ color: 39423 });
+        for (let R = 0; R < 2; R++) {
+          const T = new U(vt, jt);
+          (T.position.y = R === 0 ? 3 : -3),
             (T.rotation.x = Math.PI / 6),
             oe.add(T);
         }
         oe.position.set(60, 30, -80), s.add(oe);
-        for (let L = 0; L < 10; L++) {
+        for (let R = 0; R < 10; R++) {
           const T = new le({
               color: new xe().setHSL(0.5 + Math.random() * 0.4, 0.8, 0.4),
               transparent: !0,
               opacity: 0.06 + Math.random() * 0.08,
               depthWrite: !1,
             }),
-            W = new ae(Math.random() * 40 + 30, 32, 32),
-            $ = new F(W, T);
-          $.position.set(
+            W = new re(Math.random() * 40 + 30, 32, 32),
+            F = new U(W, T);
+          F.position.set(
             (Math.random() - 0.5) * 200,
             (Math.random() - 0.5) * 200,
             (Math.random() - 0.5) * 200,
           ),
-            $.scale.set(
+            F.scale.set(
               Math.random() * 2 + 1,
               Math.random() * 2 + 1,
               Math.random() * 2 + 1,
             ),
-            s.add($);
+            s.add(F);
         }
-        const He = new Kt(16755200, 1.5, 300);
-        He.position.copy(M.position), s.add(He);
-        const jt = new Xt(4491519, 0.4);
-        s.add(jt);
-        let Ve = 0,
+        const Ve = new Xt(16755200, 1.5, 300);
+        Ve.position.copy(g.position), s.add(Ve);
+        const Nt = new Kt(4491519, 0.4);
+        s.add(Nt);
+        let He = 0,
           We = 0,
-          pe = 0,
+          he = 0,
           Ye;
-        const qe = (L) => {
-          (Ve = (L.clientX / window.innerWidth) * 2 - 1),
-            (We = -(L.clientY / window.innerHeight) * 2 + 1);
+        const qe = (R) => {
+          (He = (R.clientX / window.innerWidth) * 2 - 1),
+            (We = -(R.clientY / window.innerHeight) * 2 + 1);
         };
         window.addEventListener("mousemove", qe);
-        const Ke = () => {
-          (Ye = requestAnimationFrame(Ke)),
-            (pe += 3e-4),
-            (m.rotation.z += 5e-5),
+        const Xe = () => {
+          (Ye = requestAnimationFrame(Xe)),
+            (he += 3e-4),
+            (h.rotation.z += 5e-5),
             (w.rotation.z += 2e-4),
             (w.rotation.x += 8e-5),
             (se.rotation.y += 0.002),
             (me.rotation.y += 0.01),
-            (M.rotation.y += 0.001),
+            (g.rotation.y += 0.001),
             (C.rotation.y -= 0.001),
-            (me.position.x = se.position.x + Math.cos(pe * 2) * 8),
-            (me.position.y = se.position.y + Math.sin(pe * 2) * 4),
-            (Q.position.x = -30 + Math.cos(pe * 0.8) * 15),
-            (Q.position.y = 40 + Math.sin(pe * 0.6) * 10),
+            (me.position.x = se.position.x + Math.cos(he * 2) * 8),
+            (me.position.y = se.position.y + Math.sin(he * 2) * 4),
+            (Z.position.x = -30 + Math.cos(he * 0.8) * 15),
+            (Z.position.y = 40 + Math.sin(he * 0.6) * 10),
             (oe.rotation.z += 0.005),
             (oe.rotation.x += 0.002),
-            (n.position.x = Ve * 40),
+            (n.position.x = He * 40),
             (n.position.y = We * 30),
             n.lookAt(0, 0, 0),
-            a.render(s, n);
+            r.render(s, n);
         };
-        Ke();
-        const Xe = () => {
-          const L = window.innerWidth,
+        Xe();
+        const Ke = () => {
+          const R = window.innerWidth,
             T = window.innerHeight;
-          (n.aspect = L / T), n.updateProjectionMatrix(), a.setSize(L, T);
+          (n.aspect = R / T), n.updateProjectionMatrix(), r.setSize(R, T);
         };
         return (
-          window.addEventListener("resize", Xe),
+          window.addEventListener("resize", Ke),
           () => {
             window.removeEventListener("mousemove", qe),
-              window.removeEventListener("resize", Xe),
+              window.removeEventListener("resize", Ke),
               cancelAnimationFrame(Ye),
-              r.removeChild(a.domElement),
+              a.removeChild(r.domElement),
               i.dispose(),
-              u.dispose(),
-              x.dispose(),
-              v.dispose(),
-              a.dispose();
+              m.dispose(),
+              p.dispose(),
+              j.dispose(),
+              r.dispose();
           }
         );
       }, []),
@@ -944,7 +944,7 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
         d: "M15.75 9V5.25A2.25 2.25 0 0013.5 3H6.75A2.25 2.25 0 004.5 5.25v13.5A2.25 2.25 0 006.75 21H13.5a2.25 2.25 0 002.25-2.25V15M9 12h12m0 0l-3-3m3 3l-3 3",
       }),
     }),
-  nt = ({ className: t = "w-5 h-5" }) =>
+  ot = ({ className: t = "w-5 h-5" }) =>
     e.jsx("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       className: t,
@@ -982,7 +982,7 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
         }),
       ],
     }),
-  Ge = ({ className: t = "w-5 h-5" }) =>
+  $e = ({ className: t = "w-5 h-5" }) =>
     e.jsx("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       className: t,
@@ -992,7 +992,7 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
         d: "M12 .297C5.37.297 0 5.67 0 12.297c0 5.3 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.337.726-4.033-1.416-4.033-1.416-.547-1.387-1.334-1.756-1.334-1.756-1.09-.745.083-.729.083-.729 1.205.083 1.839 1.237 1.839 1.237 1.07 1.834 2.806 1.304 3.492.997.108-.775.419-1.305.763-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.524.118-3.176 0 0 1.007-.322 3.3 1.23a11.34 11.34 0 013.003-.404c1.02.005 2.047.138 3.006.404 2.292-1.552 3.298-1.23 3.298-1.23.653 1.653.242 2.874.118 3.176.768.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.478 5.921.43.372.822 1.102.822 2.222v3.293c0 .319.192.694.801.576C20.563 22.097 24 17.6 24 12.297 24 5.67 18.627.297 12 .297z",
       }),
     }),
-  ot = ({ className: t = "w-5 h-5" }) =>
+  it = ({ className: t = "w-5 h-5" }) =>
     e.jsx("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       className: t,
@@ -1006,7 +1006,7 @@ const Pe = (t) => `${btoa(`${t}`).replace(/=/g, "")}`,
         d: "M3 8l9 6 9-6M4.5 6h15A1.5 1.5 0 0121 7.5v9A1.5 1.5 0 0119.5 18h-15A1.5 1.5 0 013 16.5v-9A1.5 1.5 0 014.5 6z",
       }),
     }),
-  Ue = ({ className: t = "w-5 h-5" }) =>
+  Ge = ({ className: t = "w-5 h-5" }) =>
     e.jsx("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       className: t,
@@ -1038,35 +1038,35 @@ class os {
   constructor() {
     this.map = new Map();
   }
-  on(r, s) {
-    const n = this.map.get(r) || [];
-    return n.push(s), this.map.set(r, n), () => this.off(r, s);
+  on(a, s) {
+    const n = this.map.get(a) || [];
+    return n.push(s), this.map.set(a, n), () => this.off(a, s);
   }
-  once(r, s) {
-    const n = this.on(r, (...a) => {
-      n(), s(...a);
+  once(a, s) {
+    const n = this.on(a, (...r) => {
+      n(), s(...r);
     });
     return n;
   }
-  off(r, s) {
-    const n = this.map.get(r) || [];
+  off(a, s) {
+    const n = this.map.get(a) || [];
     this.map.set(
-      r,
-      n.filter((a) => a !== s),
+      a,
+      n.filter((r) => r !== s),
     );
   }
-  emit(r, ...s) {
-    const n = this.map.get(r) || [];
-    for (const a of n)
+  emit(a, ...s) {
+    const n = this.map.get(a) || [];
+    for (const r of n)
       try {
-        a(...s);
+        r(...s);
       } catch (i) {
         console.error(i);
       }
   }
 }
-const G = new os(),
-  U = {
+const $ = new os(),
+  G = {
     API_LOADING: "api:loading",
     API_TRACE: "api:trace",
     ERROR: "app:error",
@@ -1106,7 +1106,7 @@ const G = new os(),
     retry: 3,
   },
   ms = "November 5, 2025",
-  ps = [
+  hs = [
     {
       id: 1,
       category: "✨ New Features",
@@ -1183,34 +1183,34 @@ const G = new os(),
       ],
     },
   ],
-  it = {
+  lt = {
     projectName: is,
     appVersion: ls,
     features: cs,
     ws: ds,
     api: us,
     releaseDate: ms,
-    changelog: ps,
+    changelog: hs,
   },
-  P = it,
+  A = lt,
   Ne = (t) => {
-    var r;
-    return !!((r = it.features) != null && r[t]);
+    var a;
+    return !!((a = lt.features) != null && a[t]);
   };
 let O = null,
   Y = 0,
   Ae = null,
   we = [];
-function _(t, r = {}) {
-  G.emit(`SOCKET:${t}`, H({ type: t }, r));
+function _(t, a = {}) {
+  $.emit(`SOCKET:${t}`, V({ type: t }, a));
 }
-function hs() {
-  var r;
+function ps() {
+  var a;
   if (!Ne("wss") || O) return;
   const t =
-    ((r = P == null ? void 0 : P.ws) == null ? void 0 : r.url) ||
+    ((a = A == null ? void 0 : A.ws) == null ? void 0 : a.url) ||
     window.location.origin;
-  (O = Jt(t, P.ws)),
+  (O = Jt(t, A.ws)),
     O.on("connect", () => {
       (Y = 0), _("STATUS", { connected: !0, id: O.id }), xs();
     }),
@@ -1248,18 +1248,18 @@ function xs() {
   }
 }
 function st() {
-  var n, a, i, d;
+  var n, r, i, d;
   if (Ae) return;
   const t =
-      (a =
-        (n = P == null ? void 0 : P.realtime) == null
+      (r =
+        (n = A == null ? void 0 : A.realtime) == null
           ? void 0
           : n.maxRetries) != null
-        ? a
+        ? r
         : 5,
-    r =
+    a =
       (d =
-        (i = P == null ? void 0 : P.realtime) == null
+        (i = A == null ? void 0 : A.realtime) == null
           ? void 0
           : i.retryDelay) != null
         ? d
@@ -1268,7 +1268,7 @@ function st() {
     _("reconnect_failed", { retries: Y });
     return;
   }
-  const s = Math.min(r * Math.pow(2, Y), 3e4);
+  const s = Math.min(a * Math.pow(2, Y), 3e4);
   Y++,
     _("reconnect_scheduled", { delay: s, attempt: Y }),
     (Ae = setTimeout(() => {
@@ -1278,15 +1278,15 @@ function st() {
     }, s));
 }
 let ye = localStorage.getItem("U1RBVElDX1VVSUQ");
-ye || ((ye = lt()), localStorage.setItem("U1RBVElDX1VVSUQ", ye));
-function lt(t = !1) {
+ye || ((ye = ct()), localStorage.setItem("U1RBVElDX1VVSUQ", ye));
+function ct(t = !1) {
   if (typeof crypto != "undefined") {
     if (crypto.getRandomValues) {
-      const r = new Uint8Array(20);
+      const a = new Uint8Array(20);
       return (
-        crypto.getRandomValues(r),
+        crypto.getRandomValues(a),
         `aos.${t ? "request" : "device"}_` +
-          Array.from(r)
+          Array.from(a)
             .map((s) => s.toString(16).padStart(2, "0"))
             .join("")
       );
@@ -1307,62 +1307,62 @@ function fs(t) {
   return (
     (t.metadata = { start: Date.now() }),
     (t.headers["x-request-time"] = new Date().toISOString()),
-    (t.headers["x-request-id"] = lt(!0)),
+    (t.headers["x-request-id"] = ct(!0)),
     (t.headers["x-visitor-id"] = ye),
     (t.headers["x-request-timezone"] =
       Intl.DateTimeFormat().resolvedOptions().timeZone),
     (t.headers["x-request-utc-offset"] = -new Date().getTimezoneOffset() / 60),
     (t.headers["x-request-epoch"] = Date.now()),
-    (t.headers["x-app-name"] = P.projectName),
+    (t.headers["x-app-name"] = A.projectName),
     t
   );
 }
-async function gs(t, r) {
-  var c, o, u, m, x, b;
+async function gs(t, a) {
+  var l, o, m, h, p, y;
   const s = t.config;
   if (!s || s._retrying) return Promise.reject(t);
   (s._retrying = !0), (s.__retryCount = s.__retryCount || 0);
   const n = Math.min(
-      (o = (c = s.retry) != null ? c : P.api.retry) != null ? o : 3,
+      (o = (l = s.retry) != null ? l : A.api.retry) != null ? o : 3,
       5,
     ),
-    a =
-      (m = (u = s.retryDelay) != null ? u : P.api.retryDelay) != null ? m : 1e3,
-    i = (x = t.response) == null ? void 0 : x.status;
+    r =
+      (h = (m = s.retryDelay) != null ? m : A.api.retryDelay) != null ? h : 1e3,
+    i = (p = t.response) == null ? void 0 : p.status;
   if (
     (i && i >= 400 && i < 500) ||
     t.code === "ECONNABORTED" ||
-    ((b = t.message) != null && b.includes("canceled"))
+    ((y = t.message) != null && y.includes("canceled"))
   )
     return Promise.reject(t);
   let d = t;
   for (; s.__retryCount < n; ) {
     s.__retryCount += 1;
-    const g = a * Math.pow(2, s.__retryCount - 1);
-    P.api.trace &&
-      G.emit(U.API_TRACE, {
+    const f = r * Math.pow(2, s.__retryCount - 1);
+    A.api.trace &&
+      $.emit(G.API_TRACE, {
         method: s.method,
         url: s.url,
         retry: s.__retryCount,
-        delay: g,
+        delay: f,
       }),
-      await new Promise((p) => setTimeout(p, g));
+      await new Promise((u) => setTimeout(u, f));
     try {
-      const p = await r(s);
+      const u = await a(s);
       return (
         s.loading === !0 &&
-          G.emit(U.API_LOADING, { key: ve(s), loading: !1, inFlight: 0 }),
-        p
+          $.emit(G.API_LOADING, { key: ve(s), loading: !1, inFlight: 0 }),
+        u
       );
-    } catch (p) {
-      if (((d = p), s.__retryCount >= n)) break;
+    } catch (u) {
+      if (((d = u), s.__retryCount >= n)) break;
     }
   }
   return (
     s.loading === !0 &&
-      G.emit(U.API_LOADING, { key: ve(s), loading: !1, inFlight: 0 }),
-    G.emit(U.ERROR, d),
-    G.emit(U.API_RETRY_END, {
+      $.emit(G.API_LOADING, { key: ve(s), loading: !1, inFlight: 0 }),
+    $.emit(G.ERROR, d),
+    $.emit(G.API_RETRY_END, {
       method: s.method,
       url: s.url,
       attempts: s.__retryCount,
@@ -1370,91 +1370,91 @@ async function gs(t, r) {
     Promise.reject(d)
   );
 }
-const fe = Qt.create(P.api);
+const fe = Qt.create(A.api);
 fe.interceptors.request.use(
   (t) => (
     fs(t),
     t.loading === !0 &&
-      G.emit(U.API_LOADING, { key: ve(t), loading: !0, inFlight: 1 }),
+      $.emit(G.API_LOADING, { key: ve(t), loading: !0, inFlight: 1 }),
     t
   ),
 );
 fe.interceptors.response.use(
   (t) => {
     var s;
-    const r =
+    const a =
       Date.now() -
       (((s = t.config.metadata) == null ? void 0 : s.start) || Date.now());
     return (
       t.config.loading === !0 &&
-        G.emit(U.API_LOADING, { key: ve(t.config), loading: !1, inFlight: 0 }),
-      P.api.trace &&
-        G.emit(U.API_TRACE, {
+        $.emit(G.API_LOADING, { key: ve(t.config), loading: !1, inFlight: 0 }),
+      A.api.trace &&
+        $.emit(G.API_TRACE, {
           method: t.config.method,
           url: t.config.url,
-          ms: r,
+          ms: a,
           status: t.status,
         }),
       t
     );
   },
   async (t) => {
-    var n, a;
-    const r = t.config || {},
+    var n, r;
+    const a = t.config || {},
       s =
         Date.now() -
-        (((n = r.metadata) == null ? void 0 : n.start) || Date.now());
+        (((n = a.metadata) == null ? void 0 : n.start) || Date.now());
     return (
-      P.api.trace &&
-        G.emit(U.API_TRACE, {
-          method: r.method,
-          url: r.url,
+      A.api.trace &&
+        $.emit(G.API_TRACE, {
+          method: a.method,
+          url: a.url,
           ms: s,
-          status: ((a = t.response) == null ? void 0 : a.status) || 0,
+          status: ((r = t.response) == null ? void 0 : r.status) || 0,
         }),
       gs(t, fe)
     );
   },
 );
-const ie = async (t = "GET", r, s = {}, n = {}) => {
-    var c;
-    let a;
+const ie = async (t = "GET", a, s = {}, n = {}) => {
+    var l;
+    let r;
     function i(o = {}) {
-      const u = encodeURIComponent;
+      const m = encodeURIComponent;
       return Object.keys(o)
-        .map((m) => `${u(m)}=${u(o[m])}`)
+        .map((h) => `${m(h)}=${m(o[h])}`)
         .join("&");
     }
-    const d = H({ method: t.toUpperCase(), url: r }, n);
+    const d = V({ method: t.toUpperCase(), url: a }, n);
     if (["GET", "DELETE", "HEAD"].includes(t.toUpperCase())) {
       if (s && Object.keys(s).length) {
         const o = i(s),
-          u = r.includes("?") ? "&" : "?";
-        d.url = `${r}${u}${o}`;
+          m = a.includes("?") ? "&" : "?";
+        d.url = `${a}${m}${o}`;
       }
     } else d.data = s;
     try {
       const { data: o } = await fe(d);
-      a = o;
+      r = o;
     } catch (o) {
-      a = ((c = o == null ? void 0 : o.response) == null ? void 0 : c.data) || {
+      r = ((l = o == null ? void 0 : o.response) == null ? void 0 : l.data) || {
         error: !0,
         code: "INTERNAL_SERVER_ERROR",
         message: (o == null ? void 0 : o.message) || "Something went wrong :)",
       };
     }
-    return a;
+    return r;
   },
-  ee = {
-    get: (t, r = {}, s = {}) => ie("GET", t, r, s),
-    post: (t, r = {}, s = {}) => ie("POST", t, r, s),
-    put: (t, r = {}, s = {}) => ie("PUT", t, r, s),
-    patch: (t, r = {}, s = {}) => ie("PATCH", t, r, s),
-    delete: (t, r = {}, s = {}) => ie("DELETE", t, r, s),
-    head: (t, r = {}, s = {}) => ie("HEAD", t, r, s),
+  J = {
+    get: (t, a = {}, s = {}) => ie("GET", t, a, s),
+    post: (t, a = {}, s = {}) => ie("POST", t, a, s),
+    put: (t, a = {}, s = {}) => ie("PUT", t, a, s),
+    patch: (t, a = {}, s = {}) => ie("PATCH", t, a, s),
+    delete: (t, a = {}, s = {}) => ie("DELETE", t, a, s),
+    head: (t, a = {}, s = {}) => ie("HEAD", t, a, s),
   };
 function ws() {
-  const t = () => G.emit(U.TAB_VISIBILITY, { hidden: document.hidden });
+  const t = () => $.emit(G.TAB_VISIBILITY, { hidden: document.hidden });
   document.addEventListener("visibilitychange", t), t();
 }
 const bs = async () => {
@@ -1467,7 +1467,7 @@ const bs = async () => {
       loading: !1,
     });
   } catch (t) {
-    G.emit("SYSTEM_GUARD", {
+    $.emit("SYSTEM_GUARD", {
       model: "SERVER_DOWN",
       error: t == null ? void 0 : t.message,
     });
@@ -1478,14 +1478,14 @@ function ys() {
     (window.addEventListener(
       "keydown",
       (t) => {
-        G.emit(U.INPUT_TRACE, { type: "key", key: t.key, ts: Date.now() });
+        $.emit(G.INPUT_TRACE, { type: "key", key: t.key, ts: Date.now() });
       },
       !0,
     ),
     window.addEventListener(
       "click",
       (t) => {
-        G.emit(U.INPUT_TRACE, {
+        $.emit(G.INPUT_TRACE, {
           type: "mouse",
           button: t.button,
           x: t.clientX,
@@ -1503,12 +1503,12 @@ const vs = [
   { key: "U", ctrlKey: !0 },
   { key: "S", ctrlKey: !0 },
 ];
-function js(t, r) {
+function js(t, a) {
   var s;
   return (
-    (r.key ? ((s = t.key) == null ? void 0 : s.toUpperCase()) === r.key : !0) &&
-    (r.ctrlKey ? t.ctrlKey : !r.ctrlKey) &&
-    (r.shiftKey ? t.shiftKey : !r.shiftKey)
+    (a.key ? ((s = t.key) == null ? void 0 : s.toUpperCase()) === a.key : !0) &&
+    (a.ctrlKey ? t.ctrlKey : !a.ctrlKey) &&
+    (a.shiftKey ? t.shiftKey : !a.shiftKey)
   );
 }
 function Ns() {
@@ -1518,7 +1518,7 @@ function Ns() {
     color: #ff0000;
     text-shadow: 0 0 8px #ff0000;
   `,
-    r = `
+    a = `
     font-size: 14px;
     color: #ffffff;
     background-color: #1e1e1e;
@@ -1530,7 +1530,7 @@ function Ns() {
     console.log("%c⚠️ SECURITY WARNING ⚠️", t),
     console.log(
       "%cThis console is for developers only. Any unauthorized access, data inspection, or code modification may violate terms of service or security policies.",
-      r,
+      a,
     ),
     console.log(
       "%c📜 View Terms & Conditions: https://terms.ajayos.in/",
@@ -1541,7 +1541,7 @@ function Ns() {
       "color: #ff8800;",
     );
 }
-function ks() {
+function Ss() {
   if (!Ne("inspectGuard")) return;
   Ns(),
     console.log("%cInspect Guard is active.", "color: #00ff00;"),
@@ -1572,62 +1572,56 @@ function ks() {
           "color: #ff8800;",
         ),
         console.log("%c-----------------------------------", "color: #555555;"),
-        G.emit(U.INSPECT_DETECTED, { open: !0 })));
+        $.emit(G.INSPECT_DETECTED, { open: !0 })));
   }, 1e3);
 }
 const Re = {
-    inspectGuard: ks,
+    inspectGuard: Ss,
     inputTracer: ys,
     tabTracker: ws,
-    wss: hs,
+    wss: ps,
     isServerLive: bs,
   },
-  Ss = () => {
-    const [t, r] = l.useState({ username: "", password: "" }),
-      [s, n] = l.useState(!1),
-      [a, i] = l.useState(!1),
-      [d, c] = l.useState({ username: "", password: "" }),
-      [o, u] = l.useState({ type: "", text: "" }),
-      m = V(),
-      b = new URLSearchParams(window.location.search).get("next"),
-      g = async (f) => {
-        f.preventDefault(),
-          c({ username: "", password: "" }),
-          u({ type: "", text: "" }),
+  ks = () => {
+    const [t, a] = c.useState({ username: "", password: "" }),
+      [s, n] = c.useState(!1),
+      [r, i] = c.useState(!1),
+      [d, l] = c.useState({ username: "", password: "" }),
+      [o, m] = c.useState({ type: "", text: "" }),
+      h = H(),
+      y = new URLSearchParams(window.location.search).get("next"),
+      f = async (x) => {
+        x.preventDefault(),
+          l({ username: "", password: "" }),
+          m({ type: "", text: "" }),
           i(!0);
-        let N = null,
-          h = null;
         try {
-          const j = btoa(JSON.stringify(t)),
-            { code: S, message: k } = await ee.get(`/auth/login?data=${j}`);
-          switch (((N = S), (h = k), S)) {
+          const k = btoa(JSON.stringify(t)),
+            { code: S, message: M } = await J.get(`/auth/login?data=${k}`);
+          switch (S) {
             case "ACCOUNT_NOT_FOUND":
             case "ACCOUNT_SUSPENDED":
             case "ACCOUNT_NOT_VERIFIED":
-              c({ username: k, password: "" });
+              l({ username: M, password: "" });
               break;
             case "NO_PASSWORD_SET":
             case "INVALID_PASSWORD":
-              c({ username: "", password: k });
+              l({ username: "", password: M });
               break;
             case "LOGIN_SUCCESS":
-              u({
-                type: "success",
-                text: "✅ Login successful! Redirecting...",
-              }),
-                setTimeout(() => {
-                  m(b || "/");
-                }, 1500);
+              setTimeout(() => {
+                window.location.href = y ? atob(y) : "https://ajayos.in/";
+              }, 1500);
               break;
             default:
-              u({
+              m({
                 type: "error",
-                text: k || "⚠️ Something went wrong. Please try again later.",
+                text: M || "⚠️ Something went wrong. Please try again later.",
               });
               break;
           }
-        } catch (j) {
-          u({
+        } catch (k) {
+          m({
             type: "error",
             text: "🚨 Network error: Unable to reach the server.",
           });
@@ -1635,17 +1629,17 @@ const Re = {
           i(!1);
         }
       },
-      p = (f) => m(`/oauth/${f.toLowerCase()}${b ? `?next=${b}` : ""}`),
-      y =
+      u = (x) => h(`/oauth/${x.toLowerCase()}${y ? `?next=${y}` : ""}`),
+      b =
         "peer w-full p-3 bg-black/30 border rounded-xl text-white placeholder-transparent focus:ring-4 focus:outline-none transition",
-      v = (f) =>
-        d[f]
+      j = (x) =>
+        d[x]
           ? "text-red-400"
-          : t[f]
+          : t[x]
             ? "text-cyan-300"
             : "text-gray-400 peer-focus:text-cyan-300",
-      w = (f) =>
-        d[f]
+      w = (x) =>
+        d[x]
           ? "border-red-400 focus:ring-red-400/30"
           : "border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30";
     return e.jsx("div", {
@@ -1660,7 +1654,7 @@ const Re = {
         },
         children: e.jsxs("form", {
           className: "space-y-6",
-          onSubmit: g,
+          onSubmit: f,
           children: [
             e.jsxs("div", {
               className: "relative",
@@ -1674,15 +1668,15 @@ const Re = {
                   id: "username",
                   required: !0,
                   value: t.username,
-                  onChange: (f) =>
-                    r(Z(H({}, t), { username: f.target.value.trim() })),
-                  className: `${y} pl-12 ${w("username")}`,
+                  onChange: (x) =>
+                    a(ee(V({}, t), { username: x.target.value.trim() })),
+                  className: `${b} pl-12 ${w("username")}`,
                   placeholder: "Username or Email",
                   title: "Enter your username or email address",
                 }),
                 e.jsx("label", {
                   htmlFor: "username",
-                  className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.username ? "top-0 -translate-y-full text-xs" : "top-1/2 -translate-y-1/2 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full"} ${v("username")}`,
+                  className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.username ? "top-0 -translate-y-full text-xs" : "top-1/2 -translate-y-1/2 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full"} ${j("username")}`,
                   children: "Username or Email",
                 }),
                 d.username &&
@@ -1704,15 +1698,15 @@ const Re = {
                   id: "password",
                   required: !0,
                   value: t.password,
-                  onChange: (f) =>
-                    r(Z(H({}, t), { password: f.target.value.trim() })),
-                  className: `${y} pl-12 pr-10 ${w("password")}`,
+                  onChange: (x) =>
+                    a(ee(V({}, t), { password: x.target.value.trim() })),
+                  className: `${b} pl-12 pr-10 ${w("password")}`,
                   placeholder: "Password",
                   title: "Enter your password",
                 }),
                 e.jsx("label", {
                   htmlFor: "password",
-                  className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.password ? "top-0 -translate-y-full text-xs" : "top-1/2 -translate-y-1/2 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full"} ${v("password")}`,
+                  className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.password ? "top-0 -translate-y-full text-xs" : "top-1/2 -translate-y-1/2 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full"} ${j("password")}`,
                   children: "Password",
                 }),
                 e.jsx("button", {
@@ -1733,7 +1727,7 @@ const Re = {
             e.jsx("div", {
               className:
                 "text-right text-sm text-indigo-400 hover:text-indigo-300 cursor-pointer transition",
-              onClick: () => m(`/forgot${b ? `?next=${b}` : ""}`),
+              onClick: () => h(`/forgot${y ? `?next=${y}` : ""}`),
               title: "Reset your password",
               children: "Forgot Password?",
             }),
@@ -1744,20 +1738,20 @@ const Re = {
               }),
             e.jsxs("button", {
               type: "submit",
-              disabled: a,
-              className: `w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${a ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,
+              disabled: r,
+              className: `w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${r ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,
               children: [
                 e.jsxs("span", {
                   className:
                     "relative z-10 flex justify-center items-center gap-2",
                   children: [
-                    a
+                    r
                       ? e.jsx("span", {
                           className:
                             "animate-spin border-2 border-t-transparent border-white w-5 h-5 rounded-full",
                         })
                       : e.jsx(Oe, { className: "w-5 h-5" }),
-                    a ? "Signing In..." : "SIGN IN",
+                    r ? "Signing In..." : "SIGN IN",
                   ],
                 }),
                 e.jsx("span", {
@@ -1788,36 +1782,36 @@ const Re = {
               className: "flex gap-3",
               children: [
                 { name: "Google", icon: e.jsx(_e, {}), id: "google" },
-                { name: "GitHub", icon: e.jsx(Ge, {}), id: "github" },
+                { name: "GitHub", icon: e.jsx($e, {}), id: "github" },
                 {
                   name: "Passkey",
-                  icon: e.jsx(nt, { className: "w-4 h-4 text-indigo-400" }),
+                  icon: e.jsx(ot, { className: "w-4 h-4 text-indigo-400" }),
                   id: "passkey",
                 },
-              ].map(({ name: f, icon: N, id: h }) =>
+              ].map(({ name: x, icon: k, id: S }) =>
                 e.jsxs(
                   "button",
                   {
-                    onClick: () => p(h),
+                    onClick: () => u(S),
                     type: "button",
                     className:
                       "flex-1 p-3 border border-indigo-400/40 rounded-xl bg-black/30 text-sm text-gray-200 font-semibold flex items-center justify-center gap-2 transition hover:bg-indigo-400/10 hover:border-indigo-400 hover:scale-[1.02] hover:shadow-lg",
-                    title: `Continue with ${f}`,
+                    title: `Continue with ${x}`,
                     children: [
-                      N,
+                      k,
                       e.jsx("span", {
                         className: "hidden sm:inline",
-                        children: f,
+                        children: x,
                       }),
                     ],
                   },
-                  h,
+                  S,
                 ),
               ),
             }),
             e.jsx("div", {
               className: "text-center text-sm text-blue-400 cursor-pointer",
-              onClick: () => m(`/signup${b ? `?next=${b}` : ""}`),
+              onClick: () => h(`/signup${y ? `?next=${y}` : ""}`),
               title: "Create a new account",
               children: "Don’t have an account? Sign Up",
             }),
@@ -1827,16 +1821,16 @@ const Re = {
     });
   },
   Cs = () => {
-    const [t, r] = l.useState({ email: "", firstName: "", lastName: "" }),
-      [s, n] = l.useState(!1),
-      [a, i] = l.useState({ email: "", firstName: "", lastName: "" }),
-      [d, c] = l.useState({ type: "", text: "" }),
-      o = V(),
-      u = async (g) => {
+    const [t, a] = c.useState({ email: "", firstName: "", lastName: "" }),
+      [s, n] = c.useState(!1),
+      [r, i] = c.useState({ email: "", firstName: "", lastName: "" }),
+      [d, l] = c.useState({ type: "", text: "" }),
+      o = H(),
+      m = async (f) => {
         if (
-          (g.preventDefault(),
+          (f.preventDefault(),
           i({ email: "", firstName: "", lastName: "" }),
-          c({ type: "", text: "" }),
+          l({ type: "", text: "" }),
           !t.firstName || !t.lastName || !t.email)
         ) {
           i({
@@ -1848,30 +1842,30 @@ const Re = {
         }
         n(!0);
         try {
-          const { code: p, message: y } = await ee.post("/auth/account", t);
-          switch (p) {
+          const { code: u, message: b } = await J.post("/auth/account", t);
+          switch (u) {
             case "USER_ALREADY_EXISTS":
             case "USER_NOT_VERIFIED":
             case "ACCOUNT_NOT_VERIFIED":
-              i({ email: y, firstName: "", lastName: "" });
+              i({ email: b, firstName: "", lastName: "" });
               break;
             case "REGISTER_SUCCESS":
-              c({
+              l({
                 type: "success",
                 text: "✅ Registration successful! check your mail...",
               }),
                 o("/checkMail");
               break;
             default:
-              c({
+              l({
                 type: "error",
                 text: "⚠️ Something went wrong. Please try again later.",
               });
               break;
           }
-        } catch (p) {
-          console.log(p),
-            c({
+        } catch (u) {
+          console.log(u),
+            l({
               type: "error",
               text: "🚨 Network error: Unable to reach the server.",
             });
@@ -1879,10 +1873,10 @@ const Re = {
           n(!1);
         }
       },
-      m = (g) => o(`/oauth/${g.toLowerCase()}`),
-      x =
+      h = (f) => o(`/oauth/${f.toLowerCase()}`),
+      p =
         "peer w-full p-3 bg-black/30 border rounded-xl text-white placeholder-transparent focus:ring-4 focus:outline-none transition",
-      b =
+      y =
         "peer w-full p-3 bg-black/30 border border-cyan-400/40 rounded-xl text-white placeholder-transparent focus:ring-4 focus:ring-cyan-500/30 focus:border-cyan-300 focus:outline-none transition";
     return e.jsx("div", {
       className:
@@ -1896,7 +1890,7 @@ const Re = {
         },
         children: e.jsxs("form", {
           className: "space-y-6",
-          onSubmit: u,
+          onSubmit: m,
           children: [
             e.jsxs("div", {
               className: "grid grid-cols-1 sm:grid-cols-2 gap-4",
@@ -1912,9 +1906,9 @@ const Re = {
                       type: "text",
                       id: "firstName",
                       value: t.firstName,
-                      onChange: (g) =>
-                        r(Z(H({}, t), { firstName: g.target.value })),
-                      className: b + " pl-12",
+                      onChange: (f) =>
+                        a(ee(V({}, t), { firstName: f.target.value })),
+                      className: y + " pl-12",
                       placeholder: "First Name",
                     }),
                     e.jsx("label", {
@@ -1935,9 +1929,9 @@ const Re = {
                       type: "text",
                       id: "lastName",
                       value: t.lastName,
-                      onChange: (g) =>
-                        r(Z(H({}, t), { lastName: g.target.value })),
-                      className: b + " pl-12",
+                      onChange: (f) =>
+                        a(ee(V({}, t), { lastName: f.target.value })),
+                      className: y + " pl-12",
                       placeholder: "Last Name",
                     }),
                     e.jsx("label", {
@@ -1961,9 +1955,9 @@ const Re = {
                   id: "email",
                   required: !0,
                   value: t.email,
-                  onChange: (g) =>
-                    r(Z(H({}, t), { email: g.target.value.trim() })),
-                  className: `${x} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30 ${a.email ? "border-red-400 focus:ring-red-400/30" : ""}`,
+                  onChange: (f) =>
+                    a(ee(V({}, t), { email: f.target.value.trim() })),
+                  className: `${p} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30 ${r.email ? "border-red-400 focus:ring-red-400/30" : ""}`,
                   placeholder: "Email",
                 }),
                 e.jsx("label", {
@@ -1971,10 +1965,10 @@ const Re = {
                   className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${t.email ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
                   children: "Email",
                 }),
-                a.email &&
+                r.email &&
                   e.jsx("p", {
                     className: "text-xs text-red-400 mt-1",
-                    children: a.email,
+                    children: r.email,
                   }),
               ],
             }),
@@ -2029,24 +2023,24 @@ const Re = {
               className: "flex gap-3",
               children: [
                 { name: "Google", icon: e.jsx(_e, {}), id: "google" },
-                { name: "GitHub", icon: e.jsx(Ge, {}), id: "github" },
-              ].map(({ name: g, icon: p, id: y }) =>
+                { name: "GitHub", icon: e.jsx($e, {}), id: "github" },
+              ].map(({ name: f, icon: u, id: b }) =>
                 e.jsxs(
                   "button",
                   {
-                    onClick: () => m(y),
+                    onClick: () => h(b),
                     type: "button",
                     className:
                       "flex-1 p-3 border border-indigo-400/40 rounded-xl bg-black/30 text-sm text-gray-200 font-semibold flex items-center justify-center gap-2 transition hover:bg-indigo-400/10 hover:border-indigo-400 hover:scale-[1.02] hover:shadow-lg",
                     children: [
-                      p,
+                      u,
                       e.jsx("span", {
                         className: "hidden sm:inline",
-                        children: g,
+                        children: f,
                       }),
                     ],
                   },
-                  y,
+                  b,
                 ),
               ),
             }),
@@ -2061,7 +2055,7 @@ const Re = {
     });
   },
   Ms = () => {
-    const t = V(),
+    const t = H(),
       s = new URLSearchParams(window.location.search).get("next");
     return e.jsxs("div", {
       className:
@@ -2080,7 +2074,7 @@ const Re = {
               children: e.jsx("div", {
                 className:
                   "p-6 bg-cyan-500/20 rounded-full border border-cyan-400/30 shadow-xl animate-float",
-                children: e.jsx(ot, { className: "w-12 h-12 text-cyan-400" }),
+                children: e.jsx(it, { className: "w-12 h-12 text-cyan-400" }),
               }),
             }),
             e.jsx("h1", {
@@ -2102,7 +2096,7 @@ const Re = {
                   className:
                     "flex items-center justify-center gap-2 w-full p-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 font-semibold",
                   children: [
-                    e.jsx(Ue, { className: "w-5 h-5" }),
+                    e.jsx(Ge, { className: "w-5 h-5" }),
                     "Open Mail App",
                   ],
                 }),
@@ -2135,62 +2129,62 @@ const Re = {
     });
   },
   Es = () => {
-    const t = V(),
-      r = new URLSearchParams(window.location.search),
-      s = r.get("token"),
-      n = r.get("next"),
-      [a, i] = l.useState({ password: "", confirm: "" }),
-      [d, c] = l.useState(""),
-      [o, u] = l.useState(!1),
-      [m, x] = l.useState(""),
-      [b, g] = l.useState({ type: "", text: "" }),
-      [p, y] = l.useState(!1);
-    l.useEffect(() => {
+    const t = H(),
+      a = new URLSearchParams(window.location.search),
+      s = a.get("token"),
+      n = a.get("next"),
+      [r, i] = c.useState({ password: "", confirm: "" }),
+      [d, l] = c.useState(""),
+      [o, m] = c.useState(!1),
+      [h, p] = c.useState(""),
+      [y, f] = c.useState({ type: "", text: "" }),
+      [u, b] = c.useState(!1);
+    c.useEffect(() => {
       try {
         if (s) {
-          const f = JSON.parse(atob(s));
-          f.email
-            ? c(f.email)
-            : (x("Invalid token data. Please check your link."),
+          const x = JSON.parse(atob(s));
+          x.email
+            ? l(x.email)
+            : (p("Invalid token data. Please check your link."),
               t(`/login${n ? `?next=${n}` : ""}`));
         }
-      } catch (f) {
+      } catch (x) {
         console.error("Invalid base64 data");
       }
     }, [s, t, n]);
-    const v = async (f) => {
+    const j = async (x) => {
         if (
-          (f.preventDefault(),
-          x(""),
-          g({ type: "", text: "" }),
-          a.password.length < 6)
+          (x.preventDefault(),
+          p(""),
+          f({ type: "", text: "" }),
+          r.password.length < 6)
         ) {
-          x("Password must be at least 6 characters long.");
+          p("Password must be at least 6 characters long.");
           return;
         }
-        if (a.password !== a.confirm) {
-          x("Passwords do not match!");
+        if (r.password !== r.confirm) {
+          p("Passwords do not match!");
           return;
         }
-        y(!0);
+        b(!0);
         try {
-          const { message: N, error: h } = await ee.post(
+          const { message: k, error: S } = await J.post(
             "/auth/account/verify-email",
-            { data: btoa(JSON.stringify({ email: d, password: a.password })) },
+            { data: btoa(JSON.stringify({ email: d, password: r.password })) },
           );
-          h
-            ? x({
+          S
+            ? p({
                 type: "error",
-                text: N || "⚠️ Something went wrong. Try again!",
+                text: k || "⚠️ Something went wrong. Try again!",
               })
-            : (g({ type: "success", text: "✅ Password set successfully!" }),
+            : (f({ type: "success", text: "✅ Password set successfully!" }),
               setTimeout(() => {
                 t(`/login${n ? `?next=${n}` : ""}`);
               }, 2e3));
-        } catch (N) {
-          g({ type: "error", text: "⚠️ Something went wrong. Try again!" });
+        } catch (k) {
+          f({ type: "error", text: "⚠️ Something went wrong. Try again!" });
         } finally {
-          y(!1);
+          b(!1);
         }
       },
       w =
@@ -2221,7 +2215,7 @@ const Re = {
           }),
           e.jsxs("form", {
             className: "space-y-6",
-            onSubmit: v,
+            onSubmit: j,
             children: [
               e.jsxs("div", {
                 className: "relative",
@@ -2234,20 +2228,20 @@ const Re = {
                     type: o ? "text" : "password",
                     id: "password",
                     required: !0,
-                    value: a.password,
-                    onChange: (f) =>
-                      i(Z(H({}, a), { password: f.target.value.trim() })),
+                    value: r.password,
+                    onChange: (x) =>
+                      i(ee(V({}, r), { password: x.target.value.trim() })),
                     className: `${w} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30`,
                     placeholder: "New Password",
                   }),
                   e.jsx("label", {
                     htmlFor: "password",
-                    className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${a.password ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
+                    className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${r.password ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
                     children: "New Password",
                   }),
                   e.jsx("button", {
                     type: "button",
-                    onClick: () => u(!o),
+                    onClick: () => m(!o),
                     className:
                       "absolute right-4 top-1/2 -translate-y-1/2 transition hover:scale-125",
                     children: o ? "🙉" : "🙈",
@@ -2265,46 +2259,46 @@ const Re = {
                     type: o ? "text" : "password",
                     id: "confirm",
                     required: !0,
-                    value: a.confirm,
-                    onChange: (f) =>
-                      i(Z(H({}, a), { confirm: f.target.value.trim() })),
+                    value: r.confirm,
+                    onChange: (x) =>
+                      i(ee(V({}, r), { confirm: x.target.value.trim() })),
                     className: `${w} pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-cyan-500/30`,
                     placeholder: "Confirm Password",
                   }),
                   e.jsx("label", {
                     htmlFor: "confirm",
-                    className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${a.confirm ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
+                    className: `absolute left-12 text-sm transition-all duration-200 pointer-events-none ${r.confirm ? "top-0 -translate-y-full text-xs text-cyan-300" : "top-1/2 -translate-y-1/2 text-gray-400 peer-focus:top-0 peer-focus:text-xs peer-focus:-translate-y-full peer-focus:text-cyan-300"}`,
                     children: "Confirm Password",
                   }),
                 ],
               }),
-              m &&
+              h &&
                 e.jsx("p", {
                   className:
                     "text-xs text-red-400 bg-red-900/20 p-2 rounded-lg border border-red-500/30",
-                  children: m,
+                  children: h,
                 }),
-              b.text &&
+              y.text &&
                 e.jsx("div", {
-                  className: `p-3 text-sm border rounded-xl ${b.type === "success" ? "text-green-400 bg-green-900/20 border-green-500/30 animate-bounce" : "text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,
-                  children: b.text,
+                  className: `p-3 text-sm border rounded-xl ${y.type === "success" ? "text-green-400 bg-green-900/20 border-green-500/30 animate-bounce" : "text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,
+                  children: y.text,
                 }),
               e.jsxs("button", {
                 type: "submit",
-                disabled: p,
-                className: `w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${p ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,
+                disabled: u,
+                className: `w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${u ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-wait" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,
                 children: [
                   e.jsxs("span", {
                     className:
                       "relative z-10 flex justify-center items-center gap-2",
                     children: [
-                      p
+                      u
                         ? e.jsx("span", {
                             className:
                               "animate-spin border-2 border-t-transparent border-white w-5 h-5 rounded-full",
                           })
-                        : e.jsx(Ue, { className: "w-5 h-5" }),
-                      p ? "Setting Password..." : "SET PASSWORD",
+                        : e.jsx(Ge, { className: "w-5 h-5" }),
+                      u ? "Setting Password..." : "SET PASSWORD",
                     ],
                   }),
                   e.jsx("span", {
@@ -2320,19 +2314,19 @@ const Re = {
     });
   },
   Ps = () => {
-    const [t, r] = l.useState(""),
-      [s, n] = l.useState(!1),
-      [a, i] = l.useState({ type: "", text: "" }),
-      d = V(),
+    const [t, a] = c.useState(""),
+      [s, n] = c.useState(!1),
+      [r, i] = c.useState({ type: "", text: "" }),
+      d = H(),
       o = new URLSearchParams(window.location.search).get("next"),
-      u = async (m) => {
-        m.preventDefault(), i({ type: "", text: "" }), n(!0);
+      m = async (h) => {
+        h.preventDefault(), i({ type: "", text: "" }), n(!0);
         try {
-          const x = btoa(JSON.stringify({ email: t })),
-            { code: b, message: g } = await ee.get(
-              `/auth/forgot?data=${x}${o ? `&next=${o}` : ""}`,
+          const p = btoa(JSON.stringify({ email: t })),
+            { code: y, message: f } = await J.get(
+              `/auth/forgot?data=${p}${o ? `&next=${o}` : ""}`,
             );
-          switch (b) {
+          switch (y) {
             case "EMAIL_NOT_FOUND":
               i({ type: "error", text: "❌ Email not found." });
               break;
@@ -2342,11 +2336,11 @@ const Re = {
             default:
               i({
                 type: "error",
-                text: g || "⚠️ Something went wrong. Try again later.",
+                text: f || "⚠️ Something went wrong. Try again later.",
               });
           }
-        } catch (x) {
-          console.error(x),
+        } catch (p) {
+          console.error(p),
             i({
               type: "error",
               text: "🚨 Network error: Unable to reach the server.",
@@ -2367,7 +2361,7 @@ const Re = {
         },
         children: e.jsxs("form", {
           className: "space-y-6",
-          onSubmit: u,
+          onSubmit: m,
           children: [
             e.jsx("h2", {
               className: "text-center text-2xl font-bold text-cyan-300 mb-2",
@@ -2381,7 +2375,7 @@ const Re = {
             e.jsxs("div", {
               className: "relative",
               children: [
-                e.jsx(ot, {
+                e.jsx(it, {
                   className:
                     "absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-5 h-5",
                 }),
@@ -2390,7 +2384,7 @@ const Re = {
                   id: "email",
                   required: !0,
                   value: t,
-                  onChange: (m) => r(m.target.value.trim()),
+                  onChange: (h) => a(h.target.value.trim()),
                   className:
                     "peer w-full p-3 bg-black/30 border rounded-xl text-white placeholder-transparent pl-12 border-cyan-400/40 focus:border-cyan-300 focus:ring-4 focus:ring-cyan-500/30 focus:outline-none transition",
                   placeholder: "Email address",
@@ -2402,10 +2396,10 @@ const Re = {
                 }),
               ],
             }),
-            a.text &&
+            r.text &&
               e.jsx("div", {
-                className: `p-3 text-sm border rounded-xl ${a.type === "success" ? "text-green-400 bg-green-900/20 border-green-500/30 animate-bounce" : "text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,
-                children: a.text,
+                className: `p-3 text-sm border rounded-xl ${r.type === "success" ? "text-green-400 bg-green-900/20 border-green-500/30 animate-bounce" : "text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,
+                children: r.text,
               }),
             e.jsxs("button", {
               type: "submit",
@@ -2421,7 +2415,7 @@ const Re = {
                           className:
                             "animate-spin border-2 border-t-transparent border-white w-5 h-5 rounded-full",
                         })
-                      : e.jsx(Ue, { className: "w-5 h-5" }),
+                      : e.jsx(Ge, { className: "w-5 h-5" }),
                     s ? "Sending..." : "SEND RESET LINK",
                   ],
                 }),
@@ -2447,7 +2441,7 @@ const Re = {
     });
   },
   As = () => {
-    const t = V();
+    const t = H();
     return e.jsxs("div", {
       className:
         "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
@@ -2527,63 +2521,63 @@ const Re = {
         }),
       ],
     }),
-  Ls = () => {
-    const [t, r] = l.useState("Initializing Google login..."),
-      [s, n] = l.useState(!0),
-      [a, i] = l.useState(null),
-      [d, c] = l.useState("text-gray-300"),
-      o = V(),
-      u = new URLSearchParams(window.location.search),
-      m = u.get("next");
+  Ts = () => {
+    const [t, a] = c.useState("Initializing Google login..."),
+      [s, n] = c.useState(!0),
+      [r, i] = c.useState(null),
+      [d, l] = c.useState("text-gray-300"),
+      o = H(),
+      m = new URLSearchParams(window.location.search),
+      h = m.get("next");
     return (
-      l.useEffect(() => {
-        const x = u.get("code"),
-          b =
+      c.useEffect(() => {
+        const p = m.get("code"),
+          y =
             "818711819823-segq27qkuatd2d033nethk4ldd8hjp3t.apps.googleusercontent.com",
-          g = `${window.location.origin}/oauth/google`;
-        if (x)
-          i(x),
-            r("🔄 Verifying Google login..."),
+          f = `${window.location.origin}/oauth/google`;
+        if (p)
+          i(p),
+            a("🔄 Verifying Google login..."),
             n(!0),
             (async () => {
               try {
-                const p = btoa(JSON.stringify({ code: x })),
-                  { code: y, message: v } = await ee.get(
-                    `/auth/oauth/google?data=${p}`,
+                const u = btoa(JSON.stringify({ code: p })),
+                  { code: b, message: j } = await J.get(
+                    `/auth/oauth/google?data=${u}`,
                   );
-                y === "OAUTH_SUCCESS"
-                  ? (r("✅ Login successful! Redirecting..."),
-                    c("text-green-400"),
+                b === "OAUTH_SUCCESS"
+                  ? (a("✅ Login successful! Redirecting..."),
+                    l("text-green-400"),
                     setTimeout(
                       () =>
                         (window.location.href =
-                          m || "https://dashboard.ajayos.in/"),
+                          h || "https://dashboard.ajayos.in/"),
                       1200,
                     ))
-                  : (r(v || "❌ Verification failed. Please try again."),
-                    c("text-red-400"));
-              } catch (p) {
-                console.error(p),
-                  r("🚨 Server error while verifying your account."),
-                  c("text-red-400");
+                  : (a(j || "❌ Verification failed. Please try again."),
+                    l("text-red-400"));
+              } catch (u) {
+                console.error(u),
+                  a("🚨 Server error while verifying your account."),
+                  l("text-red-400");
               } finally {
                 n(!1);
               }
             })();
         else {
-          const p = new URL("https://accounts.google.com/o/oauth2/v2/auth");
-          p.searchParams.append("client_id", b),
-            p.searchParams.append("redirect_uri", g),
-            p.searchParams.append("response_type", "code"),
-            p.searchParams.append("scope", "profile email"),
-            p.searchParams.append("access_type", "offline"),
-            p.searchParams.append("prompt", "consent"),
-            m && p.searchParams.append("state", m),
-            r("Opening Google login..."),
+          const u = new URL("https://accounts.google.com/o/oauth2/v2/auth");
+          u.searchParams.append("client_id", y),
+            u.searchParams.append("redirect_uri", f),
+            u.searchParams.append("response_type", "code"),
+            u.searchParams.append("scope", "profile email"),
+            u.searchParams.append("access_type", "offline"),
+            u.searchParams.append("prompt", "consent"),
+            h && u.searchParams.append("state", h),
+            a("Opening Google login..."),
             n(!0),
-            (window.location.href = p.toString());
+            (window.location.href = u.toString());
         }
-      }, [m, u]),
+      }, [h, m]),
       e.jsx("div", {
         className:
           "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
@@ -2606,11 +2600,11 @@ const Re = {
                 className: `text-sm text-center ${d}`,
                 children: t,
               }),
-              a &&
+              r &&
                 e.jsxs("div", {
                   className:
                     "text-xs text-gray-400 break-all border border-cyan-400/20 rounded-md p-2 w-full mt-2 bg-black/20",
-                  children: [e.jsx("strong", { children: "Code:" }), " ", a],
+                  children: [e.jsx("strong", { children: "Code:" }), " ", r],
                 }),
               s &&
                 e.jsx("div", {
@@ -2630,59 +2624,59 @@ const Re = {
       })
     );
   },
-  Ts = () => {
-    const [t, r] = l.useState("Initializing GitHub login..."),
-      [s, n] = l.useState(!0),
-      [a, i] = l.useState(null),
-      [d, c] = l.useState("text-gray-300"),
-      o = V(),
-      u = new URLSearchParams(window.location.search),
-      m = u.get("next");
+  Is = () => {
+    const [t, a] = c.useState("Initializing GitHub login..."),
+      [s, n] = c.useState(!0),
+      [r, i] = c.useState(null),
+      [d, l] = c.useState("text-gray-300"),
+      o = H(),
+      m = new URLSearchParams(window.location.search),
+      h = m.get("next");
     return (
-      l.useEffect(() => {
-        const x = u.get("code"),
-          b = "Ov23lizrjD3wtrFFibTm",
-          g = `${window.location.origin}/oauth/github`;
-        if (x)
-          i(x),
-            r("🔄 Verifying GitHub login..."),
+      c.useEffect(() => {
+        const p = m.get("code"),
+          y = "Ov23lizrjD3wtrFFibTm",
+          f = `${window.location.origin}/oauth/github`;
+        if (p)
+          i(p),
+            a("🔄 Verifying GitHub login..."),
             n(!0),
             (async () => {
               try {
-                const p = btoa(JSON.stringify({ code: x })),
-                  { code: y, message: v } = await ee.get(
-                    `/auth/oauth/github?data=${p}`,
+                const u = btoa(JSON.stringify({ code: p })),
+                  { code: b, message: j } = await J.get(
+                    `/auth/oauth/github?data=${u}`,
                   );
-                y === "OAUTH_SUCCESS"
-                  ? (r("✅ Login successful! Redirecting..."),
-                    c("text-green-400"),
+                b === "OAUTH_SUCCESS"
+                  ? (a("✅ Login successful! Redirecting..."),
+                    l("text-green-400"),
                     setTimeout(
                       () =>
                         (window.location.href =
-                          m || "https://dashboard.ajayos.in/"),
+                          h || "https://dashboard.ajayos.in/"),
                       1200,
                     ))
-                  : (r(v || "❌ Verification failed. Please try again."),
-                    c("text-red-400"));
-              } catch (p) {
-                console.error(p),
-                  r("🚨 Server error while verifying your account."),
-                  c("text-red-400");
+                  : (a(j || "❌ Verification failed. Please try again."),
+                    l("text-red-400"));
+              } catch (u) {
+                console.error(u),
+                  a("🚨 Server error while verifying your account."),
+                  l("text-red-400");
               } finally {
                 n(!1);
               }
             })();
         else {
-          const p = new URL("https://github.com/login/oauth/authorize");
-          p.searchParams.append("client_id", b),
-            p.searchParams.append("redirect_uri", g),
-            p.searchParams.append("scope", "read:user user:email"),
-            m && p.searchParams.append("state", m),
-            r("Opening GitHub login..."),
+          const u = new URL("https://github.com/login/oauth/authorize");
+          u.searchParams.append("client_id", y),
+            u.searchParams.append("redirect_uri", f),
+            u.searchParams.append("scope", "read:user user:email"),
+            h && u.searchParams.append("state", h),
+            a("Opening GitHub login..."),
             n(!0),
-            (window.location.href = p.toString());
+            (window.location.href = u.toString());
         }
-      }, [m, u]),
+      }, [h, m]),
       e.jsx("div", {
         className:
           "relative z-10 w-screen h-[80vh] flex items-center justify-center px-4",
@@ -2696,7 +2690,7 @@ const Re = {
           children: e.jsxs("div", {
             className: "flex flex-col items-center justify-center space-y-6",
             children: [
-              e.jsx(Ge, { className: "w-12 h-12 text-white" }),
+              e.jsx($e, { className: "w-12 h-12 text-white" }),
               e.jsx("h2", {
                 className: "text-xl font-semibold tracking-wide",
                 children: "GitHub Login",
@@ -2705,11 +2699,11 @@ const Re = {
                 className: `text-sm text-center ${d}`,
                 children: t,
               }),
-              a &&
+              r &&
                 e.jsxs("div", {
                   className:
                     "text-xs text-gray-400 break-all border border-gray-500/20 rounded-md p-2 w-full mt-2 bg-black/20",
-                  children: [e.jsx("strong", { children: "Code:" }), " ", a],
+                  children: [e.jsx("strong", { children: "Code:" }), " ", r],
                 }),
               s &&
                 e.jsx("div", {
@@ -2729,88 +2723,88 @@ const Re = {
       })
     );
   },
-  Is = () => {
-    const [t, r] = l.useState("🔐 Ready for system authentication..."),
-      [s, n] = l.useState(!0),
-      [a, i] = l.useState("text-gray-300"),
-      d = V(),
+  Ls = () => {
+    const [t, a] = c.useState("🔐 Ready for system authentication..."),
+      [s, n] = c.useState(!0),
+      [r, i] = c.useState("text-gray-300"),
+      d = H(),
       o = new URLSearchParams(window.location.search).get("next");
     return (
-      l.useEffect(() => {
+      c.useEffect(() => {
         (async () => {
-          var u;
+          var m;
           try {
-            r("🔑 Initializing system passkey authentication..."), n(!0);
-            const { code: m, message: x } = await ee.get(
+            a("🔑 Initializing system passkey authentication..."), n(!0);
+            const { code: h, message: p } = await J.get(
               "/auth/passkey/challenge",
             );
-            if (m !== "SUCCESS") {
-              r(x || "❌ Could not start passkey authentication."),
+            if (h !== "SUCCESS") {
+              a(p || "❌ Could not start passkey authentication."),
                 i("text-red-400"),
                 n(!1);
               return;
             }
-            const b = x;
-            if (!b || !b.challenge) {
-              r("❌ Could not start passkey authentication."),
+            const y = p;
+            if (!y || !y.challenge) {
+              a("❌ Could not start passkey authentication."),
                 i("text-red-400"),
                 n(!1);
               return;
             }
-            const g = (h) => Uint8Array.from(atob(h), (j) => j.charCodeAt(0)),
-              p = {
-                challenge: g(b.challenge),
+            const f = (S) => Uint8Array.from(atob(S), (M) => M.charCodeAt(0)),
+              u = {
+                challenge: f(y.challenge),
                 allowCredentials:
-                  ((u = b.allowCredentials) == null
+                  ((m = y.allowCredentials) == null
                     ? void 0
-                    : u.map((h) => Z(H({}, h), { id: g(h.id) }))) || [],
+                    : m.map((S) => ee(V({}, S), { id: f(S.id) }))) || [],
                 timeout: 6e4,
                 userVerification: "required",
                 rpId: window.location.hostname,
               },
-              y = await navigator.credentials.get({ publicKey: p });
-            r("🔄 Verifying with secure enclave..."), n(!0);
-            const v = {
-                id: y.id,
-                type: y.type,
-                rawId: btoa(String.fromCharCode(...new Uint8Array(y.rawId))),
+              b = await navigator.credentials.get({ publicKey: u });
+            a("🔄 Verifying with secure enclave..."), n(!0);
+            const j = {
+                id: b.id,
+                type: b.type,
+                rawId: btoa(String.fromCharCode(...new Uint8Array(b.rawId))),
                 response: {
                   clientDataJSON: btoa(
                     String.fromCharCode(
-                      ...new Uint8Array(y.response.clientDataJSON),
+                      ...new Uint8Array(b.response.clientDataJSON),
                     ),
                   ),
                   authenticatorData: btoa(
                     String.fromCharCode(
-                      ...new Uint8Array(y.response.authenticatorData),
+                      ...new Uint8Array(b.response.authenticatorData),
                     ),
                   ),
                   signature: btoa(
                     String.fromCharCode(
-                      ...new Uint8Array(y.response.signature),
+                      ...new Uint8Array(b.response.signature),
                     ),
                   ),
-                  userHandle: y.response.userHandle
+                  userHandle: b.response.userHandle
                     ? btoa(
                         String.fromCharCode(
-                          ...new Uint8Array(y.response.userHandle),
+                          ...new Uint8Array(b.response.userHandle),
                         ),
                       )
                     : null,
                 },
               },
-              w = btoa(JSON.stringify(v)),
-              { code: f, message: N } = await ee.post(
+              w = btoa(JSON.stringify(j)),
+              { code: x, message: k } = await J.post(
                 `/auth/passkey/verify?data=${w}`,
               );
-            f === "PASSKEY_SUCCESS"
-              ? (r("✅ Verified! Welcome back."),
+            x === "PASSKEY_SUCCESS"
+              ? (a("✅ Verified! Welcome back."),
                 i("text-green-400"),
                 setTimeout(() => d(o || "/dashboard"), 1200))
-              : (r(N || "❌ Authentication failed."), i("text-red-400"));
-          } catch (m) {
-            console.error(m),
-              r("🚨 Passkey authentication cancelled or failed."),
+              : (a(k || "❌ Authentication failed."), i("text-red-400"));
+          } catch (h) {
+            console.error(h),
+              a("🚨 Passkey authentication cancelled or failed."),
               i("text-red-400");
           } finally {
             n(!1);
@@ -2830,13 +2824,13 @@ const Re = {
           children: e.jsxs("div", {
             className: "flex flex-col items-center justify-center space-y-6",
             children: [
-              e.jsx(nt, { className: "w-12 h-12 text-yellow-400" }),
+              e.jsx(ot, { className: "w-12 h-12 text-yellow-400" }),
               e.jsx("h2", {
                 className: "text-xl font-semibold tracking-wide",
                 children: "System Passkey",
               }),
               e.jsx("p", {
-                className: `text-sm text-center ${a}`,
+                className: `text-sm text-center ${r}`,
                 children: t,
               }),
               s &&
@@ -2858,15 +2852,15 @@ const Re = {
     );
   },
   Ds = () => {
-    const [t] = Et(),
-      r = t.get("next"),
-      s = V(),
-      [n, a] = l.useState(""),
-      [i, d] = l.useState(!1),
-      [c, o] = l.useState({ type: "", text: "" }),
-      u = (b) => /^\d{10}$/.test(b),
-      m = async (b) => {
-        if ((b.preventDefault(), o({ type: "", text: "" }), !u(n))) {
+    const [t] = nt(),
+      a = t.get("next"),
+      s = H(),
+      [n, r] = c.useState(""),
+      [i, d] = c.useState(!1),
+      [l, o] = c.useState({ type: "", text: "" }),
+      m = (y) => /^\d{10}$/.test(y),
+      h = async (y) => {
+        if ((y.preventDefault(), o({ type: "", text: "" }), !m(n))) {
           o({
             type: "error",
             text: "📞 Please enter a valid 10-digit phone number.",
@@ -2875,15 +2869,17 @@ const Re = {
         }
         d(!0);
         try {
-          const g = { phone: `+91${n}` },
-            y = `/auth/forgot?data=${btoa(JSON.stringify(g))}${r ? `&next=${r}` : ""}`,
-            { code: v, message: w } = await ee.get(y);
-          switch (v) {
+          const f = { number: Number(n) },
+            b = `/auth/sso/prudent/login?data=${btoa(JSON.stringify(f))}${a ? `&next=${a}` : ""}`,
+            { code: j, message: w, data: x } = await J.get(b);
+          switch (j) {
             case "PHONE_NOT_FOUND":
               o({ type: "error", text: "❌ Phone number not found." });
               break;
-            case "RESET_LINK_SENT":
-              o({ type: "success", text: "✅ Reset link sent via SMS!" });
+            case "OTP_SENT":
+              s(
+                `/sso/VERIFY_PRUDENT?data=${btoa(JSON.stringify(x)).replace(/=/g, "")}${a ? `&next=${a}` : ""}`,
+              );
               break;
             default:
               o({
@@ -2891,8 +2887,8 @@ const Re = {
                 text: w || "⚠️ Something went wrong. Try again later.",
               });
           }
-        } catch (g) {
-          console.error("Forgot password error:", g),
+        } catch (f) {
+          console.error("Forgot password error:", f),
             o({
               type: "error",
               text: "🚨 Network error: Unable to reach the server.",
@@ -2901,9 +2897,9 @@ const Re = {
           d(!1);
         }
       },
-      x = (b) => {
-        const g = b.target.value.replace(/\D/g, "").slice(0, 10);
-        a(g), c.type === "error" && u(g) && o({ type: "", text: "" });
+      p = (y) => {
+        const f = y.target.value.replace(/\D/g, "").slice(0, 10);
+        r(f), l.type === "error" && m(f) && o({ type: "", text: "" });
       };
     return e.jsx("div", {
       className:
@@ -2917,7 +2913,7 @@ const Re = {
         },
         children: e.jsxs("form", {
           className: "space-y-6",
-          onSubmit: m,
+          onSubmit: h,
           children: [
             e.jsx("h2", {
               className: "text-center text-2xl font-bold text-cyan-300 mb-2",
@@ -2958,11 +2954,11 @@ const Re = {
                           maxLength: "10",
                           required: !0,
                           value: n,
-                          onChange: x,
+                          onChange: p,
                           className:
                             "w-full bg-transparent text-white p-3 placeholder-transparent focus:outline-none",
                           placeholder: "10-digit number",
-                          "aria-describedby": c.text ? "phone-error" : void 0,
+                          "aria-describedby": l.text ? "phone-error" : void 0,
                         }),
                       ],
                     }),
@@ -2970,18 +2966,18 @@ const Re = {
                 }),
               ],
             }),
-            c.text &&
+            l.text &&
               e.jsx("div", {
                 id: "phone-error",
-                className: `p-3 text-sm border rounded-xl ${c.type === "success" ? "text-green-400 bg-green-900/20 border-green-500/30 animate-bounce" : "text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,
+                className: `p-3 text-sm border rounded-xl ${l.type === "success" ? "text-green-400 bg-green-900/20 border-green-500/30 animate-bounce" : "text-red-400 bg-red-900/20 border-red-500/30 animate-pulse"}`,
                 role: "alert",
                 "aria-live": "polite",
-                children: c.text,
+                children: l.text,
               }),
             e.jsxs("button", {
               type: "submit",
-              disabled: i || !u(n),
-              className: `w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${i || !u(n) ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-not-allowed" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,
+              disabled: i || !m(n),
+              className: `w-full p-3 font-bold rounded-xl text-white shadow-xl transition-all duration-300 relative overflow-hidden group ${i || !m(n) ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-not-allowed" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-2xl"}`,
               children: [
                 e.jsx("span", {
                   className:
@@ -3008,11 +3004,11 @@ const Re = {
             }),
             e.jsxs("button", {
               type: "button",
-              onClick: () => s(`/login${r ? `?next=${r}` : ""}`),
+              onClick: () => s(`/login${a ? `?next=${a}` : ""}`),
               className:
                 "w-full flex items-center justify-center gap-2 p-3 border border-indigo-400/40 rounded-xl bg-black/30 text-sm text-gray-300 font-semibold transition hover:bg-indigo-400/10 hover:border-indigo-400 hover:scale-[1.02] hover:shadow-lg",
               children: [
-                e.jsx(Lt, { className: "w-4 h-4 text-indigo-300" }),
+                e.jsx(Tt, { className: "w-4 h-4 text-indigo-300" }),
                 "Back to Login",
               ],
             }),
@@ -3022,94 +3018,104 @@ const Re = {
     });
   },
   zs = () => {
-    const t = V(),
-      [r, s] = l.useState(["", "", "", "", "", ""]),
-      [n, a] = l.useState(!1),
-      [i, d] = l.useState(0),
-      [c, o] = l.useState({ type: "", text: "" }),
-      u = l.useRef([]),
-      m = l.useRef(null),
-      x = "9876543210",
-      b = "Ajay O S";
-    l.useEffect(() => {
-      var h;
-      (h = u.current[0]) == null || h.focus();
+    const [t] = nt(),
+      a = t.get("next"),
+      s = t.get("data");
+    s || (window.location.href = `/sso/prudent${a ? `?next=${a}` : ""}`);
+    const { number: n, name: r, avatar: i } = JSON.parse(atob(s) || "{}"),
+      d = H(),
+      [l, o] = c.useState(["", "", "", "", "", ""]),
+      [m, h] = c.useState(!1),
+      [p, y] = c.useState(0),
+      [f, u] = c.useState({ type: "", text: "" }),
+      b = c.useRef([]),
+      j = c.useRef(null);
+    c.useEffect(() => {
+      var g;
+      (g = b.current[0]) == null || g.focus();
     }, []),
-      l.useEffect(
+      c.useEffect(
         () => (
-          i > 0 &&
-            (m.current = setTimeout(() => {
-              d(i - 1);
+          p > 0 &&
+            (j.current = setTimeout(() => {
+              y(p - 1);
             }, 1e3)),
-          () => clearTimeout(m.current)
+          () => clearTimeout(j.current)
         ),
-        [i],
+        [p],
       );
-    const g = (h, j) => {
-        const S = j.replace(/\D/g, "").slice(0, 1),
-          k = [...r];
-        (k[h] = S),
-          s(k),
-          c.type === "error" && S && o({ type: "", text: "" }),
-          S && h < 5 && u.current[h + 1].focus();
+    const w = (g, N) => {
+        const v = N.replace(/\D/g, "").slice(0, 1),
+          C = [...l];
+        (C[g] = v),
+          o(C),
+          f.type === "error" && v && u({ type: "", text: "" }),
+          v && g < 5 && b.current[g + 1].focus();
       },
-      p = (h, j) => {
-        if (j.key === "Backspace") {
-          if (!r[h] && h > 0) {
-            const S = [...r];
-            (S[h - 1] = ""), s(S), u.current[h - 1].focus();
+      x = (g, N) => {
+        if (N.key === "Backspace") {
+          if (!l[g] && g > 0) {
+            const v = [...l];
+            (v[g - 1] = ""), o(v), b.current[g - 1].focus();
           }
         } else
-          j.key === "ArrowLeft" && h > 0
-            ? u.current[h - 1].focus()
-            : j.key === "ArrowRight" && h < 5 && u.current[h + 1].focus();
+          N.key === "ArrowLeft" && g > 0
+            ? b.current[g - 1].focus()
+            : N.key === "ArrowRight" && g < 5 && b.current[g + 1].focus();
       },
-      y = (h) => {
-        h.preventDefault();
-        const S = h.clipboardData
+      k = (g) => {
+        g.preventDefault();
+        const v = g.clipboardData
           .getData("text")
           .replace(/\D/g, "")
           .slice(0, 6)
           .padEnd(6, "")
           .split("");
-        s(S), S.filter((k) => k !== "").length === 6 && u.current[5].focus();
+        o(v), v.filter((C) => C !== "").length === 6 && b.current[5].focus();
       },
-      v = r.every((h) => h !== ""),
-      w = async () => {
-        if ((o({ type: "", text: "" }), !v)) {
-          o({ type: "error", text: "Please enter the complete 6-digit OTP" }),
-            u.current[0].focus();
+      S = l.every((g) => g !== ""),
+      M = async () => {
+        if ((u({ type: "", text: "" }), !S)) {
+          u({ type: "error", text: "Please enter the complete 6-digit OTP" }),
+            b.current[0].focus();
           return;
         }
-        a(!0);
+        h(!0);
         try {
-          await new Promise((h) => setTimeout(h, 1500)),
-            o({
-              type: "success",
-              text: "OTP verified successfully! Redirecting...",
-            }),
-            setTimeout(() => {
-              alert("Redirecting to reset password...");
-            }, 1e3);
-        } catch (h) {
-          console.error("OTP verification error:", h),
-            o({
+          const g = { number: Number(n), otp: l == null ? void 0 : l.join("") },
+            v = `/auth/sso/prudent/verify?data=${btoa(JSON.stringify(g))}${a ? `&next=${a}` : ""}`,
+            { code: C, message: P } = await J.get(v);
+          switch (C) {
+            case "OTP_VERIFIED":
+              setTimeout(() => {
+                window.location.href = a ? atob(a) : "https://ajayos.in/";
+              }, 1500);
+              break;
+            default:
+              u({
+                type: "error",
+                text: P || "⚠️ Something went wrong. Try again later.",
+              });
+          }
+        } catch (g) {
+          console.error("OTP verification error:", g),
+            u({
               type: "error",
               text: "Network error. Please check your connection.",
             });
         } finally {
-          a(!1);
+          h(!1);
         }
       },
-      f = (h) =>
-        h
+      z = (g) =>
+        g
           .split(" ")
-          .map((j) => j[0])
+          .map((N) => N[0])
           .join("")
           .toUpperCase()
           .slice(0, 2),
-      N = (h) => {
-        const j = [
+      E = (g) => {
+        const N = [
             "from-blue-500 to-blue-600",
             "from-purple-500 to-purple-600",
             "from-pink-500 to-pink-600",
@@ -3119,8 +3125,8 @@ const Re = {
             "from-cyan-500 to-cyan-600",
             "from-red-500 to-red-600",
           ],
-          S = h.length % j.length;
-        return j[S];
+          v = g.length % N.length;
+        return N[v];
       };
     return e.jsx("div", {
       className:
@@ -3136,20 +3142,27 @@ const Re = {
           e.jsxs("div", {
             className: "text-center space-y-4",
             children: [
-              e.jsx("div", {
-                className: `w-20 h-20 mx-auto bg-gradient-to-br ${N(b)} rounded-full flex items-center justify-center border-2 border-white/20 shadow-lg`,
-                children: e.jsx("span", {
-                  className: "text-3xl font-bold text-white",
-                  children: f(b),
-                }),
-              }),
+              i
+                ? e.jsx("img", {
+                    src: i,
+                    alt: `${r}`,
+                    className:
+                      "w-20 h-20 mx-auto rounded-full border-2 border-white/20 shadow-lg",
+                  })
+                : e.jsx("div", {
+                    className: `w-20 h-20 mx-auto bg-gradient-to-br ${E(r)} rounded-full flex items-center justify-center border-2 border-white/20 shadow-lg`,
+                    children: e.jsx("span", {
+                      className: "text-3xl font-bold text-white",
+                      children: z(r),
+                    }),
+                  }),
               e.jsxs("div", {
                 className:
                   "flex flex-col items-center justify-center gap-2 bg-white/5 border border-white/10 rounded-xl p-3",
                 children: [
                   e.jsx("h3", {
                     className: "text-xl font-semibold text-white",
-                    children: b,
+                    children: r,
                   }),
                   e.jsxs("div", {
                     className:
@@ -3169,7 +3182,12 @@ const Re = {
                       }),
                       e.jsxs("span", {
                         className: "text-sm font-mono text-gray-300",
-                        children: ["+91 ", x.slice(0, 2), "****", x.slice(-2)],
+                        children: [
+                          "+91 ",
+                          n.toString().slice(0, 2),
+                          "****",
+                          n.toString().slice(-2),
+                        ],
                       }),
                     ],
                   }),
@@ -3191,38 +3209,38 @@ const Re = {
                   e.jsx("div", {
                     className:
                       "flex justify-between gap-2 bg-black/40 border border-cyan-400/40 rounded-2xl focus-within:border-cyan-300 focus-within:ring-4 focus-within:ring-cyan-500/20 transition-all p-3",
-                    onPaste: y,
-                    children: r.map((h, j) =>
+                    onPaste: k,
+                    children: l.map((g, N) =>
                       e.jsx(
                         "input",
                         {
-                          ref: (S) => (u.current[j] = S),
+                          ref: (v) => (b.current[N] = v),
                           type: "text",
                           inputMode: "numeric",
                           maxLength: "1",
-                          value: h,
-                          onChange: (S) => g(j, S.target.value),
-                          onKeyDown: (S) => p(j, S),
+                          value: g,
+                          onChange: (v) => w(N, v.target.value),
+                          onKeyDown: (v) => x(N, v),
                           className:
                             "w-12 h-14 bg-gradient-to-br from-white/10 to-white/5 text-center text-2xl font-bold text-white rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-400 transition hover:border-cyan-400/50",
-                          "aria-label": `OTP digit ${j + 1}`,
+                          "aria-label": `OTP digit ${N + 1}`,
                         },
-                        j,
+                        N,
                       ),
                     ),
                   }),
                 ],
               }),
-              c.text &&
+              f.text &&
                 e.jsxs("div", {
-                  className: `p-4 text-sm border rounded-xl flex items-start gap-3 transition-all ${c.type === "success" ? "text-green-300 bg-green-900/20 border-green-500/30" : "text-red-300 bg-red-900/20 border-red-500/30"}`,
+                  className: `p-4 text-sm border rounded-xl flex items-start gap-3 transition-all ${f.type === "success" ? "text-green-300 bg-green-900/20 border-green-500/30" : "text-red-300 bg-red-900/20 border-red-500/30"}`,
                   role: "alert",
                   "aria-live": "polite",
                   children: [
                     e.jsx("span", {
                       className: "flex-shrink-0 mt-0.5",
                       children:
-                        c.type === "success"
+                        f.type === "success"
                           ? e.jsx("svg", {
                               className: "w-5 h-5",
                               fill: "currentColor",
@@ -3244,18 +3262,18 @@ const Re = {
                               }),
                             }),
                     }),
-                    e.jsx("span", { className: "flex-1", children: c.text }),
+                    e.jsx("span", { className: "flex-1", children: f.text }),
                   ],
                 }),
               e.jsxs("button", {
-                onClick: w,
-                disabled: n || !v,
-                className: `w-full py-3 px-4 font-bold rounded-xl text-white shadow-lg transition-all duration-300 relative overflow-hidden group ${n || !v ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-not-allowed opacity-50" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-xl active:scale-95"}`,
+                onClick: M,
+                disabled: m || !S,
+                className: `w-full py-3 px-4 font-bold rounded-xl text-white shadow-lg transition-all duration-300 relative overflow-hidden group ${m || !S ? "bg-gradient-to-r from-gray-500 to-gray-700 cursor-not-allowed opacity-50" : "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:scale-[1.02] hover:shadow-xl active:scale-95"}`,
                 children: [
                   e.jsx("span", {
                     className:
                       "relative z-10 flex justify-center items-center gap-2",
-                    children: n
+                    children: m
                       ? e.jsxs(e.Fragment, {
                           children: [
                             e.jsxs("svg", {
@@ -3307,7 +3325,7 @@ const Re = {
                 ],
               }),
               e.jsxs("button", {
-                onClick: () => t("/sso/prudent"),
+                onClick: () => d("/sso/prudent"),
                 className:
                   "w-full flex items-center justify-center gap-2 py-3 px-4 border border-gray-500/40 rounded-xl bg-black/20 text-sm text-gray-300 font-semibold hover:bg-gray-500/10 hover:border-gray-400 hover:text-gray-200 transition-all",
                 children: [
@@ -3332,64 +3350,64 @@ const Re = {
       }),
     });
   },
-  Le = [es, ts, ss, rs, as, ns],
-  Te = {
-    LOGIN: Ss,
+  Te = [es, ts, ss, as, rs, ns],
+  Ie = {
+    LOGIN: ks,
     SIGNUP: Cs,
     CHECKMAIL: Ms,
     SETPASSWORD: Es,
     FORGOT: Ps,
     DEFAULT: As,
     LOADING: Rs,
-    GOOGLE: Ls,
-    GITHUB: Ts,
-    PASSKEY: Is,
+    GOOGLE: Ts,
+    GITHUB: Is,
+    PASSKEY: Ls,
     PRUDENT: Ds,
     VERIFY_PRUDENT: zs,
   };
-function he() {
-  const [t, r] = l.useState(() => Math.floor(Math.random() * Le.length)),
-    [s, n] = l.useState("LOADING"),
-    a = Le[t],
-    i = Te[s],
+function pe() {
+  const [t, a] = c.useState(() => Math.floor(Math.random() * Te.length)),
+    [s, n] = c.useState("LOADING"),
+    r = Te[t],
+    i = Ie[s],
     d = (o) => {
-      const u = o.split("/").filter(Boolean),
-        m = (u[0] || "").toUpperCase(),
-        x = (u[1] || "").toUpperCase();
-      return m
-        ? Te[m]
-          ? m
-          : ["OAUTH", "SSO"].includes(m) && Te[x]
-            ? x
+      const m = o.split("/").filter(Boolean),
+        h = (m[0] || "").toUpperCase(),
+        p = (m[1] || "").toUpperCase();
+      return h
+        ? Ie[h]
+          ? h
+          : ["OAUTH", "SSO"].includes(h) && Ie[p]
+            ? p
             : "DEFAULT"
         : "LOGIN";
     };
-  l.useEffect(() => {
+  c.useEffect(() => {
     n(d(window.location.pathname));
   }, []),
-    l.useEffect(() => {
+    c.useEffect(() => {
       const o = () => {
         n(d(window.location.pathname));
       };
       window.addEventListener("popstate", o);
-      const u = window.history.pushState,
-        m = window.history.replaceState;
+      const m = window.history.pushState,
+        h = window.history.replaceState;
       return (
-        (window.history.pushState = function (...x) {
-          u.apply(window.history, x), o();
+        (window.history.pushState = function (...p) {
+          m.apply(window.history, p), o();
         }),
-        (window.history.replaceState = function (...x) {
-          m.apply(window.history, x), o();
+        (window.history.replaceState = function (...p) {
+          h.apply(window.history, p), o();
         }),
         () => {
           window.removeEventListener("popstate", o),
-            (window.history.pushState = u),
-            (window.history.replaceState = m);
+            (window.history.pushState = m),
+            (window.history.replaceState = h);
         }
       );
     }, []);
-  const c = () => {
-    r((o) => (o + 1) % Le.length);
+  const l = () => {
+    a((o) => (o + 1) % Te.length);
   };
   return e.jsx("div", {
     className: "relative w-screen h-screen overflow-hidden bg-black text-white",
@@ -3402,12 +3420,12 @@ function he() {
           {
             className:
               "absolute inset-0 z-0 transition-opacity duration-700 ease-in-out opacity-100",
-            children: e.jsx(a, {}),
+            children: e.jsx(r, {}),
           },
           t,
         ),
         e.jsxs("button", {
-          onClick: c,
+          onClick: l,
           className:
             "absolute top-5 right-6 z-20 px-4 py-2 bg-white/10 backdrop-blur-md hover:bg-white/20 text-sm rounded-md border border-white/20 transition-all duration-200",
           children: [t + 1, " ✨"],
@@ -3468,31 +3486,31 @@ function he() {
     }),
   });
 }
-const rt = [
-    { path: "/oauth/*", element: e.jsx(he, {}) },
-    { path: "/sso/*", element: e.jsx(he, {}) },
-    { path: "*", element: e.jsx(he, {}) },
+const at = [
+    { path: "/oauth/*", element: e.jsx(pe, {}) },
+    { path: "/sso/*", element: e.jsx(pe, {}) },
+    { path: "*", element: e.jsx(pe, {}) },
   ],
   Os = [
-    { path: "/oauth/*", element: e.jsx(he, {}) },
-    { path: "*", element: e.jsx(he, {}) },
+    { path: "/oauth/*", element: e.jsx(pe, {}) },
+    { path: "*", element: e.jsx(pe, {}) },
     { path: "/about", element: e.jsx("h1", { children: "About Page v1.0.0" }) },
   ];
 function _s() {
   var t = B.get("appVersion") || "1.0.0";
   t = t.replace(/\./g, "_");
-  const s = { "1_0_0": rt, "1_1_0": Os }[t] || rt;
-  return Tt(s);
+  const s = { "1_0_0": at, "1_1_0": Os }[t] || at;
+  return It(s);
 }
-const Gs = () => {
-    const [t, r] = l.useState(60),
-      [s, n] = l.useState(1);
+const $s = () => {
+    const [t, a] = c.useState(60),
+      [s, n] = c.useState(1);
     return (
-      l.useEffect(() => {
-        const a = setInterval(() => {
-          r((i) => (i > 0 ? i - 1 : 60)), n(Math.random() * 0.5 + 0.7);
+      c.useEffect(() => {
+        const r = setInterval(() => {
+          a((i) => (i > 0 ? i - 1 : 60)), n(Math.random() * 0.5 + 0.7);
         }, 1e3);
-        return () => clearInterval(a);
+        return () => clearInterval(r);
       }, []),
       e.jsxs("div", {
         className:
@@ -3734,18 +3752,18 @@ const Gs = () => {
       })
     );
   },
-  at = ({ children: t }) => {
-    const [r, s] = l.useState(0);
+  rt = ({ children: t }) => {
+    const [a, s] = c.useState(0);
     return (
-      l.useEffect(
-        () => G.on(U.API_LOADING, ({ inFlight: a }) => s(a || 0)),
+      c.useEffect(
+        () => $.on(G.API_LOADING, ({ inFlight: r }) => s(r || 0)),
         [],
       ),
       e.jsxs("div", {
         className: "relative",
         children: [
           t,
-          r > 0 &&
+          a > 0 &&
             e.jsxs("div", {
               className:
                 "fixed inset-0 z-50 flex flex-col items-center justify-center",
@@ -3877,55 +3895,55 @@ const Gs = () => {
       })
     );
   };
-function Us({ children: t }) {
-  var y, v;
-  const [r, s] = l.useState(!1),
-    [n, a] = l.useState(!1),
-    [i, d] = l.useState("idle"),
-    [c, o] = l.useState(0),
-    [u, m] = l.useState(null),
-    x = (w, f) => {
-      const N = w.split(".").map(Number),
-        h = f.split(".").map(Number);
-      for (let j = 0; j < Math.max(N.length, h.length); j++) {
-        const S = N[j] || 0,
-          k = h[j] || 0;
-        if (S > k) return 1;
-        if (S < k) return -1;
+function Gs({ children: t }) {
+  var b, j;
+  const [a, s] = c.useState(!1),
+    [n, r] = c.useState(!1),
+    [i, d] = c.useState("idle"),
+    [l, o] = c.useState(0),
+    [m, h] = c.useState(null),
+    p = (w, x) => {
+      const k = w.split(".").map(Number),
+        S = x.split(".").map(Number);
+      for (let M = 0; M < Math.max(k.length, S.length); M++) {
+        const z = k[M] || 0,
+          E = S[M] || 0;
+        if (z > E) return 1;
+        if (z < E) return -1;
       }
       return 0;
     };
-  l.useEffect(() => {
-    m(P.appVersion);
-    const f = setTimeout(() => {
-      const N = B.get("appVersion") || P.appVersion,
-        h = B.get("skippedVersion"),
-        j = B.get("lastSkipDate"),
-        S = Date.now(),
-        k = 1440 * 60 * 1e3;
-      if (u && x(u, N) > 0) {
-        const M = !h || h !== u || !j || S - j > 1 * k;
-        a(M);
+  c.useEffect(() => {
+    h(A.appVersion);
+    const x = setTimeout(() => {
+      const k = B.get("appVersion") || A.appVersion,
+        S = B.get("skippedVersion"),
+        M = B.get("lastSkipDate"),
+        z = Date.now(),
+        E = 1440 * 60 * 1e3;
+      if (m && p(m, k) > 0) {
+        const g = !S || S !== m || !M || z - M > 1 * E;
+        r(g);
       }
-      B.get("appVersion") || B.set("appVersion", P.appVersion);
+      B.get("appVersion") || B.set("appVersion", A.appVersion);
     }, 500);
-    return () => clearTimeout(f);
-  }, [u]);
-  const b = () => {
-      B.set("skippedVersion", u),
+    return () => clearTimeout(x);
+  }, [m]);
+  const y = () => {
+      B.set("skippedVersion", m),
         B.set("lastSkipDate", Date.now()),
         setTimeout(() => {
-          a(!1);
+          r(!1);
         }, 300);
     },
-    g = () => {
+    f = () => {
       d("checking"),
         o(0),
         setTimeout(() => {
           d("downloading"), o(15);
         }, 1200);
       const w = setInterval(() => {
-        o((f) => (f >= 85 ? (clearInterval(w), 85) : f + Math.random() * 20));
+        o((x) => (x >= 85 ? (clearInterval(w), 85) : x + Math.random() * 20));
       }, 300);
       setTimeout(() => {
         clearInterval(w), d("installing"), o(90);
@@ -3938,10 +3956,10 @@ function Us({ children: t }) {
         }, 5500),
         B.remove("skippedVersion"),
         B.remove("lastSkipDate"),
-        B.set("appVersion", u);
+        B.set("appVersion", m);
     };
-  if (!n || !u) return t;
-  const p = B.get("appVersion") || P.appVersion;
+  if (!n || !m) return t;
+  const u = B.get("appVersion") || A.appVersion;
   return e.jsxs("div", {
     className:
       "w-full min-h-screen bg-gradient-to-br from-slate-950 via-purple-900 to-slate-950 flex items-center justify-center p-4 relative overflow-hidden",
@@ -3980,7 +3998,7 @@ function Us({ children: t }) {
                   e.jsxs("div", {
                     className: "flex items-center gap-2",
                     children: [
-                      e.jsx(It, {
+                      e.jsx(Lt, {
                         className: "w-5 h-5 text-yellow-300 animate-pulse",
                       }),
                       e.jsx("h1", {
@@ -3993,7 +4011,7 @@ function Us({ children: t }) {
                   }),
                   e.jsxs("p", {
                     className: "text-purple-100 text-sm font-medium",
-                    children: [p, " → ", u],
+                    children: [u, " → ", m],
                   }),
                 ],
               }),
@@ -4017,7 +4035,7 @@ function Us({ children: t }) {
                           children: [
                             e.jsxs("span", {
                               className: "font-semibold text-white text-sm",
-                              children: ["What's New in v", u],
+                              children: ["What's New in v", m],
                             }),
                             e.jsx(Dt, {
                               className:
@@ -4029,7 +4047,7 @@ function Us({ children: t }) {
                           className: "space-y-3 pt-2",
                           children: [
                             e.jsxs("button", {
-                              onClick: g,
+                              onClick: f,
                               className:
                                 "w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 rounded-xl transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-lg hover:shadow-pink-500/50",
                               children: [
@@ -4038,7 +4056,7 @@ function Us({ children: t }) {
                               ],
                             }),
                             e.jsxs("button", {
-                              onClick: b,
+                              onClick: y,
                               className:
                                 "w-full bg-gradient-to-r from-blue-500/30 to-cyan-500/30 hover:from-blue-500/50 hover:to-cyan-500/50 text-slate-100 font-semibold py-3 rounded-xl transition-all border border-blue-400/60 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-cyan-500/30 backdrop-blur-sm",
                               children: [
@@ -4121,13 +4139,13 @@ function Us({ children: t }) {
                                 children: e.jsx("div", {
                                   className:
                                     "h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 transition-all duration-500 ease-out rounded-full shadow-lg shadow-pink-500/50",
-                                  style: { width: `${c}%` },
+                                  style: { width: `${l}%` },
                                 }),
                               }),
                               e.jsxs("p", {
                                 className:
                                   "text-center text-white font-semibold text-sm",
-                                children: [Math.round(c), "%"],
+                                children: [Math.round(l), "%"],
                               }),
                             ],
                           }),
@@ -4138,26 +4156,26 @@ function Us({ children: t }) {
                               "Download",
                               "Install",
                               "Complete",
-                            ].map((w, f) => {
-                              const h = [
+                            ].map((w, x) => {
+                              const S = [
                                   "checking",
                                   "downloading",
                                   "installing",
                                   "complete",
                                 ].indexOf(i),
-                                j = f < h || (f === h && i === "complete"),
-                                S = f === h;
+                                M = x < S || (x === S && i === "complete"),
+                                z = x === S;
                               return e.jsxs(
                                 "div",
                                 {
-                                  className: `text-center p-2 rounded-lg transition-all ${j ? "bg-green-500/30 border border-green-400/60" : S ? "bg-purple-500/40 border border-purple-400/60 animate-pulse" : "bg-white/10 border border-white/20"}`,
+                                  className: `text-center p-2 rounded-lg transition-all ${M ? "bg-green-500/30 border border-green-400/60" : z ? "bg-purple-500/40 border border-purple-400/60 animate-pulse" : "bg-white/10 border border-white/20"}`,
                                   children: [
                                     e.jsx("p", {
                                       className:
                                         "text-xs font-semibold text-white",
                                       children: w,
                                     }),
-                                    j &&
+                                    M &&
                                       e.jsx("p", {
                                         className: "text-green-400 text-lg",
                                         children: "✓",
@@ -4175,8 +4193,8 @@ function Us({ children: t }) {
           ],
         }),
       }),
-      r &&
-        ((y = P == null ? void 0 : P.changelog) == null ? void 0 : y.length) >
+      a &&
+        ((b = A == null ? void 0 : A.changelog) == null ? void 0 : b.length) >
           0 &&
         e.jsx("div", {
           className:
@@ -4195,7 +4213,7 @@ function Us({ children: t }) {
                     children: [
                       e.jsx("span", { children: "📝" }),
                       "Changelog v",
-                      u,
+                      m,
                     ],
                   }),
                   e.jsx("button", {
@@ -4209,9 +4227,9 @@ function Us({ children: t }) {
               e.jsxs("div", {
                 className: "overflow-y-auto flex-1 p-6 space-y-6",
                 children: [
-                  (v = P == null ? void 0 : P.changelog) == null
+                  (j = A == null ? void 0 : A.changelog) == null
                     ? void 0
-                    : v.map((w) =>
+                    : j.map((w) =>
                         e.jsxs(
                           "div",
                           {
@@ -4230,7 +4248,7 @@ function Us({ children: t }) {
                               e.jsx("div", {
                                 className:
                                   "grid grid-cols-1 md:grid-cols-2 gap-4",
-                                children: w.items.map((f, N) =>
+                                children: w.items.map((x, k) =>
                                   e.jsx(
                                     "div",
                                     {
@@ -4241,7 +4259,7 @@ function Us({ children: t }) {
                                           e.jsx("div", {
                                             className:
                                               "text-3xl flex-shrink-0 group-hover:scale-110 transition-transform",
-                                            children: f.image,
+                                            children: x.image,
                                           }),
                                           e.jsxs("div", {
                                             className: "flex-1",
@@ -4249,19 +4267,19 @@ function Us({ children: t }) {
                                               e.jsx("h4", {
                                                 className:
                                                   "text-white font-semibold text-sm",
-                                                children: f.title,
+                                                children: x.title,
                                               }),
                                               e.jsx("p", {
                                                 className:
                                                   "text-slate-300 text-xs mt-1",
-                                                children: f.description,
+                                                children: x.description,
                                               }),
                                             ],
                                           }),
                                         ],
                                       }),
                                     },
-                                    N,
+                                    k,
                                   ),
                                 ),
                               }),
@@ -4283,7 +4301,7 @@ function Us({ children: t }) {
                             children: "📅 Release Date:",
                           }),
                           " ",
-                          P.releaseDate,
+                          A.releaseDate,
                         ],
                       }),
                       e.jsx("p", {
@@ -4307,7 +4325,7 @@ function Us({ children: t }) {
                   }),
                   e.jsx("button", {
                     onClick: () => {
-                      g(), s(!1);
+                      f(), s(!1);
                     },
                     className:
                       "flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-2.5 rounded-lg transition-all shadow-lg hover:shadow-pink-500/50",
@@ -4341,25 +4359,25 @@ function Us({ children: t }) {
     ],
   });
 }
-function Fs() {
-  const [t, r] = l.useState(0),
-    [s, n] = l.useState(!1);
-  l.useEffect(() => {
+function Us() {
+  const [t, a] = c.useState(0),
+    [s, n] = c.useState(!1);
+  c.useEffect(() => {
     const d = setInterval(() => {
-      r((c) => c + 1);
+      a((l) => l + 1);
     }, 1e3);
     return () => clearInterval(d);
   }, []);
-  const a = () => {
+  const r = () => {
       n(!0),
         setTimeout(() => {
           window.location.reload();
         }, 500);
     },
     i = (d) => {
-      const c = Math.floor(d / 60),
+      const l = Math.floor(d / 60),
         o = d % 60;
-      return `${c}:${o.toString().padStart(2, "0")}`;
+      return `${l}:${o.toString().padStart(2, "0")}`;
     };
   return e.jsxs("div", {
     className:
@@ -4467,7 +4485,7 @@ function Fs() {
                             children: e.jsx("div", {
                               className:
                                 "bg-red-500/30 p-2 rounded-full border border-red-500/60 backdrop-blur",
-                              children: e.jsx(Gt, {
+                              children: e.jsx($t, {
                                 className: "w-5 h-5 text-red-300",
                               }),
                             }),
@@ -4537,12 +4555,12 @@ function Fs() {
                     e.jsx("div", {
                       className: "grid ",
                       children: e.jsxs("button", {
-                        onClick: a,
+                        onClick: r,
                         disabled: s,
                         className:
                           "bg-red-600 hover:bg-red-700 disabled:bg-red-600/50 text-white font-semibold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 group",
                         children: [
-                          e.jsx(Ut, {
+                          e.jsx(Gt, {
                             className: `w-4 h-4 ${s ? "animate-spin" : "group-hover:rotate-180 transition-transform"}`,
                           }),
                           "Retry",
@@ -4560,7 +4578,7 @@ function Fs() {
             children: e.jsxs("div", {
               className: "flex items-center gap-4",
               children: [
-                e.jsx(Ft, {
+                e.jsx(Ut, {
                   className: "w-5 h-5 text-red-400 flex-shrink-0 animate-pulse",
                 }),
                 e.jsxs("div", {
@@ -4583,7 +4601,7 @@ function Fs() {
                   rel: "noopener noreferrer",
                   className:
                     "text-red-400 hover:text-red-300 text-sm font-semibold flex items-center gap-1 flex-shrink-0",
-                  children: ["View ", e.jsx($t, { className: "w-3 h-3" })],
+                  children: ["View ", e.jsx(Ft, { className: "w-3 h-3" })],
                 }),
               ],
             }),
@@ -4594,26 +4612,26 @@ function Fs() {
   });
 }
 const Ys = () => {
-  const [t, r] = l.useState("SYSTEM_UPDATE"),
-    [s, n] = l.useState(!1);
+  const [t, a] = c.useState("SYSTEM_UPDATE"),
+    [s, n] = c.useState(!1);
   return (
-    l.useEffect(() => {
-      const a = [
-        G.on("SYSTEM_GUARD", ({ model: i = null }) => {
-          r(i);
+    c.useEffect(() => {
+      const r = [
+        $.on("SYSTEM_GUARD", ({ model: i = null }) => {
+          a(i);
         }),
       ];
-      return () => a.forEach((i) => i());
+      return () => r.forEach((i) => i());
     }, []),
-    l.useEffect(
+    c.useEffect(
       () => (
-        Object.keys(Re).forEach((a) => {
-          if (Ne(a) && typeof Re[a] == "function")
+        Object.keys(Re).forEach((r) => {
+          if (Ne(r) && typeof Re[r] == "function")
             try {
-              Re[a]();
+              Re[r]();
             } catch (i) {
               console.error(
-                `[SystemGuard] Error initializing feature: ${a}`,
+                `[SystemGuard] Error initializing feature: ${r}`,
                 i,
               );
             }
@@ -4624,12 +4642,12 @@ const Ys = () => {
     ),
     s
       ? t === "LOADING"
-        ? e.jsx(at, {})
+        ? e.jsx(rt, {})
         : t === "INSPECT_BLOCKER"
-          ? e.jsx(Gs, {})
+          ? e.jsx($s, {})
           : t === "SERVER_DOWN"
-            ? e.jsx(Fs, {})
-            : e.jsx(at, { children: e.jsx(Us, { children: e.jsx(_s, {}) }) })
+            ? e.jsx(Us, {})
+            : e.jsx(rt, { children: e.jsx(Gs, { children: e.jsx(_s, {}) }) })
       : e.jsx(Zt, {})
   );
 };
